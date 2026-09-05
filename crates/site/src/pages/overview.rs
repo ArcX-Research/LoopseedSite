@@ -15,7 +15,7 @@ pub fn Overview() -> impl IntoView {
             <div class="wrap hero-grid">
                 <div class="hero-copy">
                     <p class="eyebrow">"Dilate Technologies · research program"</p>
-                    <h1 class="display display-xl">"A framework for adaptive intelligence"</h1>
+                    <h1 class="display display-xl">"A Framework for Adaptive Intelligence"</h1>
                     <p class="mono meta">"The Dynamical Synthesis equation"</p>
                     <p class="eq">{EQUATION}</p>
                     <p class="lede">
