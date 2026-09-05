@@ -1,4 +1,4 @@
-//! The mark: a ring with one point on it, the loop and the one word from outside.
+//! Loopseed logo.
 use leptos::prelude::*;
 
 pub const MARK: &str = r##"<svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">

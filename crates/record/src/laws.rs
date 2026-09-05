@@ -1,5 +1,4 @@
-//! Measured laws, distilled in `docs/LAWS.md` of the loopseed repository the shift they were
-//! found. A law here is a regularity that was photographed, with the rows or cycles that hold it.
+//! Observations and source references from `docs/LAWS.md`.
 
 pub struct Law {
     pub title: &'static str,
@@ -9,63 +8,63 @@ pub struct Law {
 
 pub const LAWS: &[Law] = &[
     Law {
-        title: "σ keeps encounters, not lessons",
-        statement: "A derivation that lands cannot be kept: success makes the next message predictable, δ falls below θ, and σ keeps only the failures. What decides keeping is the variety of the keeper's shape, not the content.",
+        title: "Successful lessons can miss the memory threshold",
+        statement: "In these sessions, a successful explanation often made the next message predictable. Its error score fell below θ, so the exchange was not stored. Memory selection depended on surprise, including how the supervisor phrased the message.",
         evidence: "bag 2, rows 255, 269–274, 294",
     },
     Law {
-        title: "σ is a surprise gate blind to truth",
-        statement: "Wrong-but-surprising is kept, retrieved and repeated; only the keeper's pen deletes. σ keeps errors and drops corrections, and a correction placed beside an error cancels nothing.",
+        title: "Surprise does not establish correctness",
+        statement: "The memory rule stored some incorrect exchanges and omitted their corrections. Adding a correction beside an error did not prevent retrieval of the error. Human review was needed to remove it.",
         evidence: "bag 2, rows 231, 236–237; bag 3, cycles 70–71",
     },
     Law {
-        title: "Memory amplifies retrieval and nothing else",
-        statement: "The right kept row lifts recall from 0 of 12 to 12 of 12; the same row lowers judgement from 12 of 12 to 4 of 12. The harm needs a repeated question, which is rare in conversation and common in testing: tests feed habits.",
+        title: "Memory can improve recall while reducing judgement accuracy",
+        statement: "One stored record raised recall from 0 of 12 to 12 of 12, but lowered judgement accuracy from 12 of 12 to 4 of 12. The loss occurred with repeated questions, showing that repeated testing can affect the behaviour being measured.",
         evidence: "bag 2, rows 240–242",
     },
     Law {
-        title: "Corrections must be lived, then dreamed",
-        statement: "A correction reaches the model only if it is kept, which requires surprise, and then dreamed. Prompt text can declare what the fish cannot know; it cannot override what it learned.",
+        title: "Corrections need a path into training",
+        statement: "A correction can affect the current prompt, but changing trained parameters requires storing it and including it in training. The surprise rule can exclude corrections, so writing one in conversation does not ensure that it will be learned.",
         evidence: "bag 2, memory section",
     },
     Law {
-        title: "The self-priming dream",
-        statement: "A dreamt address is surprising, so σ keeps it; retrieval shows the fish its own dream; it dreams it again. Pruning the row broke the run the next turn. Any junk σ keeps becomes bait, so kept dream rows are pruned the moment they are kept.",
+        title: "Stored errors can reinforce themselves",
+        statement: "An invented address entered memory, was retrieved, and appeared again in later training. Removing that record stopped the repetition on the next turn. The incident led to a rule for removing these records when they enter memory.",
         evidence: "bag 4, cycle 1026",
     },
     Law {
-        title: "The first hour after a wearing is when memory is most exposed",
-        statement: "A newly worn coat's register is surprising, so σ keeps its junk. The tender hour holds every keep of that hour apart until reviewed; it is now mechanism, opened by the wearing-watch on the first request the changed voice makes.",
+        title: "Adapter changes require a period of memory review",
+        statement: "A new adapter can change reply style enough to make unwanted output pass the surprise threshold. The system therefore holds memories from the first hour after an adapter change for review. A monitor starts this period when it detects the changed adapter.",
         evidence: "the 2026-08-07 wearing; docs/KEEPING.md",
     },
     Law {
-        title: "A silent coat can still move the memory gate",
-        statement: "A prediction coat that never speaks still changes the mirror that supplies prediction error, and prediction error participates in σ admission. No interval with a coat change is a curriculum-only intervention.",
+        title: "Prediction adapters can affect which memories are stored",
+        statement: "An adapter used only for prediction still changes the error score that controls memory selection. If an adapter changes during a teaching study, any observed effect cannot be attributed to the teaching material alone.",
         evidence: "cycle 3039, 2026-08-15",
     },
     Law {
-        title: "Exact recomputation and graph faithfulness are distinct gates",
-        statement: "Four replies proved the requested terminal values while drifting from the requested operation graph. The symbolic ruler is necessary; terminal equality alone is not sufficient, and only whole-reply review caught the drift.",
+        title: "A correct value can come from the wrong procedure",
+        statement: "Four replies passed exact numerical checks while departing from the requested calculation steps. Independent review caught the mismatch. A symbolic value check alone did not establish that the full answer met the specification.",
         evidence: "clean transfer ruling, 2026-09-04",
     },
     Law {
-        title: "Interface interference",
-        statement: "A coat trained to infer the names-only formal form is hurt by being handed the operation recipe: 43 of 64 names-only against 4 of 64 node-specified, on the same tasks.",
+        title: "More detailed prompts can reduce performance",
+        statement: "The candidate scored 43 of 64 when given the problem and result names, but 4 of 64 when also given the calculation steps. Both conditions used the same tasks. The longer prompt may have conflicted with the form used in training.",
         evidence: "clean transfer factorial, 2026-09-04",
     },
     Law {
-        title: "A narrow grammar is itself a scaffold",
-        statement: "The shuffled-reply placebo scored 18 of 64 under the task-scoped grammar and 0 of 64 under the loose grammar. An endpoint that wants to see method must not let the grammar supply it.",
+        title: "Output rules can supply part of the task structure",
+        statement: "The shuffled-reply placebo scored 18 of 64 with the strict grammar and 0 of 64 with the loose grammar. A transfer test must account for help supplied by the output rules.",
         evidence: "clean transfer factorial, 2026-09-04",
     },
     Law {
-        title: "Raw corrections poison a training boundary",
-        statement: "Copying correction turns into dream prompts produced a repeated stray literal in the family with the fewest examples. Rendering prompts from the sealed task alone moved that family from 0 of 18 to 18 of 18 with no stray literals.",
+        title: "Training prompts can copy the errors they describe",
+        statement: "An adapter trained on prompts containing raw corrections repeated an unrelated constant. Training a new adapter with prompts generated only from the task specification raised the affected family's score from 0 of 18 to 18 of 18, with no unrelated constants. This supports the prompt-contamination diagnosis.",
         evidence: "stage-1 diagnosis and the safety slice, 2026-09-03",
     },
     Law {
-        title: "Never advance without the pass test",
-        statement: "A stage opens only when its preregistered test is met; a remainder that is measured is not a scheduling remainder. Failed records are neither overwritten nor rescored, and a result may not be rescued by repairing the instrument after seeing it.",
+        title: "Keep decision criteria fixed",
+        statement: "Preset criteria determine whether an experiment passes. An unresolved test remains unresolved even when implementation is complete. Failed records are preserved, and a revised instrument requires a new test. Any waiver must be recorded explicitly.",
         evidence: "docs/ROADMAP.md, both tracks",
     },
 ];

@@ -1,4 +1,4 @@
-//! Root component: router, header, footer and the route table.
+//! Routes and shared page layout.
 use crate::components::mark::Mark;
 use crate::pages::{
     method::Method, not_found::NotFound, overview::Overview, promise::Promise, record::Record,
@@ -15,8 +15,8 @@ pub const NAV: &[(&str, &str)] = &[
     ("/", "Overview"),
     ("/results", "Results"),
     ("/method", "Method"),
-    ("/record", "Record"),
-    ("/promise", "Promise"),
+    ("/record", "Reports"),
+    ("/promise", "Research goals"),
 ];
 
 #[component]
@@ -75,7 +75,7 @@ fn Footer() -> impl IntoView {
                     <Mark/>
                     <div>
                         <div class="brand-name">"Loopseed"</div>
-                        <p class="footer-tag">"A research program on interpretable, self-regulating machines, by " <a href=ORGANISATION_URL>{ORGANISATION}</a> "."</p>
+                        <p class="footer-tag">"Research on systems that learn from interaction, by " <a href=ORGANISATION_URL>{ORGANISATION}</a> "."</p>
                     </div>
                 </div>
                 <div class="footer-cols">
@@ -89,7 +89,7 @@ fn Footer() -> impl IntoView {
                             Some(url) => view! { <a href=url>"Repository"</a> }.into_any(),
                             None => view! { <span class="footer-muted">"Repository private during the study; evidence on request"</span> }.into_any(),
                         }}
-                        <a href="/record">"Rulings and hashes"</a>
+                        <a href="/record">"Reports and source records"</a>
                     </div>
                     <div>
                         <div class="footer-h">"This site"</div>
@@ -108,8 +108,7 @@ fn Footer() -> impl IntoView {
     }
 }
 
-/// Client-side routing does not scroll like a page load; return to the top on every navigation
-/// that carries no fragment.
+/// Scroll to the fragment, or the top when none is present.
 #[component]
 fn ScrollKeeper() -> impl IntoView {
     let location = use_location();

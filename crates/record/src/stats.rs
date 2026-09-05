@@ -1,11 +1,7 @@
-//! The exact statistics the rulings use, reimplemented so a reader can recompute every frozen
-//! number from the frozen counts: a one-sided exact McNemar test on the discordant pairs, and a
-//! Bonferroni Clopper–Pearson lower bound on the paired difference of success rates.
-//!
-//! The harness that produced the rulings is `fish/lab/claim_evolution.py` in the loopseed
-//! repository; these functions follow it line for line, including the hundred-step bisection.
+//! Exact McNemar tests and Bonferroni Clopper–Pearson bounds.
+//! Matches `fish/lab/claim_evolution.py`, including 100-step bisection.
 
-/// Binomial coefficient as a float; exact for the sizes the rulings use.
+/// Binomial coefficient as a float.
 pub fn choose(n: u64, k: u64) -> f64 {
     if k > n {
         return 0.0;
@@ -61,10 +57,10 @@ pub fn clopper_pearson_upper(successes: u64, trials: u64, alpha: f64) -> f64 {
     1.0 - clopper_pearson_lower(trials - successes, trials, alpha)
 }
 
-/// Each one-sided bound at 2.5 %, so the difference of the two is a 95 % Bonferroni bound.
+/// Two 2.5 % one-sided bounds give a 95 % Bonferroni bound.
 pub const ALPHA_ONE_SIDED: f64 = 0.025;
 
-/// The paired decision statistics for one arm against one comparator over `n` matched tasks.
+/// Paired statistics over `n` matched tasks.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Paired {
     pub n: u64,
@@ -73,7 +69,7 @@ pub struct Paired {
     pub ties: u64,
     /// One-sided exact McNemar: `P[Binomial(gains + losses, ½) ≥ gains]`.
     pub p_value: f64,
-    /// Clopper–Pearson lower bound on the gain rate minus the upper bound on the loss rate.
+    /// Lower gain-rate bound minus upper loss-rate bound.
     pub lower_difference: f64,
     pub observed_difference: f64,
 }
@@ -100,7 +96,7 @@ pub fn paired(gains: u64, losses: u64, n: u64) -> Paired {
 }
 
 impl Paired {
-    /// The frozen superiority gate: `p < 0.05` and a positive lower bound.
+    /// Requires `p < 0.05` and a positive lower bound.
     pub fn superior(&self) -> bool {
         self.p_value < 0.05 && self.lower_difference > 0.0
     }

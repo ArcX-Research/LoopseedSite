@@ -1,5 +1,4 @@
-//! The loop: five stages on a ring around the organism. Pure SVG, generated here so the geometry
-//! is one computation rather than hand-placed coordinates.
+//! Five-step learning cycle, rendered as SVG.
 use leptos::prelude::*;
 use std::f64::consts::PI;
 use std::fmt::Write;
@@ -12,11 +11,11 @@ pub struct Step {
 }
 
 pub const STEPS: &[Step] = &[
-    Step { ordinal: "01", label: "Predict", organ: "Ŵ → Î", gloss: "The mirror writes Î, the fish's guess at your next message, before it exists." },
-    Step { ordinal: "02", label: "Compare", organ: "δ = I − Î", gloss: "The skin: how far your actual words fell from the guess. Its plateau is the headline figure." },
-    Step { ordinal: "03", label: "Compress", organ: "σ, M", gloss: "The write gate keeps an exchange only when δ exceeds θ; the ledger holds what was kept and fades it nightly." },
-    Step { ordinal: "04", label: "Act", organ: "π, V", gloss: "The fin acts on a want, V = −‖δ‖ + β·H(you), that prizes the Other's variety as much as its own accuracy." },
-    Step { ordinal: "05", label: "Sustain", organ: "night: λ, lean", gloss: "The night decays the ledger and dreams on kept encounters; a night whose held-out loss does not fall is discarded." },
+    Step { ordinal: "01", label: "Predict", organ: "Ŵ → Î", gloss: "Record a prediction of the next external input before observing it." },
+    Step { ordinal: "02", label: "Compare", organ: "δ = I − Î", gloss: "Compare the observation with the prediction. Track the error score, δ, over time." },
+    Step { ordinal: "03", label: "Remember", organ: "σ, M", gloss: "Select experiences for memory when prediction error exceeds the threshold θ. Reduce the weight of unused records over time." },
+    Step { ordinal: "04", label: "Act", organ: "π, V", gloss: "Choose actions using the current state. Balance prediction accuracy with the variety of external input." },
+    Step { ordinal: "05", label: "Update", organ: "λ, η", gloss: "Use selected experience to update the system. Test proposed changes before adopting them." },
 ];
 
 pub fn loop_svg() -> String {
@@ -27,9 +26,9 @@ pub fn loop_svg() -> String {
     let mut s = String::with_capacity(8_000);
     let _ = write!(
         s,
-        r##"<svg class="loop" viewBox="0 0 {size} {size}" role="img" aria-label="The Loopseed cycle: predict, compare, compress, act, sustain">"##
+        r##"<svg class="loop" viewBox="0 0 {size} {size}" role="img" aria-label="The Loopseed cycle: predict, compare, remember, act, update">"##
     );
-    // Hairline field.
+    // Background grid.
     let _ = write!(
         s,
         r##"<g stroke="#000020" stroke-opacity="0.06" stroke-width="1">"##
@@ -55,7 +54,7 @@ pub fn loop_svg() -> String {
             r##"<path d="M-5 -4.5L1 0L-5 4.5" transform="translate({x:.1} {y:.1}) rotate({heading:.1})" fill="none" stroke="#4946ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>"##
         );
     }
-    // The organism at the centre.
+    // Centre mark.
     let _ = write!(
         s,
         r##"<circle cx="{c}" cy="{c}" r="74" fill="#ffffff" stroke="#000020" stroke-opacity="0.3" stroke-width="1.2"/>"##

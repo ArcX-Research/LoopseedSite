@@ -1,6 +1,4 @@
-//! The preregistered, blinded coat experiments of September 2026, quoted from their frozen
-//! rulings in `fish/album/`. Counts are what the verdict files recorded; the site recomputes the
-//! statistics from these counts with [`crate::stats`].
+//! Adapter experiments from `fish/album/`; original counts, plain-language summaries.
 
 pub struct Arm {
     pub name: &'static str,
@@ -49,39 +47,39 @@ pub struct Experiment {
 pub const EXPERIMENTS: &[Experiment] = &[
     Experiment {
         id: "primary",
-        title: "Node-specified transcription: a checked dream changes the speaking channel",
+        title: "Supplying the calculation steps: training improved structured answers",
         date: "2026-09-02",
         run: "claim-evolution-2026-09-02T174832Z",
         instrument: "claim-coat-evolution-v1",
         cells: 384,
         design: &[
-            "Sixty exact, whole-reply-audited typed-AST examples trained a private speaking coat on a disposable clone. The living body was never opened for writing.",
-            "128 fresh tasks in 16 formal families, each sent to three blinded arms on a fresh cloned body and a fresh daemon, with retrieval, mirror, fins, ocean and the regulator off. The prompt handed the model the whole operation tree in English; the reply was grammar-forced JSON.",
-            "An exact typed-AST checker backed by a computer-algebra kernel recomputed every claim. Machine-proved replies went to an independent, arm-blind whole-reply audit with veto-only authority before the arm key was applied to outcomes.",
+            "A reply adapter was trained on 60 structured examples that passed exact checks and independent review. Training used an isolated copy; the live database remained unchanged.",
+            "Each of 128 new tasks from 16 mathematical families was tested in three blinded conditions. Every request used a fresh copy and service, with memory retrieval, prediction, tools, external input and regulation disabled. Prompts supplied all calculation steps in English; replies had to follow a JSON grammar.",
+            "A typed checker and computer algebra system recomputed the answers. An independent AI reviewer, unaware of condition identities, read every reply that passed. The reviewer could reject these replies but could not reverse a failed calculation check.",
         ],
         arms: &[
-            Arm { name: "Candidate claim dream", successes: 94, tasks: 128, negative_literal_cells: 1, note: "2 reply-cap cuts, counted as failures" },
-            Arm { name: "Bare production voice", successes: 73, tasks: 128, negative_literal_cells: 0, note: "3 reply-cap cuts, counted as failures" },
-            Arm { name: "Retained prediction coat, spoken at scale 1", successes: 52, tasks: 128, negative_literal_cells: 22, note: "a counterfactual control, not the deployed voice" },
+            Arm { name: "Candidate reply adapter", successes: 94, tasks: 128, negative_literal_cells: 1, note: "2 replies reached the length limit and counted as failures" },
+            Arm { name: "Base model", successes: 73, tasks: 128, negative_literal_cells: 0, note: "3 replies reached the length limit and counted as failures" },
+            Arm { name: "Prediction adapter used for replies, scale 1", successes: 52, tasks: 128, negative_literal_cells: 22, note: "experimental control; this is not its deployed role" },
         ],
         comparisons: &[
-            Comparison { label: "candidate vs bare", n: 128, gains: 21, losses: 0, frozen_p: 4.76837158203125e-7, frozen_lower: 0.07611204480423511 },
-            Comparison { label: "candidate vs retained", n: 128, gains: 42, losses: 0, frozen_p: 2.2737367544323206e-13, frozen_lower: 0.21934735023473845 },
+            Comparison { label: "candidate vs base model", n: 128, gains: 21, losses: 0, frozen_p: 4.76837158203125e-7, frozen_lower: 0.07611204480423511 },
+            Comparison { label: "candidate vs prediction adapter", n: 128, gains: 42, losses: 0, frozen_p: 2.2737367544323206e-13, frozen_lower: 0.21934735023473845 },
         ],
         gates: &[
-            Gate { name: "mechanical validity (no voids)", passed: true },
-            Gate { name: "superiority against both controls", passed: true },
-            Gate { name: "overall no-harm", passed: true },
-            Gate { name: "family safety (≤ 2 losses of 8)", passed: true },
+            Gate { name: "all test requests valid", passed: true },
+            Gate { name: "statistical advantage over both controls", passed: true },
+            Gate { name: "overall limit on performance loss", passed: true },
+            Gate { name: "family loss limit (≤ 2 losses of 8)", passed: true },
             Gate { name: "negative-literal rate not increased", passed: false },
-            Gate { name: "zero leaks", passed: true },
-            Gate { name: "living body unchanged", passed: true },
+            Gate { name: "zero information leaks", passed: true },
+            Gate { name: "live database unchanged", passed: true },
         ],
-        verdict: "advance_to_transfer = false. No transfer stage, no wearing, no living promotion.",
+        verdict: "advance_to_transfer = false. This run did not authorise a transfer test or deployment to the live system.",
         reading: &[
-            "The gains are real and causal, and they belong to transcription: every gain sits in a family whose recipe shape the dream contained. This says nothing about inferring a method from a statement.",
-            "Four families scored 0 of 8 in every arm. Their nested recipes were rendered without delimiters, so 32 tasks were unreadable for everyone; the candidate solved 94 of the 96 in the twelve readable families and no arm solved the other two.",
-            "The one negative literal was a filler token on a garden-path prompt, not a learned habit. The frozen gate still stands; the instrument was repaired for the next run rather than the result reinterpreted.",
+            "The controlled comparison supports a training effect on translating supplied steps into the formal language. Every gain occurred in a family represented in training. This test did not require the model to discover a solution method.",
+            "Four families scored 0 of 8 in every condition. Their nested instructions lacked delimiters, making 32 prompts ambiguous. The candidate solved 94 of 96 tasks in the twelve remaining families; no condition solved the other two.",
+            "The later review attributed the single negative constant to filler output on an ambiguous prompt. It still failed the preset criterion. The prompt generator was revised for a new test, and the original result was preserved.",
         ],
         hashes: &[
             Hash { label: "harness commit", value: "ce4e60689a9c190204066cfe09fe40333cb28479" },
@@ -95,35 +93,35 @@ pub const EXPERIMENTS: &[Experiment] = &[
     },
     Experiment {
         id: "transfer-1",
-        title: "Names-only transfer, stage 1: a real effect, rejected by the safety cap",
+        title: "Transfer without supplied steps: higher scores, but an error limit failed",
         date: "2026-09-03",
         run: "claim-transfer-2026-09-03T050535Z",
         instrument: "claim-method-transfer-v2",
         cells: 192,
         design: &[
-            "The same candidate coat, now on the preregistered names-only endpoint under the loose grammar: the fish received the fresh problem and the required fact names, but no operation recipe.",
-            "64 unseen tasks, three blinded arms: the candidate, bare water, and a shuffled-reply placebo trained on the same prompts with replies assigned to the wrong tasks.",
+            "The same candidate adapter was tested with names-only prompts and the loose grammar. Fish received each new problem and required result names, without calculation steps. This was the primary condition selected before testing.",
+            "64 new tasks were tested in three blinded conditions: the candidate, the base model, and a placebo adapter trained on the same prompts with replies assigned to the wrong tasks.",
         ],
         arms: &[
-            Arm { name: "Candidate claim dream", successes: 25, tasks: 64, negative_literal_cells: 3, note: "all three negatives in unseen place-value tasks, the same erroneous terminal node" },
-            Arm { name: "Bare production voice", successes: 0, tasks: 64, negative_literal_cells: 0, note: "" },
+            Arm { name: "Candidate reply adapter", successes: 25, tasks: 64, negative_literal_cells: 3, note: "all three repeated the same incorrect final step on new place-value tasks" },
+            Arm { name: "Base model", successes: 0, tasks: 64, negative_literal_cells: 0, note: "" },
             Arm { name: "Shuffled-reply placebo", successes: 0, tasks: 64, negative_literal_cells: 0, note: "" },
         ],
         comparisons: &[
-            Comparison { label: "candidate vs bare", n: 64, gains: 25, losses: 0, frozen_p: 2.9802322387695312e-8, frozen_lower: 0.2150264321730908 },
+            Comparison { label: "candidate vs base model", n: 64, gains: 25, losses: 0, frozen_p: 2.9802322387695312e-8, frozen_lower: 0.2150264321730908 },
             Comparison { label: "candidate vs placebo", n: 64, gains: 25, losses: 0, frozen_p: 2.9802322387695312e-8, frozen_lower: 0.2150264321730908 },
         ],
         gates: &[
-            Gate { name: "mechanical validity", passed: true },
-            Gate { name: "superiority against both controls", passed: true },
-            Gate { name: "zero leaks", passed: true },
-            Gate { name: "negative-literal cap among failed replies (≤ 2 %)", passed: false },
+            Gate { name: "all test requests valid", passed: true },
+            Gate { name: "statistical advantage over both controls", passed: true },
+            Gate { name: "zero information leaks", passed: true },
+            Gate { name: "negative constants in failed replies (≤ 2 %)", passed: false },
         ],
-        verdict: "No dream, coat or stage 2 authorized. The failed coat remains a private artifact.",
+        verdict: "No further training, deployment or stage 2 test was authorised by this result. The adapter remains a private experimental file.",
         reading: &[
-            "Gains appeared in eight of sixteen families with no losses, so the causal speaking effect survived the removal of the recipe.",
-            "Three of the 39 failed replies carried the literal −2, a rate of 7.7 % against a preregistered cap of 2 %. Tracing the training set found the cause: raw correction turns had been copied into the dream prompts, and one quoted the rejected construction outright. The place-value family had only four examples.",
-            "That was a causal hypothesis, not a proved explanation, so it was tested prospectively rather than argued.",
+            "Gains occurred in eight of sixteen families with no losses. The advantage over the controls remained when prompts no longer supplied the solution steps.",
+            "Three of 39 failed replies included the constant −2: 7.7 %, above the preset 2 % limit. The training prompts included raw corrections, one of which quoted the rejected calculation. The affected place-value family had only four training examples.",
+            "This suggested that the correction text had introduced the error. A new experiment tested that explanation.",
         ],
         hashes: &[
             Hash { label: "protocol", value: "9bd8df051ac6854f8f35859ff05acfc587e71a8c810acbcf13a3a21e252585d8" },
@@ -135,31 +133,31 @@ pub const EXPERIMENTS: &[Experiment] = &[
     },
     Experiment {
         id: "safety",
-        title: "The clean data boundary: a prospective safety slice",
+        title: "Cleaner training prompts: a focused follow-up test",
         date: "2026-09-03",
         run: "claim-clean-safety-2026-09-03T163231Z",
         instrument: "claim-clean-prompt-safety-v1",
         cells: 54,
         design: &[
-            "A new coat was dreamt with the repaired boundary: prompts rendered deterministically from the sealed task specification, carrying no previous reply, verdict, computed answer or prior literal; raw correction turns kept as provenance only.",
-            "18 unseen place-value tasks, the family that had failed, with each terminal ones digit from 1 to 9 appearing exactly twice. Three sealed arms: bare water, the contaminated coat, the clean coat. Names-only prompts, loose grammar, fresh disposable bodies.",
+            "A new adapter was trained with prompts generated from the fixed task specification. These prompts excluded previous replies, verdicts, answers and constants copied from earlier exchanges. Raw corrections were retained only in the source record.",
+            "The test used 18 new place-value tasks, with each final ones digit from 1 to 9 appearing twice. Three blinded conditions compared the base model, the earlier adapter and the clean adapter. All used names-only prompts, the loose grammar and fresh isolated copies.",
         ],
         arms: &[
-            Arm { name: "Clean coat (v2 dream)", successes: 18, tasks: 18, negative_literal_cells: 0, note: "0 stray literals" },
-            Arm { name: "Contaminated coat (v1 dream)", successes: 0, tasks: 18, negative_literal_cells: 9, note: "9 stray-literal cells" },
-            Arm { name: "Bare production voice", successes: 0, tasks: 18, negative_literal_cells: 6, note: "6 stray-literal cells" },
+            Arm { name: "Clean adapter (v2 training)", successes: 18, tasks: 18, negative_literal_cells: 0, note: "0 replies with unrelated constants" },
+            Arm { name: "Earlier adapter (v1 training)", successes: 0, tasks: 18, negative_literal_cells: 9, note: "9 replies with unrelated constants" },
+            Arm { name: "Base model", successes: 0, tasks: 18, negative_literal_cells: 6, note: "6 replies with unrelated constants" },
         ],
         comparisons: &[],
         gates: &[
-            Gate { name: "all arms mechanically complete", passed: true },
-            Gate { name: "zero negative literals from the clean arm", passed: true },
-            Gate { name: "at least one exact clean reply", passed: true },
-            Gate { name: "no fewer exact clean replies than the contaminated arm", passed: true },
+            Gate { name: "all conditions completed", passed: true },
+            Gate { name: "zero negative constants from the clean adapter", passed: true },
+            Gate { name: "at least one exact answer from the clean adapter", passed: true },
+            Gate { name: "clean adapter scored at least as well as the earlier adapter", passed: true },
         ],
-        verdict: "A full blinded transfer experiment was authorized. Wearing was not.",
+        verdict: "A full blinded transfer experiment was authorised. Deployment was not.",
         reading: &[
-            "The repair did more than suppress a token: on the matched family exact performance moved from 0 of 18 to 18 of 18 while every stray literal disappeared. This supports the diagnosis that raw correction prompts were poisoning the old training boundary.",
-            "The slice deliberately targeted one family, so it establishes nothing about cross-family transfer.",
+            "The clean adapter answered 18 of 18 tasks correctly, compared with 0 of 18 for the earlier adapter, and produced no unrelated constants. This supports the diagnosis that raw correction text in the training prompts contributed to the earlier errors.",
+            "This test deliberately covered one family. It does not establish transfer across task families.",
         ],
         hashes: &[
             Hash { label: "protocol", value: "54d6ca6fc50490838fb7f8fa7686b8382c77fb12bba93183630798bf416a9972" },
@@ -171,39 +169,39 @@ pub const EXPERIMENTS: &[Experiment] = &[
     },
     Experiment {
         id: "transfer-clean",
-        title: "Clean names-only transfer: reusable formal methods on unseen instances",
+        title: "Clean transfer: formal methods applied to new problem instances",
         date: "2026-09-04",
         run: "claim-transfer-clean-2026-09-03T170409Z",
         instrument: "claim-method-transfer-v2",
         cells: 1024,
         design: &[
-            "64 new tasks, four unseen parameter instances in each of 16 families, excluding every task from the earlier stage, the safety slice and the historical source.",
-            "Every task crossed four prompt-and-grammar conditions and four blinded speaking arms: bare water, the retained prediction coat forced into speech, a clean shuffled-reply placebo trained on the same prompt and reply marginals, and the clean candidate. The primary endpoint was names-only under the loose grammar.",
-            "All 1,024 cells were mechanically valid. Machine-positive whole replies went to one independent reviewer before arm identities could be opened; the reviewer accepted 137 of 155 and vetoed 18 for specification drift the value checker could not see.",
+            "64 new tasks covered four new parameter sets in each of 16 families. The test excluded all tasks used in the earlier stage, the focused follow-up and the original source data.",
+            "Each task was tested under four prompt-and-grammar settings and four blinded adapter conditions: the base model, the prediction adapter used for replies, a clean shuffled-reply placebo, and the clean candidate. The placebo used the same sets of prompts and replies with their pairings shuffled. Names-only prompts with the loose grammar were the primary condition.",
+            "All 1,024 requests were valid. Before condition identities were revealed, an independent AI reviewer accepted 137 of the 155 replies that passed the exact checker. It rejected 18 because their calculations did not match the requested specification.",
         ],
         arms: &[
-            Arm { name: "Clean candidate coat", successes: 43, tasks: 64, negative_literal_cells: 0, note: "47 machine-exact before four vetoes on Chinese-remainder replies" },
-            Arm { name: "Bare production voice", successes: 0, tasks: 64, negative_literal_cells: 3, note: "" },
+            Arm { name: "Clean candidate adapter", successes: 43, tasks: 64, negative_literal_cells: 0, note: "47 passed the checker; review rejected four Chinese-remainder answers" },
+            Arm { name: "Base model", successes: 0, tasks: 64, negative_literal_cells: 3, note: "" },
             Arm { name: "Shuffled-reply placebo", successes: 0, tasks: 64, negative_literal_cells: 0, note: "" },
-            Arm { name: "Retained prediction coat, spoken", successes: 5, tasks: 64, negative_literal_cells: 2, note: "" },
+            Arm { name: "Prediction adapter used for replies", successes: 5, tasks: 64, negative_literal_cells: 2, note: "" },
         ],
         comparisons: &[
-            Comparison { label: "candidate vs bare", n: 64, gains: 43, losses: 0, frozen_p: 1.1368683772161603e-13, frozen_lower: 0.4871 },
+            Comparison { label: "candidate vs base model", n: 64, gains: 43, losses: 0, frozen_p: 1.1368683772161603e-13, frozen_lower: 0.4871 },
             Comparison { label: "candidate vs placebo", n: 64, gains: 43, losses: 0, frozen_p: 1.1368683772161603e-13, frozen_lower: 0.4871 },
-            Comparison { label: "candidate vs retained", n: 64, gains: 38, losses: 0, frozen_p: 3.637978807091713e-12, frozen_lower: 0.4077 },
+            Comparison { label: "candidate vs prediction adapter", n: 64, gains: 38, losses: 0, frozen_p: 3.637978807091713e-12, frozen_lower: 0.4077 },
         ],
         gates: &[
-            Gate { name: "mechanical validity (1,024 of 1,024 cells)", passed: true },
-            Gate { name: "superiority against bare and placebo", passed: true },
-            Gate { name: "zero negative literals in the candidate", passed: true },
-            Gate { name: "zero leaks, living body unchanged", passed: true },
+            Gate { name: "all requests valid (1,024 of 1,024)", passed: true },
+            Gate { name: "statistical advantage over base model and placebo", passed: true },
+            Gate { name: "zero negative constants from the candidate", passed: true },
+            Gate { name: "zero information leaks; live database unchanged", passed: true },
         ],
-        verdict: "method_transfer = true. living_promotion_authorized = false: the coat stays unworn until a separately reviewed consolidation qualification on disposable bodies.",
+        verdict: "method_transfer = true. living_promotion_authorized = false. The transfer criterion passed. Deployment requires a separate, independently reviewed qualification on isolated copies.",
         reading: &[
-            "Ten families at 4 of 4 and one at 3 of 4; five families earned nothing. This is transfer to new parameter instances across eleven learned families inside a sealed formal language. It is not general theorem proving, code synthesis, or transfer outside that language.",
-            "The matched placebo failed the primary endpoint while the candidate passed it, so the effect is not syntax memorization alone. Under the narrow task-scoped grammar the placebo did score, which is why the loose grammar is the endpoint.",
-            "Adding the operation recipe hurt the candidate: 4 of 64 under node-specified prompts against 43 names-only. A coat trained to infer the names-only form is moved off its learned boundary by the long recipe.",
-            "Exact recomputation and graph faithfulness are distinct gates. Four candidate replies proved the right terminal values by drifting from the requested operation graph; only whole-reply review caught them.",
+            "The candidate passed all four tasks in ten families and three of four in another; it scored zero in five families. This supports transfer to new parameter values within eleven learned families. It does not establish general theorem proving, code generation or transfer beyond this formal language.",
+            "The candidate passed the primary test while the matched placebo scored zero. This supports learning beyond the output format alone. The placebo did score under the strict grammar, showing why output rules must be controlled when testing learned methods.",
+            "Supplying the calculation steps reduced the candidate's score to 4 of 64, compared with 43 under names-only prompts. A likely explanation is the mismatch between the longer prompts and the form used in training.",
+            "Four candidate replies passed the numerical checks but did not perform the requested calculation. Independent review rejected them. Exact calculation and compliance with the task specification therefore need separate checks.",
         ],
         hashes: &[
             Hash { label: "harness commit", value: "da445bb8de772f794766ca44a944e8ffff82c09a" },
@@ -221,8 +219,7 @@ pub const EXPERIMENTS: &[Experiment] = &[
     },
 ];
 
-/// The clean transfer's factorial diagnostic: independently accepted successes of 64 by prompt
-/// and grammar condition. Descriptive, not an alternate endpoint.
+/// Accepted answers out of 64 by prompt and grammar; secondary comparisons.
 pub struct FactorialRow {
     pub condition: &'static str,
     pub bare: u32,
@@ -233,28 +230,28 @@ pub struct FactorialRow {
 
 pub const FACTORIAL: &[FactorialRow] = &[
     FactorialRow {
-        condition: "Node-specified · task-scoped grammar",
+        condition: "Steps supplied · strict grammar",
         bare: 1,
         placebo: 12,
         candidate: 4,
         retained: 1,
     },
     FactorialRow {
-        condition: "Node-specified · loose grammar",
+        condition: "Steps supplied · loose grammar",
         bare: 0,
         placebo: 0,
         candidate: 4,
         retained: 1,
     },
     FactorialRow {
-        condition: "Names-only · task-scoped grammar",
+        condition: "Names only · strict grammar",
         bare: 0,
         placebo: 18,
         candidate: 43,
         retained: 5,
     },
     FactorialRow {
-        condition: "Names-only · loose grammar (endpoint)",
+        condition: "Names only · loose grammar (primary test)",
         bare: 0,
         placebo: 0,
         candidate: 43,

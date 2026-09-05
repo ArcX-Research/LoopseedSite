@@ -1,4 +1,4 @@
-//! Arm tables, gate lists and hash lists for the rulings.
+//! Experiment conditions, pass criteria and file hashes.
 use leptos::prelude::*;
 use loopseed_record::experiments::{Arm, Gate, Hash};
 
@@ -10,10 +10,10 @@ pub fn ArmTable(arms: &'static [Arm]) -> impl IntoView {
             <table class="table">
                 <thead>
                     <tr>
-                        <th>"Arm"</th>
-                        <th class="num">"accepted successes"</th>
+                        <th>"Condition"</th>
+                        <th class="num">"accepted answers"</th>
                         <th class="num">"tasks"</th>
-                        <th class="num">"negative-literal cells"</th>
+                        <th class="num">"replies with negative constants"</th>
                         {notes.then(|| view! { <th>"Note"</th> })}
                     </tr>
                 </thead>
@@ -51,7 +51,7 @@ pub fn GateList(gates: &'static [Gate]) -> impl IntoView {
 pub fn HashList(hashes: &'static [Hash]) -> impl IntoView {
     view! {
         <details class="hashes">
-            <summary>{format!("{} content hashes", hashes.len())}</summary>
+            <summary>{format!("{} file hashes", hashes.len())}</summary>
             <dl>
                 {hashes.iter().map(|h| view! {
                     <div><dt>{h.label}</dt><dd class="mono">{h.value}</dd></div>

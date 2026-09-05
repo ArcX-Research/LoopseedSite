@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-# Builds loopseed.io to ./dist (static files; serve from any HTTP server with an SPA fallback
-# to index.html).
-#
-#   scripts/build.sh            release build (optimised, small)
-#   scripts/build.sh dev        fast debug build for local iteration
+# Build dist/. Usage: scripts/build.sh [release|dev]
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PROFILE="${1:-release}"
@@ -51,7 +47,7 @@ if [ "$PROFILE" = release ] && command -v wasm-opt >/dev/null 2>&1; then
   wasm-opt -Os -o "$ROOT/dist/pkg/loopseed_bg.wasm" "$ROOT/dist/pkg/loopseed_bg.wasm"
 fi
 cp -R "$ROOT/static/." "$ROOT/dist/"
-# Cache-bust the module and stylesheet with a content hash.
+# Version assets by content hash.
 if command -v shasum >/dev/null 2>&1; then
   HASH="$(shasum -a 256 "$ROOT/dist/pkg/loopseed_bg.wasm" | cut -c1-10)"
 else
@@ -59,7 +55,7 @@ else
 fi
 sed -i.bak -e "s#/pkg/loopseed.js#/pkg/loopseed.js?v=$HASH#g" -e "s#/styles.css#/styles.css?v=$HASH#g" "$ROOT/dist/index.html"
 rm -f "$ROOT/dist/index.html.bak"
-# SPA fallback for static hosts that serve 404.html.
+# Static-host routing fallback.
 cp "$ROOT/dist/index.html" "$ROOT/dist/404.html"
 echo "▸ dist/ ready ($PROFILE)"
 ls -la "$ROOT/dist/pkg" | awk '$1 ~ /^-/ {printf "   %-22s %8.1f KB\n", $9, $5/1024}'

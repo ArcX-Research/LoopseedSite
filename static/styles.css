@@ -1,6 +1,4 @@
-/* loopseed.io — light-only design system in the Dilate visual language:
-   ink #000020, indigo #4946ff, Dilate blue #0454ff, warm off-whites, hairlines;
-   Geist (text), Adamina (the equation), DM Mono (numbers and paths). */
+/* Dilate colours and typography, light theme. */
 
 :root {
   --ink: #000020;
@@ -53,7 +51,7 @@ img, svg { max-width: 100%; }
 .boot { display: flex; align-items: center; justify-content: center; min-height: 60vh; color: var(--ink-3); }
 .boot-noscript { color: var(--ink); }
 
-/* The shell: the same content width as lanyon.ai (1240px inside 40px margins, 700px on tablets). */
+/* Shared content width. */
 .wrap { width: min(var(--max), 100% - 80px); margin-inline: auto; }
 .mono { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0; }
 .small { font-size: 12px; }
@@ -170,6 +168,9 @@ img, svg { max-width: 100%; }
 .toggle { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
 .toggle input { accent-color: var(--indigo); }
 .caption { margin: 10px 0 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+.figure-h { margin: 40px 0 8px; font-size: 19px; letter-spacing: -0.02em; }
+.section-head + .figure-h { margin-top: 4px; }
+.figure-lede { margin-bottom: 16px; }
 .exegesis { margin: 0 0 22px; padding: 18px 20px; border: 1px solid var(--hair); border-radius: var(--r-m); background: var(--paper-2); font-size: 13.5px; line-height: 1.7; overflow-x: auto; color: var(--ink); }
 .figures { margin: 0; display: grid; gap: 12px; }
 .figures dt { font-size: 14.5px; color: var(--ink); }

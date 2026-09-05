@@ -1,5 +1,4 @@
-//! Paired comparisons: the frozen numbers beside the same numbers recomputed here, and a small
-//! explorer for the decision rule.
+//! Recorded statistics, browser recalculations and an interactive comparison.
 use leptos::prelude::*;
 use loopseed_record::experiments::Comparison;
 use loopseed_record::stats::{paired, scientific, signed};
@@ -12,11 +11,11 @@ pub fn PairedTable(comparisons: &'static [Comparison]) -> impl IntoView {
                 <thead>
                     <tr>
                         <th>"Comparison"</th>
-                        <th class="num">"n"</th>
+                        <th class="num">"matched tasks"</th>
                         <th class="num">"gains"</th>
                         <th class="num">"losses"</th>
                         <th class="num">"one-sided exact p"</th>
-                        <th class="num">"95 % lower difference"</th>
+                        <th class="num">"95 % lower bound on difference"</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,11 +29,11 @@ pub fn PairedTable(comparisons: &'static [Comparison]) -> impl IntoView {
                                 <td class="num">{c.losses}</td>
                                 <td class="num">
                                     <span class="frozen">{scientific(c.frozen_p)}</span>
-                                    <span class="recomputed">{format!("here {}", scientific(r.p_value))}</span>
+                                    <span class="recomputed">{format!("recalculated {}", scientific(r.p_value))}</span>
                                 </td>
                                 <td class="num">
                                     <span class="frozen">{signed(c.frozen_lower, 4)}</span>
-                                    <span class="recomputed">{format!("here {}", signed(r.lower_difference, 4))}</span>
+                                    <span class="recomputed">{format!("recalculated {}", signed(r.lower_difference, 4))}</span>
                                 </td>
                             </tr>
                         }
@@ -64,9 +63,9 @@ pub fn Explorer() -> impl IntoView {
             </div>
             <dl class="explorer-out mono">
                 <div><dt>"one-sided exact McNemar p"</dt><dd>{move || scientific(result().p_value)}</dd></div>
-                <div><dt>"95 % lower bound on the paired difference"</dt><dd>{move || signed(result().lower_difference, 4)}</dd></div>
-                <div><dt>"observed difference"</dt><dd>{move || signed(result().observed_difference, 4)}</dd></div>
-                <div><dt>"superiority gate"</dt><dd>{move || if result().superior() { "passes" } else { "fails" }}</dd></div>
+                <div><dt>"95 % lower bound on the success-rate difference"</dt><dd>{move || signed(result().lower_difference, 4)}</dd></div>
+                <div><dt>"observed success-rate difference"</dt><dd>{move || signed(result().observed_difference, 4)}</dd></div>
+                <div><dt>"statistical criterion"</dt><dd>{move || if result().superior() { "passes" } else { "fails" }}</dd></div>
             </dl>
         </div>
     }
