@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Loopseed is a research program on interpretable, self-regulating machines: a language organism closed by a measured Other, with preregistered, hash-pinned results.">
+  <title>Loopseed — a measured learning loop</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Adamina&family=DM+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="modulepreload" href="/pkg/loopseed.js">
+</head>
+<body>
+  <div id="boot" class="boot" aria-live="polite">
+    <div class="boot-text mono">Loading Loopseed…</div>
+    <noscript><p class="boot-noscript">Turn on JavaScript and WebAssembly to read this site.</p></noscript>
+  </div>
+  <script type="module">
+    import init from '/pkg/loopseed.js';
+    init().then(() => {
+      const b = document.getElementById('boot');
+      if (b) b.remove();
+    }).catch((err) => {
+      const t = document.querySelector('.boot-text');
+      if (t) t.textContent = 'Loopseed could not load: ' + err;
+      console.error(err);
+    });
+  </script>
+</body>
+</html>

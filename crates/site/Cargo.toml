@@ -1,0 +1,19 @@
+[package]
+name = "loopseed-site"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+description = "loopseed.io web application (Leptos, client-side rendered WebAssembly)"
+
+[dependencies]
+loopseed-record = { path = "../record" }
+leptos = { version = "0.8", features = ["csr"] }
+leptos_router = { version = "0.8" }
+# Pinned to the installed wasm-bindgen CLI (scripts/build.sh checks the match).
+wasm-bindgen = "=0.2.127"
+web-sys = { version = "0.3", features = [
+  "Window", "Document", "Element", "HtmlElement", "HtmlInputElement", "Location",
+  "ScrollToOptions", "ScrollBehavior",
+] }
+console_error_panic_hook = "0.1"

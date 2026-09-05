@@ -1,0 +1,11 @@
+[package]
+name = "loopseed-record"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+description = "The record behind loopseed.io: typed results, the exact statistics that rule on them, and the skin data"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
