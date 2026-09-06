@@ -76,7 +76,7 @@ remain in its own `.meridian/` folder; connecting the website does not alter the
 ## Layout
 
 ```
-loopseed-site/
+LoopseedSite/
   crates/record/   results, source references and statistics
   crates/site/     pages and figures (Leptos)
   static/         HTML, CSS and icons
