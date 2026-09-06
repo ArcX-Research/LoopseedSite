@@ -21,11 +21,9 @@ This repository contains the research website, built in Rust and compiled to Web
 recalculates paired comparisons from the original counts.
 
 ## Run it locally
-
 ```bash
 make dev    # preview with live reload
 ```
-
 Open http://127.0.0.1:8790/. Other commands:
 
 ```bash
