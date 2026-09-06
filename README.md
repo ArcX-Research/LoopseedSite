@@ -31,13 +31,47 @@ make help                      # list commands
 make build                     # release build
 make build-dev                 # debug build
 make serve                     # serve dist/
-make test                      # verify recorded statistics
+make test                      # verify recorded statistics and local connections
 make check                     # format, lint, tests, Wasm
-make skin LOOPSEED=../loopseed  # export chart data, read-only
+make skin                      # export chart data from the connected Loopseed
 ```
 
 Requirements: Rust ≥ 1.85, the `wasm32-unknown-unknown` target, Python 3, and `wasm-bindgen`
 CLI 0.2.127 (matching `crates/site/Cargo.toml` and `Cargo.lock`). `wasm-opt` is optional.
+
+## Connect a Loopseed checkout
+
+Loopseed and this website can live in separate folders at any depth. Register the
+checkout explicitly before exporting chart data:
+
+```bash
+./scripts/connect-loopseed.sh "/absolute/path/to/Loopseed"
+make skin
+```
+
+The helper validates the checkout and saves its absolute path in this website’s
+ignored `.loopseedsite/config.json`. It does not change Loopseed or start a model.
+The chart exporter opens `fish/sediment.db` in read-only mode and reads `SOUL.md`
+from that checkout. Reconnect after moving Loopseed; previewing and building the
+website use the committed chart data and do not require a connection.
+
+For one export, pass a Make variable or environment variable without changing the
+saved connection:
+
+```bash
+make skin LOOPSEED="/another/location/Loopseed"
+LOOPSEED="/another/location/Loopseed" make skin
+python3 scripts/export_skin.py --loopseed "/another/location/Loopseed"
+```
+
+Resolution order is the exporter’s `--loopseed` argument, `LOOPSEED`, then the
+saved connection. An unset connection or invalid explicit path produces a setup
+error. No sibling directory is assumed. `LOOPSEEDSITE_CONFIG` can select another
+settings file, for example when testing. Inspect the selected path with
+`python3 scripts/loopseed_connection.py path`.
+
+This connection belongs to LoopseedSite. Meridian’s adapter and workspace settings
+remain in its own `.meridian/` folder; connecting the website does not alter them.
 
 ## Layout
 

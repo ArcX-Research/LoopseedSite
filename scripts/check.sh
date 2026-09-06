@@ -15,6 +15,9 @@ if command -v shellcheck >/dev/null 2>&1; then
   shellcheck scripts/*.sh
 fi
 
+echo "▸ connection tests"
+python3 -m unittest discover -s scripts -p '*_test.py'
+
 echo "▸ clippy (record, native)"
 cargo clippy -p loopseed-record --all-targets -- -D warnings
 

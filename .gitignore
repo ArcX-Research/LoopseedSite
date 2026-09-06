@@ -43,6 +43,7 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Local environment and secret material
+/.loopseedsite/
 .env
 .env.*
 !.env.example

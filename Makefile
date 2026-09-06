@@ -4,7 +4,8 @@ CARGO ?= cargo
 PYTHON ?= python3
 HOST ?= 127.0.0.1
 PORT ?= 8790
-LOOPSEED ?= ../loopseed
+# Optional command-line/environment override for the saved connection.
+export LOOPSEED
 
 .DEFAULT_GOAL := help
 
@@ -18,8 +19,9 @@ help:
 		'  make build-dev    Build the development site in dist/' \
 		'  make serve        Serve the existing dist/ directory' \
 		'  make check        Format, lint, test, and wasm checks' \
-		'  make test         Run the record tests (statistics, data consistency)' \
-		'  make skin         Re-export the skin figure data from $$LOOPSEED (read-only)' \
+		'  make test         Run record and connection tests' \
+		'  make skin         Export chart data from the connected Loopseed (read-only)' \
+		'                    Connect first: scripts/connect-loopseed.sh /path/to/Loopseed' \
 		'  make clean        Remove generated build output'
 
 fmt:
@@ -33,6 +35,7 @@ lint:
 	$(CARGO) clippy -p loopseed-site --target wasm32-unknown-unknown -- -D warnings
 
 test:
+	$(PYTHON) -m unittest discover -s scripts -p '*_test.py'
 	$(CARGO) test -p loopseed-record
 
 check:
@@ -51,7 +54,7 @@ serve:
 	$(PYTHON) scripts/serve.py --host "$(HOST)" --port "$(PORT)" --no-build
 
 skin:
-	$(PYTHON) scripts/export_skin.py "$(LOOPSEED)/fish/sediment.db" --soul "$(LOOPSEED)/SOUL.md"
+	$(PYTHON) scripts/export_skin.py
 
 clean:
 	$(CARGO) clean

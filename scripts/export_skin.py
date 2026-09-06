@@ -6,6 +6,8 @@ scores are exported as daily quartiles and session medians. Teachers and weather
 group, each classroom keeps its own series. v1 and v2 stay separate. Session gaps follow
 fish/lab/UnNaivety.wl.
 """
+from __future__ import annotations
+
 import argparse
 import json
 import re
@@ -14,6 +16,8 @@ import statistics
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+from loopseed_connection import loopseed_root
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "crates" / "record" / "data" / "skin.json"
@@ -137,17 +141,25 @@ def guest_export(rows):
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("sediment", type=Path)
-    ap.add_argument("--soul", type=Path, default=None)
+    ap.add_argument("--loopseed", type=Path, help="explicit checkout override for this export")
     ap.add_argument("--out", type=Path, default=OUT)
     args = ap.parse_args()
 
-    db = sqlite3.connect(f"file:{args.sediment.resolve()}?mode=ro", uri=True)
-    rows = db.execute(
-        "SELECT d.ts, d.delta, COALESCE(e.speaker, 'keeper'), COALESCE(d.delta_v, 1) "
-        "FROM delta_log d LEFT JOIN exchanges e ON e.id = d.exchange_id ORDER BY d.ts"
-    ).fetchall()
-    db.close()
+    try:
+        checkout = loopseed_root(args.loopseed)
+        sediment = checkout / "fish/sediment.db"
+        if not sediment.is_file():
+            raise ValueError(f"No sediment database in the connected checkout: {sediment}")
+        db = sqlite3.connect(sediment.as_uri() + "?mode=ro", uri=True)
+        try:
+            rows = db.execute(
+                "SELECT d.ts, d.delta, COALESCE(e.speaker, 'keeper'), COALESCE(d.delta_v, 1) "
+                "FROM delta_log d LEFT JOIN exchanges e ON e.id = d.exchange_id ORDER BY d.ts"
+            ).fetchall()
+        finally:
+            db.close()
+    except (OSError, ValueError, sqlite3.Error) as exc:
+        ap.error(str(exc))
 
     keeper = [(parse(ts), float(delta), int(version)) for ts, delta, speaker, version in rows if speaker == "keeper"]
     guests = sum(1 for _, _, speaker, _ in rows if speaker != "keeper")
@@ -168,8 +180,8 @@ def main() -> None:
 
     out = {
         "exported_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-        "source": args.sediment.name,
-        "theta": theta_from_soul(args.soul),
+        "source": sediment.name,
+        "theta": theta_from_soul(checkout / "SOUL.md"),
         "epoch_unix": int(epoch.timestamp()) if epoch else None,
         "instrumentation_end_unix": int(INSTRUMENTATION_END.timestamp()),
         "keeper_grades": len(keeper),
