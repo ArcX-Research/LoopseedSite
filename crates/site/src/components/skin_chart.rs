@@ -516,7 +516,7 @@ pub fn GuestChart() -> impl IntoView {
                 <label class="toggle"><input type="checkbox" prop:checked=move || show_sittings.get() on:change=move |_| show_sittings.update(|v| *v = !*v)/>" show session medians"</label>
             </div>
             <figcaption class="caption">
-                {format!("Guest exchanges use the same prediction error measure and are reported separately, never pooled with the regular participant's results. {}. The chart includes {} daily records and {} sessions; {} scores from {} are omitted because there are too few to chart.", summary.join("; "), day_records, session_records, omitted.grades, omitted.speakers.join(", "))}
+                {format!("Guest exchanges use the same prediction error measure and are reported separately, never pooled with the regular participant's results. {}. The chart includes {} daily records and {} sessions; {} scores labelled {} are omitted because there are too few to chart.", summary.join("; "), day_records, session_records, omitted.grades, omitted.speakers.join(", "))}
             </figcaption>
         </figure>
     }
