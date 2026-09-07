@@ -1,24 +1,37 @@
 //! Experimental results and their limits.
+use crate::components::page_nav::PageNav;
 use crate::components::skin_chart::{GuestChart, SkinChart};
 use crate::components::stats::{Explorer, PairedTable};
-use crate::components::tables::{ArmTable, GateList, HashList};
+use crate::components::tables::{ArmTable, GateList, HashList, ScrollTable};
 use crate::util::{grouped, set_title};
 use leptos::prelude::*;
 use loopseed_record::experiments::{Experiment, EXPERIMENTS, FACTORIAL};
 use loopseed_record::measures::{BODY_RULING, MEMORY, OCEAN, OCEAN_SOURCE, SWEEP, SWEEP_SOURCE};
 use loopseed_record::skin::{DELTA_V1, DELTA_V2, ERA_ONE};
 
+const SECTIONS: &[(&str, &str)] = &[
+    ("#coats", "Adapter studies"),
+    ("#explorer-h", "Statistics"),
+    ("#current", "Latest study"),
+    ("#skin", "Prediction"),
+    ("#ocean", "External input"),
+    ("#bodies", "Model comparison"),
+    ("#memory", "Memory"),
+];
+
 #[component]
 pub fn Results() -> impl IntoView {
     set_title("Results");
     view! {
-        <section class="wrap page">
-            <p class="eyebrow">"Results"</p>
-            <h1 class="display display-xl">"What the record shows"</h1>
-            <p class="lede">"The strongest completed adapter comparison found 43 accepted answers out of 64 new parameter instances, versus zero for both the base model and a shuffled-reply control. Gains occurred within eleven learned task families. The studies below show the design, failed criteria and limits of that finding."</p>
-            <p class="prose-p">"This is a dated research summary, reviewed on 7 September 2026. It separates controlled tests, a private continuation study and observational measurements. The source repository is private; "<a href="/record#where-h">"evidence is available on request"</a>". Recalculating the statistics checks the arithmetic, not the underlying observations."</p>
-            <p class="more"><a href="#coats">"Controlled adapter tests"</a>" · "<a href="#current">"Current private study"</a>" · "<a href="#skin">"Prediction observations"</a>" · "<a href="#memory">"Memory tests"</a></p>
+        <section class="page-intro page-intro-results">
+            <div class="wrap">
+                <p class="eyebrow">"Results"</p>
+                <h1 class="display display-xl">"What the record shows"</h1>
+                <p class="lede">"The strongest completed adapter comparison found 43 accepted answers out of 64 new parameter instances, versus zero for both the base model and a shuffled-reply control. Gains occurred within eleven learned task families. The studies below show the design, failed criteria and limits of that finding."</p>
+                <p class="prose-p">"This is a dated research summary, reviewed on 7 September 2026. It separates controlled tests, a private continuation study and observational measurements. The source repository is private; "<a href="/record#where-h">"evidence is available on request"</a>". Recalculating the statistics checks the arithmetic, not the underlying observations."</p>
+            </div>
         </section>
+        <PageNav items=SECTIONS/>
 
         <section id="coats" class="wrap section" aria-labelledby="coats-h">
             <div class="section-head">
@@ -29,6 +42,15 @@ pub fn Results() -> impl IntoView {
                 <p class="prose-p">"The candidate is the adapter being tested. The base model runs without it. The placebo is an adapter trained on replies assigned to the wrong tasks. The retained prediction adapter is an additional control, used experimentally to generate replies. Each experimental condition is also called an arm."</p>
                 <p class="prose-p">"‘Names-only’ prompts give the problem and required result names without a solution procedure. ‘Node-specified’ prompts also provide the calculation steps. A strict grammar limits names and argument counts for each task; a loose grammar limits the general output structure. Both constrain generation. A negative literal is a negative number written directly in the answer; the preset limit is a task-specific contamination check, not a general mathematical rule or safety measure."</p>
             </div>
+            <nav class="study-index" aria-label="Adapter studies">
+                {EXPERIMENTS.iter().enumerate().map(|(i, e)| view! {
+                    <a href=format!("#{}", e.id)>
+                        <span class="n">{format!("{:02}", i + 1)}</span>
+                        <span class="study-index-title">{e.title}</span>
+                        <span aria-hidden="true" class="study-index-arrow">"↗"</span>
+                    </a>
+                }).collect_view()}
+            </nav>
             {EXPERIMENTS.iter().map(|e| view! { <ExperimentBlock experiment=e/> }).collect_view()}
         </section>
 
@@ -38,7 +60,7 @@ pub fn Results() -> impl IntoView {
                 <h2 id="factorial-h" class="display">"How prompts and output rules affected scores"</h2>
                 <p class="lede-sm">"Each score counts accepted answers out of 64 tasks. The placebo succeeded only with the strict grammar; the candidate scored lower when given the calculation steps. These comparisons help explain the result. The primary test remains the condition selected before the run."</p>
             </div>
-            <div class="table-wrap">
+            <ScrollTable label="Prompt and grammar comparisons">
                 <table class="table">
                     <thead><tr><th>"Prompt · grammar"</th><th class="num">"base model"</th><th class="num">"placebo"</th><th class="num">"candidate"</th><th class="num">"prediction adapter"</th></tr></thead>
                     <tbody>
@@ -47,7 +69,7 @@ pub fn Results() -> impl IntoView {
                         }).collect_view()}
                     </tbody>
                 </table>
-            </div>
+            </ScrollTable>
         </section>
 
         <section class="wrap section" aria-labelledby="explorer-h">
@@ -82,7 +104,7 @@ pub fn Results() -> impl IntoView {
                 </div>
             </div>
             <h3 class="figure-h">"Paired task–seed outcomes"</h3>
-            <div class="table-wrap">
+            <ScrollTable label="Paired task and seed outcomes">
                 <table class="table">
                     <thead><tr><th>"Evaluation group"</th><th class="num">"pairs"</th><th class="num">"gains"</th><th class="num">"losses"</th><th class="num">"ties"</th></tr></thead>
                     <tbody>
@@ -91,7 +113,7 @@ pub fn Results() -> impl IntoView {
                         <tr><td>"Unavailable-information controls"</td><td class="num">"6"</td><td class="num">"0"</td><td class="num">"0"</td><td class="num">"6"</td></tr>
                     </tbody>
                 </table>
-            </div>
+            </ScrollTable>
             <p class="prose-p">"These are 84 task–seed pairs from 42 tasks, with shared operation families and repeated seeds. The counts are descriptive, not independent replications or a new statistical efficacy claim. This result shows why an improvement in the training objective needs a separate behavioural test, including earlier abilities."</p>
             <p class="prose-p">"A separate controlled learning study is still qualifying eligible probes before its causal comparison. Screening and pilot replies measure whether the experiment can run as specified; they are not evidence of a learning benefit. Failed eligibility attempts remain in the record."</p>
             <p class="source mono">"result: fish/album/2026-09-07T0335-EAT-private-continuing-learning-result.md · plan: fish/album/2026-09-07T0048-EAT-private-continuing-learning.md"</p>
@@ -143,7 +165,7 @@ pub fn Results() -> impl IntoView {
                 <p class="lede-sm">"A second input channel supplies outside material at rate ε. This test tracked its relationship with the conversation using word-based estimates of overlap and mutual information. The criterion required the estimate to rise and then level off below its maximum. The recorded result was approved on 2026-08-12."</p>
                 <p class="prose-p">"These are implementation-specific word-based estimates. Their scale is not a direct measure of semantic understanding, causal influence or general intelligence. This descriptive trajectory met the project's stage criterion. Later changes to input handling started a separate measurement period; direct before-and-after comparisons would confound those changes."</p>
             </div>
-            <div class="table-wrap">
+            <ScrollTable label="External-input measurements">
                 <table class="table">
                     <thead><tr><th class="num">"input cycles"</th><th class="num">"paired overlap"</th><th class="num">"shuffled overlap"</th><th class="num">"estimated mutual information"</th><th>"Observation"</th></tr></thead>
                     <tbody>
@@ -158,7 +180,7 @@ pub fn Results() -> impl IntoView {
                         }).collect_view()}
                     </tbody>
                 </table>
-            </div>
+            </ScrollTable>
             <p class="source mono">{format!("source: {OCEAN_SOURCE}")}</p>
         </section>
 
@@ -168,7 +190,7 @@ pub fn Results() -> impl IntoView {
                 <h2 id="bodies-h" class="display">"Three models tested with the same procedure"</h2>
                 <p class="lede-sm">"Each model received 30 teaching turns, 20 fixed test questions and 200 training iterations. Testing took place before training, in fresh sessions with memory retrieval disabled. These measurements compare baseline responses and training time on the recorded setup. The small task set and single recorded timing per model do not establish learning gains or a general model ranking."</p>
             </div>
-            <div class="table-wrap">
+            <ScrollTable label="Model baseline comparisons">
                 <table class="table">
                     <thead><tr><th>"Model"</th><th class="num">"style consistency"</th><th class="num">"repetition rate"</th><th class="num">"task accuracy"</th><th class="num">"training time (s)"</th></tr></thead>
                     <tbody>
@@ -177,7 +199,7 @@ pub fn Results() -> impl IntoView {
                         }).collect_view()}
                     </tbody>
                 </table>
-            </div>
+            </ScrollTable>
             <p class="source mono">{format!("source: {SWEEP_SOURCE}")}</p>
         </section>
 
@@ -210,7 +232,7 @@ pub fn Results() -> impl IntoView {
                 <h2 id="remainders-h" class="display">"What is still open"</h2>
                 <p class="lede-sm">"Independent setup on another machine, reliable use of a working area, memory answers with source references, and replication across model–supervisor pairs have not yet met their stated criteria. The research goals page lists each stage and its status."</p>
             </div>
-            <p class="more"><a class="btn" href="/promise#tracks">"Research progress by stage"</a></p>
+            <p class="more"><a class="btn" href="/goals#tracks">"Research progress by stage"</a></p>
         </section>
     }
 }
@@ -218,15 +240,24 @@ pub fn Results() -> impl IntoView {
 #[component]
 fn ExperimentBlock(experiment: &'static Experiment) -> impl IntoView {
     let e = experiment;
+    let met = e.gates.iter().all(|g| g.passed);
     view! {
         <article id=e.id class="exp">
             <div class="exp-head">
-                <p class="mono meta">{format!("{} · {} · {} test requests", e.date, e.instrument, grouped(e.cells.into()))}</p>
+                <div class="exp-meta">
+                    <p class="mono meta">{format!("{} · {} test requests", e.date, grouped(e.cells.into()))}</p>
+                    <span class=if met { "status-badge status-pass" } else { "status-badge status-fail" }>{if met { "Criteria met" } else { "Criteria not met" }}</span>
+                </div>
                 <h3 class="display display-sm">{e.title}</h3>
             </div>
             <div class="exp-grid">
                 <div class="exp-main">
-                    {e.design.iter().map(|p| view! { <p class="prose-p">{*p}</p> }).collect_view()}
+                    <details class="study-details">
+                        <summary>"Study design and training setup"</summary>
+                        <div class="study-details-content">
+                            {e.design.iter().map(|p| view! { <p class="prose-p">{*p}</p> }).collect_view()}
+                        </div>
+                    </details>
                     <ArmTable arms=e.arms/>
                     {(!e.comparisons.is_empty()).then(|| view! { <PairedTable comparisons=e.comparisons/> })}
                     <p class="verdict"><b>"Recorded decision. "</b>{e.verdict}</p>
@@ -237,6 +268,7 @@ fn ExperimentBlock(experiment: &'static Experiment) -> impl IntoView {
                     <h4>"Pass criteria"</h4>
                     <GateList gates=e.gates/>
                     <h4>"Run"</h4>
+                    <p class="mono small muted">{e.instrument}</p>
                     <p class="mono small">{e.run}</p>
                     <HashList hashes=e.hashes/>
                     <p class="mono small muted">{format!("source: {}", e.source)}</p>

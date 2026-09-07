@@ -1,14 +1,14 @@
 //! Routes and shared page layout.
 use crate::components::mark::Mark;
 use crate::pages::{
-    method::Method, not_found::NotFound, overview::Overview, promise::Promise, record::Record,
+    goals::Goals, method::Method, not_found::NotFound, overview::Overview, record::Record,
     results::Results,
 };
 use crate::util::scroll_to_top;
 use leptos::prelude::*;
-use leptos_router::components::{Route, Router, Routes};
+use leptos_router::components::{Redirect, Route, Router, Routes};
 use leptos_router::hooks::use_location;
-use leptos_router::path;
+use leptos_router::{path, NavigateOptions};
 use loopseed_record::{ORGANISATION, ORGANISATION_URL, REPOSITORY_URL};
 
 pub const NAV: &[(&str, &str)] = &[
@@ -16,7 +16,7 @@ pub const NAV: &[(&str, &str)] = &[
     ("/results", "Results"),
     ("/method", "Method"),
     ("/record", "Reports"),
-    ("/promise", "Promise"),
+    ("/goals", "Research goals"),
 ];
 
 #[component]
@@ -31,13 +31,22 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/results") view=Results/>
                     <Route path=path!("/method") view=Method/>
                     <Route path=path!("/record") view=Record/>
-                    <Route path=path!("/promise") view=Promise/>
+                    <Route path=path!("/goals") view=Goals/>
+                    <Route path=path!("/promise") view=LegacyGoals/>
                 </Routes>
             </main>
             <Footer/>
             <ScrollKeeper/>
         </Router>
     }
+}
+
+/// Preserve links to the previous research-goals address, including section anchors.
+#[component]
+fn LegacyGoals() -> impl IntoView {
+    let location = use_location();
+    let path = format!("/goals{}", location.hash.get_untracked());
+    view! { <Redirect path=path options=NavigateOptions { replace: true, ..Default::default() }/> }
 }
 
 #[component]

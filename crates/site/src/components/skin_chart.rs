@@ -7,7 +7,7 @@ use std::fmt::Write;
 const WIDTH: f64 = 960.0;
 const HEIGHT: f64 = 380.0;
 const LEFT: f64 = 52.0;
-const RIGHT: f64 = 20.0;
+const RIGHT: f64 = 32.0;
 const TOP: f64 = 18.0;
 const BOTTOM: f64 = 44.0;
 const DAY: i64 = 86_400;
@@ -94,7 +94,7 @@ impl Frame {
         }
         let _ = write!(
             s,
-            r##"<rect x="{LEFT}" y="{TOP}" width="{:.1}" height="{}" fill="{INK}" fill-opacity="0.035"/><text x="{:.1}" y="{:.1}" font-family="{MONO}" font-size="10.5" fill="{INK}" fill-opacity="0.5">{label}</text>"##,
+            r##"<rect x="{LEFT}" y="{TOP}" width="{:.1}" height="{}" fill="{INK}" fill-opacity="0.035"/><text x="{:.1}" y="{:.1}" font-family="{MONO}" font-size="12" fill="{INK}" fill-opacity="0.7">{label}</text>"##,
             self.x(until) - LEFT,
             self.plot_h,
             LEFT + 6.0,
@@ -108,7 +108,7 @@ impl Frame {
             let yy = self.y(level);
             let _ = write!(
                 s,
-                r##"<line x1="{LEFT}" y1="{yy:.1}" x2="{:.1}" y2="{yy:.1}" stroke="{INK}" stroke-opacity="0.08"/><text x="{:.1}" y="{:.1}" text-anchor="end" font-family="{MONO}" font-size="11" fill="{INK}" fill-opacity="0.55">{level:.1}</text>"##,
+                r##"<line x1="{LEFT}" y1="{yy:.1}" x2="{:.1}" y2="{yy:.1}" stroke="{INK}" stroke-opacity="0.08"/><text x="{:.1}" y="{:.1}" text-anchor="end" font-family="{MONO}" font-size="13" fill="{INK}" fill-opacity="0.7">{level:.1}</text>"##,
                 WIDTH - RIGHT,
                 LEFT - 8.0,
                 yy + 4.0
@@ -127,7 +127,7 @@ impl Frame {
             if (day - self.x0) / DAY % label_every_days == 0 {
                 let _ = write!(
                     s,
-                    r##"<text x="{xx:.1}" y="{:.1}" text-anchor="middle" font-family="{MONO}" font-size="11" fill="{INK}" fill-opacity="0.55">{}</text>"##,
+                    r##"<text x="{xx:.1}" y="{:.1}" text-anchor="middle" font-family="{MONO}" font-size="13" fill="{INK}" fill-opacity="0.7">{}</text>"##,
                     self.bottom() + 20.0,
                     day_label(day)
                 );
@@ -146,7 +146,7 @@ impl Frame {
         let ty = self.y(theta);
         let _ = write!(
             s,
-            r##"<line x1="{LEFT}" y1="{ty:.1}" x2="{:.1}" y2="{ty:.1}" stroke="{INK}" stroke-opacity="0.45" stroke-dasharray="4 4"/><text x="{:.1}" y="{:.1}" text-anchor="end" font-family="{MONO}" font-size="10.5" fill="{INK}" fill-opacity="0.6">θ = {theta:.2}</text>"##,
+            r##"<line x1="{LEFT}" y1="{ty:.1}" x2="{:.1}" y2="{ty:.1}" stroke="{INK}" stroke-opacity="0.45" stroke-dasharray="4 4"/><text x="{:.1}" y="{:.1}" text-anchor="end" font-family="{MONO}" font-size="12" fill="{INK}" fill-opacity="0.7">θ = {theta:.2}</text>"##,
             WIDTH - RIGHT,
             WIDTH - RIGHT - 4.0,
             ty - 5.0
@@ -155,7 +155,7 @@ impl Frame {
             let ex = self.x(epoch);
             let _ = write!(
                 s,
-                r##"<line x1="{ex:.1}" y1="{TOP}" x2="{ex:.1}" y2="{:.1}" stroke="{V2}" stroke-opacity="0.7" stroke-dasharray="4 4"/><text x="{:.1}" y="{:.1}" font-family="{MONO}" font-size="10.5" fill="{V2}">δ v2 begins</text>"##,
+                r##"<line x1="{ex:.1}" y1="{TOP}" x2="{ex:.1}" y2="{:.1}" stroke="{V2}" stroke-opacity="0.7" stroke-dasharray="4 4"/><text x="{:.1}" y="{:.1}" font-family="{MONO}" font-size="12" fill="{V2}">δ v2 begins</text>"##,
                 self.bottom(),
                 ex + 5.0,
                 TOP + 14.0
@@ -413,7 +413,8 @@ pub fn SkinChart() -> impl IntoView {
     let svg = move || skin_svg(&skin, show_grades.get());
     view! {
         <figure class="figure">
-            <div class="figure-body" inner_html=svg></div>
+            <p class="chart-scroll-hint">"Scroll the chart horizontally to explore the full timeline."</p>
+            <div class="figure-body" tabindex="0" role="region" aria-label="Regular participant prediction chart" inner_html=svg></div>
             <div class="legend">
                 <span><i class="swatch" style="background:#4946ff"></i>"session median, δ v1 (cosine distance)"</span>
                 <span><i class="swatch" style="background:#c98a00"></i>"session median, δ v2 (combined score)"</span>
@@ -505,7 +506,8 @@ pub fn GuestChart() -> impl IntoView {
     let svg = move || guest_svg(&skin, show_sittings.get());
     view! {
         <figure class="figure">
-            <div class="figure-body" inner_html=svg></div>
+            <p class="chart-scroll-hint">"Scroll the chart horizontally to explore the full timeline."</p>
+            <div class="figure-body" tabindex="0" role="region" aria-label="External participant prediction chart" inner_html=svg></div>
             <div class="legend">
                 {legend.into_iter().map(|(label, colour)| view! {
                     <span><i class="swatch" style=format!("background:{colour}")></i>{label}</span>

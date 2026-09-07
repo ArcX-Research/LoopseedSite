@@ -15,25 +15,33 @@ pub fn Overview() -> impl IntoView {
             <div class="wrap hero-grid">
                 <div class="hero-copy">
                     <p class="eyebrow">"Dilate Technologies · research program"</p>
-                    <h1 class="display display-xl">"Toward intelligence that keeps learning"</h1>
+                    <h1 class="display display-xl">"Toward Intelligence that keeps Learning"</h1>
                     <p class="lede">
-                        "Our mission is to build systems that turn verified experience into lasting improvements, apply what they learn to new situations, and retain earlier abilities. Loopseed is a research programme and experimental testbed for that question. Fish, its current implementation, combines a language model, memory, prediction and tools."
+                        "Our mission is to build systems that turn verified experience into lasting improvements, apply what they learn to new situations, and retain earlier abilities."
                     </p>
-                    <p class="prose-p">"Early controlled tests show improved answers on new instances of specific mathematical tasks. Reliable learning across unfamiliar tasks and sustained interaction remains the goal."</p>
+                    <p class="prose-p">"Loopseed studies how computational systems can learn across tasks and environments. Fish, its current language-model testbed, explores this through memory, prediction and tools."</p>
                     <div class="hero-actions">
                         <a class="btn btn-primary" href="/results">"Read the results"</a>
                         <a class="btn" href="/method">"How we test learning"</a>
-                        <a class="btn" href="/promise">"The promise and next tests"</a>
+                        <a class="text-link" href="/goals">"Research goals and next tests "<span aria-hidden="true">"↗"</span></a>
                     </div>
-                    <dl class="hero-stats mono">
-                        <div><dt>"accepted answers · new parameter instances"</dt><dd>"43 / 64"</dd></div>
-                        <div><dt>"base model and placebo, same tasks"</dt><dd>"0 / 64 · 0 / 64"</dd></div>
-                        <div><dt>"task families with at least one success"</dt><dd>"11 / 16"</dd></div>
-                        <div><dt>"independent replication of this result"</dt><dd>"pending"</dd></div>
+                </div>
+                <figure class="hero-visual">
+                    <div class="visual-label"><span>"Research framework"</span><span>"01 — 05"</span></div>
+                    <LoopDiagram/>
+                    <figcaption>"The Fish learning cycle"</figcaption>
+                </figure>
+                <div class="research-summary">
+                    <div class="summary-heading"><p class="eyebrow">"A measured starting point"</p><a class="text-link" href="/results#transfer-clean">"Read the study "<span aria-hidden="true">"↗"</span></a></div>
+                    <dl class="hero-stats">
+                        <div><dt>"Accepted answers · new parameter instances"</dt><dd>"43"<span>" / 64"</span></dd></div>
+                        <div class="stat-controls"><dt>"Base model and placebo · same tasks"</dt><dd>"0 / 64"<span>" · "</span>"0 / 64"</dd></div>
+                        <div><dt>"Task families with at least one success"</dt><dd>"11"<span>" / 16"</span></dd></div>
+                        <div class="stat-status"><dt>"Independent replication of this result"</dt><dd>"Pending"</dd></div>
                     </dl>
                     <p class="source">"Clean transfer study · 4 September 2026. Exact calculation plus a separate AI review of complete answers. "<a href="/results#transfer-clean">"Design, counts and limitations"</a>"."</p>
+                    <p class="prose-p summary-context">"Early controlled tests show improved answers on new instances of specific mathematical tasks. Reliable learning across unfamiliar tasks and sustained interaction remains the goal."</p>
                 </div>
-                <div class="hero-visual"><LoopDiagram/></div>
             </div>
         </section>
 
@@ -130,21 +138,22 @@ pub fn Overview() -> impl IntoView {
                 {latest.into_iter().map(|r| view! {
                     <article class="ruling">
                         <span class="mono meta">{r.date}</span>
-                        <h3>{r.title}</h3>
-                        <p>{r.result}</p>
+                        <div class="ruling-body"><h3>{r.title}</h3><p>{r.result}</p></div>
                     </article>
                 }).collect_view()}
             </div>
             <p class="more"><a href="/record">"All reports, with source files and hashes"</a></p>
         </section>
 
-        <section class="wrap section" aria-labelledby="promise-h">
-            <div class="section-head">
-                <p class="eyebrow">"The promise"</p>
-                <h2 id="promise-h" class="display">"Useful experience that survives the next conversation"</h2>
-                <p class="lede-sm">"If verified experience can improve future behaviour without erasing earlier abilities, adaptive systems could become more reliable through use. Our next tests examine retention, unfamiliar task families and independent replication. Broader adaptive intelligence, including AGI, is a long-term ambition whose required evidence extends well beyond these initial results."</p>
+        <section class="section section-feature" aria-labelledby="goals-h">
+            <div class="wrap">
+                <div class="section-head">
+                    <p class="eyebrow">"Research goals"</p>
+                    <h2 id="goals-h" class="display">"Learning that persists across tasks and environments"</h2>
+                    <p class="lede-sm">"If verified experience can improve future behaviour without erasing earlier abilities, adaptive systems could become more reliable through use. Our next tests examine retention, unfamiliar task families and independent replication. Broader adaptive intelligence, including AGI, is a long-term ambition whose required evidence extends well beyond these initial results."</p>
+                </div>
+                <p class="more"><a class="btn" href="/goals">"Research goals and limits"</a></p>
             </div>
-            <p class="more"><a class="btn" href="/promise">"Research goals and limits"</a></p>
         </section>
     }
 }

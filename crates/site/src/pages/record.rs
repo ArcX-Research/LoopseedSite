@@ -8,11 +8,14 @@ use loopseed_record::{ALBUM_PATH, CONTACT_EMAIL, CONTACT_URL, LAWS_PATH, REPOSIT
 pub fn Record() -> impl IntoView {
     set_title("Record");
     view! {
-        <section class="wrap page">
-            <p class="eyebrow">"Record"</p>
-            <h1 class="display display-xl">"Research reports, newest first"</h1>
-            <p class="lede">"The archive contains study plans, transcripts, measurements and project decisions. These summaries distinguish completed results from preparation and observation. Formal-study reports identify source artifacts and hashes; early notes and figures have less extensive documentation. Original failed decisions remain part of the record."</p>
-            <p class="prose-p">"Summaries were reviewed on 7 September 2026. The original reports sometimes use stronger terms such as ‘causal ruling’ or ‘method transfer’. Those labels name the project's decisions; the Results page states the narrower empirical scope, review process and statistical assumptions."</p>
+        <section class="page-intro page-intro-record">
+            <div class="wrap">
+                <p class="eyebrow">"Record"</p>
+                <h1 class="display display-xl">"Research reports, newest first"</h1>
+                <p class="lede">"The archive contains study plans, transcripts, measurements and project decisions. These summaries distinguish completed results from preparation and observation. Formal-study reports identify source artifacts and hashes; early notes and figures have less extensive documentation. Original failed decisions remain part of the record."</p>
+                <p class="prose-p">"Summaries were reviewed on 7 September 2026. The original reports sometimes use stronger terms such as ‘causal ruling’ or ‘method transfer’. Those labels name the project's decisions; the Results page states the narrower empirical scope, review process and statistical assumptions."</p>
+                <p class="more"><a class="btn" href="#where-h">"Access the source records "<span aria-hidden="true">"↗"</span></a></p>
+            </div>
         </section>
 
         <section class="wrap section">
@@ -20,10 +23,15 @@ pub fn Record() -> impl IntoView {
                 {RULINGS.iter().map(|r| view! {
                     <article class="ruling">
                         <span class="mono meta">{r.date}</span>
-                        <h3>{r.title}</h3>
-                        <p>{r.result}</p>
-                        <p class="mono small">{r.path}</p>
-                        {r.hash.map(|h| view! { <p class="mono small muted">{format!("decision artifact sha256 {h}")}</p> })}
+                        <div class="ruling-body">
+                            <h3>{r.title}</h3>
+                            <p>{r.result}</p>
+                            <details class="report-source">
+                                <summary>"Source record"</summary>
+                                <p class="mono small">{r.path}</p>
+                                {r.hash.map(|h| view! { <p class="mono small muted">{format!("decision artifact sha256 {h}")}</p> })}
+                            </details>
+                        </div>
                     </article>
                 }).collect_view()}
             </div>

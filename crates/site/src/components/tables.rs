@@ -3,33 +3,44 @@ use leptos::prelude::*;
 use loopseed_record::experiments::{Arm, Gate, Hash};
 
 #[component]
-pub fn ArmTable(arms: &'static [Arm]) -> impl IntoView {
-    let notes = arms.iter().any(|a| !a.note.is_empty());
+pub fn ScrollTable(label: &'static str, children: Children) -> impl IntoView {
     view! {
-        <div class="table-wrap">
-            <table class="table">
+        <div class="table-wrap" tabindex="0" role="region" aria-label=label>
+            {children()}
+        </div>
+    }
+}
+
+#[component]
+pub fn ArmTable(arms: &'static [Arm]) -> impl IntoView {
+    view! {
+        <ScrollTable label="Accepted answers by experimental condition">
+            <table class="table arm-table">
+                <caption class="sr-only">"Accepted answers and task-specific checks for negative constants"</caption>
                 <thead>
                     <tr>
-                        <th>"Condition"</th>
-                        <th class="num">"accepted answers"</th>
-                        <th class="num">"tasks"</th>
-                        <th class="num">"replies with negative constants"</th>
-                        {notes.then(|| view! { <th>"Note"</th> })}
+                        <th scope="col">"Condition"</th>
+                        <th scope="col" class="num">"Accepted / tasks"</th>
+                        <th scope="col" class="num">"Negative-constant replies"</th>
                     </tr>
                 </thead>
                 <tbody>
                     {arms.iter().map(|a| view! {
                         <tr>
-                            <td>{a.name}</td>
-                            <td class="num">{a.successes}</td>
-                            <td class="num">{a.tasks}</td>
+                            <th scope="row" class="arm-name">
+                                <span>{a.name}</span>
+                                {(!a.note.is_empty()).then(|| view! { <span class="arm-note">{a.note}</span> })}
+                            </th>
+                            <td class="num score-cell">
+                                <div class="score-number"><b>{a.successes}</b><span>{format!(" / {}", a.tasks)}</span></div>
+                                <div class="score-track" aria-hidden="true"><span style:width=format!("{}%", 100.0 * f64::from(a.successes) / f64::from(a.tasks.max(1)))></span></div>
+                            </td>
                             <td class="num">{a.negative_literal_cells}</td>
-                            {notes.then(|| view! { <td class="muted">{a.note}</td> })}
                         </tr>
                     }).collect_view()}
                 </tbody>
             </table>
-        </div>
+        </ScrollTable>
     }
 }
 

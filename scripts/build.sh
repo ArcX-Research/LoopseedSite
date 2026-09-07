@@ -50,10 +50,12 @@ cp -R "$ROOT/static/." "$ROOT/dist/"
 # Version assets by content hash.
 if command -v shasum >/dev/null 2>&1; then
   HASH="$(shasum -a 256 "$ROOT/dist/pkg/loopseed_bg.wasm" | cut -c1-10)"
+  CSS_HASH="$(shasum -a 256 "$ROOT/dist/styles.css" | cut -c1-10)"
 else
   HASH="$(sha256sum "$ROOT/dist/pkg/loopseed_bg.wasm" | cut -c1-10)"
+  CSS_HASH="$(sha256sum "$ROOT/dist/styles.css" | cut -c1-10)"
 fi
-sed -i.bak -e "s#/pkg/loopseed.js#/pkg/loopseed.js?v=$HASH#g" -e "s#/styles.css#/styles.css?v=$HASH#g" "$ROOT/dist/index.html"
+sed -i.bak -e "s#/pkg/loopseed.js#/pkg/loopseed.js?v=$HASH#g" -e "s#/styles.css#/styles.css?v=$CSS_HASH#g" "$ROOT/dist/index.html"
 rm -f "$ROOT/dist/index.html.bak"
 # Static-host routing fallback.
 cp "$ROOT/dist/index.html" "$ROOT/dist/404.html"

@@ -1,4 +1,5 @@
 //! Recorded statistics, browser recalculations and an interactive comparison.
+use crate::components::tables::ScrollTable;
 use leptos::prelude::*;
 use loopseed_record::experiments::Comparison;
 use loopseed_record::stats::{paired, scientific, signed};
@@ -6,8 +7,8 @@ use loopseed_record::stats::{paired, scientific, signed};
 #[component]
 pub fn PairedTable(comparisons: &'static [Comparison]) -> impl IntoView {
     view! {
-        <div class="table-wrap">
-            <table class="table">
+        <ScrollTable label="Paired comparisons and recalculated statistics">
+            <table class="table paired-table">
                 <thead>
                     <tr>
                         <th>"Comparison"</th>
@@ -40,7 +41,7 @@ pub fn PairedTable(comparisons: &'static [Comparison]) -> impl IntoView {
                     }).collect_view()}
                 </tbody>
             </table>
-        </div>
+        </ScrollTable>
     }
 }
 
@@ -61,11 +62,11 @@ pub fn Explorer() -> impl IntoView {
                 <label>"losses"<input type="number" min="0" prop:value=move || losses.get().to_string() on:input=move |ev| losses.set(parse_count(event_target_value(&ev)))/></label>
                 <label>"matched tasks"<input type="number" min="1" prop:value=move || n.get().to_string() on:input=move |ev| n.set(parse_count(event_target_value(&ev)))/></label>
             </div>
-            <dl class="explorer-out mono">
+            <dl class="explorer-out mono" aria-live="polite" aria-atomic="true">
                 <div><dt>"one-sided exact McNemar p"</dt><dd>{move || scientific(result().p_value)}</dd></div>
                 <div><dt>"95 % lower bound on the success-rate difference"</dt><dd>{move || signed(result().lower_difference, 4)}</dd></div>
                 <div><dt>"observed success-rate difference"</dt><dd>{move || signed(result().observed_difference, 4)}</dd></div>
-                <div><dt>"statistical criterion"</dt><dd>{move || if result().superior() { "passes" } else { "fails" }}</dd></div>
+                <div><dt>"statistical criterion"</dt><dd><span class=move || if result().superior() { "status-badge status-pass" } else { "status-badge status-fail" }>{move || if result().superior() { "passes" } else { "fails" }}</span></dd></div>
             </dl>
         </div>
     }

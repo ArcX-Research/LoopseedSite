@@ -1,7 +1,17 @@
 //! Equations, implementation and evaluation methods.
+use crate::components::page_nav::PageNav;
+use crate::components::tables::ScrollTable;
 use crate::util::set_title;
 use leptos::prelude::*;
 use loopseed_record::laws::LAWS;
+
+const SECTIONS: &[(&str, &str)] = &[
+    ("#eq-h", "Measurements"),
+    ("#night-h", "Training"),
+    ("#instruments-h", "Verification"),
+    ("#context-h", "Scientific context"),
+    ("#laws", "Observations"),
+];
 
 const EXEGESIS: &str = "I[t] = α · E(r[t−1]) + E(you[t])
 δ_v1 = 1 − cos(E(Î), E(you))
@@ -31,14 +41,17 @@ const ORGANS: &[Organ] = &[
 pub fn Method() -> impl IntoView {
     set_title("Method");
     view! {
-        <section class="wrap page">
-            <p class="eyebrow">"Method"</p>
-            <h1 class="display display-xl">"From a design idea to a testable learning system"</h1>
-            <p class="lede">"Dynamical Synthesis is Loopseed's name for organising a feedback loop between system activity and external input. Fish makes parts of that idea operational through a conversation state, prediction scores, selective memory, tools and offline adapter training. Each mechanism needs its own comparison and measure of success."</p>
-            <p class="prose-p">"The shorthand I = W(I) + you expresses the design idea. It does not by itself specify an algorithm, establish stability, or demonstrate intelligence. The equations below describe the implemented conversation vector and prediction instruments. Learning changes model parameters through gradient-based training, using separate objectives for prediction and replies."</p>
-            <p class="prose-p">"Project records use several short names: the base model is ‘water’, an adapter is a ‘coat’, offline training is a ‘dream’, and loading an adapter is ‘wearing’. The ‘body’ includes the stored system state; the ‘keeper’ is the human supervisor. We use their technical meanings throughout this site."</p>
+        <section class="page-intro page-intro-method">
+            <div class="wrap">
+                <p class="eyebrow">"Method"</p>
+                <h1 class="display display-xl">"From a design idea to a testable learning system"</h1>
+                <p class="lede">"Dynamical Synthesis is Loopseed's name for organising a feedback loop between system activity and external input. Fish makes parts of that idea operational through a conversation state, prediction scores, selective memory, tools and offline adapter training. Each mechanism needs its own comparison and measure of success."</p>
+                <p class="prose-p">"The shorthand I = W(I) + you expresses the design idea. It does not by itself specify an algorithm, establish stability, or demonstrate intelligence. The equations below describe the implemented conversation vector and prediction instruments. Learning changes model parameters through gradient-based training, using separate objectives for prediction and replies."</p>
+                <p class="prose-p">"Project records use several short names: the base model is ‘water’, an adapter is a ‘coat’, offline training is a ‘dream’, and loading an adapter is ‘wearing’. The ‘body’ includes the stored system state; the ‘keeper’ is the human supervisor. We use their technical meanings throughout this site."</p>
+            </div>
         </section>
 
+        <PageNav items=SECTIONS/>
         <section class="wrap section" aria-labelledby="eq-h">
             <div class="section-head">
                 <p class="eyebrow">"Equations and terms"</p>
@@ -48,7 +61,7 @@ pub fn Method() -> impl IntoView {
             <p class="source mono">"implementation: fish/daemon/src/fast/state.rs · fish/daemon/src/skin/mod.rs · fish/daemon/src/want/mod.rs · SOUL.md"</p>
             <p class="prose-p">"The two δ versions are recorded separately, including fallback to v1 when token scoring is unavailable. Held-out token loss used to assess training is a different measurement from the δ time series. A reduction in either does not prove a contraction bound for the complete system. That would require a specified state space and a bound on how the update changes distances between states."</p>
             <pre class="exegesis mono">{EXEGESIS}</pre>
-            <div class="table-wrap">
+            <ScrollTable label="Symbols and measurement definitions">
                 <table class="table organs">
                     <thead><tr><th>"Symbol"</th><th>"Pronunciation"</th><th>"Meaning"</th></tr></thead>
                     <tbody>
@@ -57,7 +70,7 @@ pub fn Method() -> impl IntoView {
                         }).collect_view()}
                     </tbody>
                 </table>
-            </div>
+            </ScrollTable>
         </section>
 
         <section class="wrap section" aria-labelledby="night-h">

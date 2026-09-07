@@ -1,19 +1,32 @@
 //! Research goals, limits and planned tests.
+use crate::components::page_nav::PageNav;
+use crate::components::tables::ScrollTable;
 use crate::util::set_title;
 use leptos::prelude::*;
 use loopseed_record::stages::{Stage, BECOMING_CLOSED, ORGANISM, SCALING};
 
+const SECTIONS: &[(&str, &str)] = &[
+    ("#claim-h", "Research questions"),
+    ("#not-h", "Evidence limits"),
+    ("#becoming", "Ambition"),
+    ("#tracks", "Roadmap"),
+    ("#next-h", "Next tests"),
+];
+
 #[component]
-pub fn Promise() -> impl IntoView {
-    set_title("Promise and research goals");
+pub fn Goals() -> impl IntoView {
+    set_title("Research goals");
     view! {
-        <section class="wrap page">
-            <p class="eyebrow">"The promise · research goals"</p>
-            <h1 class="display display-xl">"Systems that improve through experience and keep what they learn"</h1>
-            <p class="lede">"The promise of Loopseed is cumulative learning: useful exchanges become improvements that persist, transfer to new situations and preserve earlier abilities. If demonstrated, this could support assistants that benefit from verified corrections and adaptive software that improves as its environment changes."</p>
-            <p class="prose-p">"Fish is our current language-model testbed. The longer-term ambition is broader adaptive intelligence, including artificial general intelligence (AGI). Here that means learning and applying knowledge across a wide range of tasks and environments. It is a research direction, not a capability established by the results on this site."</p>
+        <section class="page-intro page-intro-goals">
+            <div class="wrap">
+                <p class="eyebrow">"Research goals"</p>
+                <h1 class="display display-xl">"Systems that improve through experience and keep what they learn"</h1>
+                <p class="lede">"Loopseed aims to develop cumulative learning: useful exchanges become improvements that persist, transfer to new situations and preserve earlier abilities. If demonstrated, this could support assistants that benefit from verified corrections and adaptive software that improves as its environment changes."</p>
+                <p class="prose-p">"Fish is our current language-model testbed. The longer-term ambition is broader adaptive intelligence, including artificial general intelligence (AGI). Here that means learning and applying knowledge across a wide range of tasks and environments. It is a research direction, not a capability established by the results on this site."</p>
+            </div>
         </section>
 
+        <PageNav items=SECTIONS/>
         <section class="wrap section" aria-labelledby="claim-h">
             <div class="section-head">
                 <p class="eyebrow">"What we are trying to show"</p>
@@ -116,7 +129,7 @@ pub fn Promise() -> impl IntoView {
                 <h2 id="falsify-h" class="display">"Findings that would change the conclusion"</h2>
             </div>
             <ul class="plain">
-                <li>"Repeated failure on unfamiliar task families would limit the promise of broader transfer; the current within-family finding would remain bounded by its original test."</li>
+                <li>"Repeated failure on unfamiliar task families would weaken the case for broader transfer; the current within-family finding would remain bounded by its original test."</li>
                 <li>"A matched shuffled-reply control reaching the candidate's score in new loose-grammar tests would weaken the explanation that correct example pairings produce the advantage."</li>
                 <li>"Improvement on a new held-out task set, compared with a concurrent control, would support a benefit from the update. A before-and-after curve alone would still be vulnerable to changes in topics and interaction."</li>
                 <li>"Losses on earlier abilities across successive updates would challenge the claim of cumulative learning, even if each update improved its immediate training objective."</li>
@@ -129,7 +142,7 @@ pub fn Promise() -> impl IntoView {
 #[component]
 fn StageTable(stages: &'static [Stage]) -> impl IntoView {
     view! {
-        <div class="table-wrap">
+        <ScrollTable label="Research roadmap and stage status">
             <table class="table stages">
                 <thead><tr><th>"#"</th><th>"Stage"</th><th>"Purpose"</th><th>"Pass criterion"</th><th>"Status"</th></tr></thead>
                 <tbody>
@@ -144,6 +157,6 @@ fn StageTable(stages: &'static [Stage]) -> impl IntoView {
                     }).collect_view()}
                 </tbody>
             </table>
-        </div>
+        </ScrollTable>
     }
 }
