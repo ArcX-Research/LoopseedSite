@@ -43,7 +43,7 @@ pub const OCEAN: &[OceanReading] = &[
         paired: Some(0.0717),
         shuffled: Some(0.0371),
         mutual_information: 0.0712,
-        note: "remained level, about 14 times below the 1.0 maximum",
+        note: "near the preceding value; the instrument's normalised scale has maximum 1.0",
     },
 ];
 pub const OCEAN_SOURCE: &str = "docs/ROADMAP.md, stage 6 (approved 2026-08-12)";
@@ -91,18 +91,18 @@ pub struct Figure {
 /// The memory laws' numbers, from bag 2 of the laws file.
 pub const MEMORY: &[Figure] = &[
     Figure {
-        claim: "One stored record improved recall but reduced judgement accuracy",
+        claim: "A small test found better recall and worse judgement with the same record",
         number: "recall 0/12 → 12/12; judgement 12/12 → 4/12 with the same record",
         evidence: "LAWS.md bag 2, rows 240–241",
     },
     Figure {
-        claim: "One incorrect memory increased the error rate",
-        number: "6×; storing a correction alongside it did not remove the effect",
+        claim: "An interaction report associated an incorrect memory with more errors",
+        number: "reported 6× increase; adding a correction did not remove the pattern",
         evidence: "LAWS.md bag 2, rows 236–237",
     },
     Figure {
-        claim: "Performance improved after one worked example",
-        number: "0/32 before; 48/48 on the later test set",
+        claim: "Different test sets before and after one worked example",
+        number: "0/32 before; 48/48 later — not a matched comparison",
         evidence: "LAWS.md bag 2, row 267",
     },
     Figure {

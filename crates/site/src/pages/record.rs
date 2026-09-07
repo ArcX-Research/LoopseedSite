@@ -11,7 +11,8 @@ pub fn Record() -> impl IntoView {
         <section class="wrap page">
             <p class="eyebrow">"Record"</p>
             <h1 class="display display-xl">"Research reports, newest first"</h1>
-            <p class="lede">"The project archive contains figures, transcripts and experimental decisions. Each report identifies its run, file hashes and authorised next steps. Failed results are preserved without being overwritten or rescored. The summaries below use plain language; the source files hold the original records."</p>
+            <p class="lede">"The archive contains study plans, transcripts, measurements and project decisions. These summaries distinguish completed results from preparation and observation. Formal-study reports identify source artifacts and hashes; early notes and figures have less extensive documentation. Original failed decisions remain part of the record."</p>
+            <p class="prose-p">"Summaries were reviewed on 7 September 2026. The original reports sometimes use stronger terms such as ‘causal ruling’ or ‘method transfer’. Those labels name the project's decisions; the Results page states the narrower empirical scope, review process and statistical assumptions."</p>
         </section>
 
         <section class="wrap section">
@@ -22,7 +23,7 @@ pub fn Record() -> impl IntoView {
                         <h3>{r.title}</h3>
                         <p>{r.result}</p>
                         <p class="mono small">{r.path}</p>
-                        {r.hash.map(|h| view! { <p class="mono small muted">{format!("verdict sha256 {h}")}</p> })}
+                        {r.hash.map(|h| view! { <p class="mono small muted">{format!("decision artifact sha256 {h}")}</p> })}
                     </article>
                 }).collect_view()}
             </div>
@@ -35,17 +36,18 @@ pub fn Record() -> impl IntoView {
             </div>
             <div class="cols-2">
                 <div>
-                    <p class="prose-p">"File paths on this site start at the root of the loopseed repository. Research reports are in "<code>{ALBUM_PATH}</code>"; recorded observations are in "<code>{LAWS_PATH}</code>". Each experiment's directory holds its protocol, coded condition key, saved results, review materials and final decision. File hashes allow readers to check that these records have not changed."</p>
+                    <p class="prose-p">"File paths on this site start at the root of the Loopseed checkout associated with a run. Research reports are in "<code>{ALBUM_PATH}</code>"; recorded observations are in "<code>{LAWS_PATH}</code>". Formal-study directories hold protocols, coded condition keys, saved results, review materials and decisions. SHA-256 hashes let a reader verify that supplied bytes match the named artifact."</p>
                     {match REPOSITORY_URL {
                         Some(url) => view! { <p class="prose-p">"The repository is public: "<a href=url>{url}</a>"."</p> }.into_any(),
-                        None => view! { <p class="prose-p">"The repository is private while the study runs. Evidence files are available on request, and every hash on this site can be checked against them."</p> }.into_any(),
+                        None => view! { <p class="prose-p">"The source repository and full run artifacts are currently private. Evidence is available on request. Until those materials can be independently inspected and the runs repeated, this site offers traceable summaries rather than a publicly reproducible evidence package."</p> }.into_any(),
                     }}
                 </div>
                 <div>
-                    <p class="prose-p">"To request evidence, name the run and the file. "
+                    <p class="prose-p">"A matching hash verifies file identity. It does not establish that a measurement is correct, that a protocol was publicly registered, or that all possible information leakage was excluded. Software checks cover the conditions recorded by each instrument."</p>
+                    <p class="prose-p">"For a technical review, request the run's frozen protocol, model and adapter identifiers, prompts, task-generation code, reply records, scorer, review materials and final decision. Name the run and the files when you "
                         {match CONTACT_EMAIL {
                             Some(mail) => view! { <a href=format!("mailto:{mail}")>{mail}</a> }.into_any(),
-                            None => view! { <a href=CONTACT_URL>"Contact Dilate Technologies"</a> }.into_any(),
+                            None => view! { <a href=CONTACT_URL>"contact Dilate Technologies"</a> }.into_any(),
                         }}
                     "."</p>
                 </div>

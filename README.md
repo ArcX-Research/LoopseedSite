@@ -1,26 +1,35 @@
 # Loopseed
 
-Loopseed is a framework for systems that learn from interaction. Built around Dynamical
-Synthesis, it connects prediction, feedback, memory and action in a repeating cycle.
+Loopseed researches whether verified experience can produce lasting improvements, transfer
+to new situations and preserve earlier abilities. Fish, the current testbed, combines a
+language model with prediction, memory, tools and separate adapters for prediction and replies.
 
-The Dynamical Synthesis equation, `I = W(I) + you`, describes a system combining its evolving
-state with external input. The framework is intended for any system whose state, observations
-and actions can be defined and measured. Current experiments use language models.
+Dynamical Synthesis is the project's organising idea for a system combining its activity
+with external input. `I = W(I) + you` is design shorthand, not a complete learning algorithm
+or a proven law of intelligence. The Method page defines the implemented state recurrence,
+prediction measurements, memory rules and gradient-based adapter training separately.
 
 The formal-reasoning lab takes a neurosymbolic approach: a neural model proposes calculations
 in a typed domain-specific language, a deterministic compiler translates them, and a symbolic
-checker evaluates them against an exact task generator. Independent AI review checks the full
-reply against the task. These checks do not yet provide general formal proofs of correctness.
+checker evaluates them against an exact task generator. A separate AI reviewer with condition
+labels withheld checks the full reply. This assessment is distinct from independent replication
+and does not provide a general formal proof of correctness.
 
-The Becoming track aims to test the framework in other systems, improve transfer across tasks,
-and extend symbolic checking toward formal verification. This is an effort toward artificial
-general intelligence (AGI); current findings establish narrower results in language-model tests.
+The strongest completed adapter result is 43 accepted answers out of 64 new parameter
+instances, with gains within eleven learned task families. Both principal controls scored zero.
+The result does not establish transfer beyond those families or long-term retention. The
+Becoming track proposes broader applications and formal verification; AGI remains an ambition.
 
 This repository contains the research website, built in Rust and compiled to WebAssembly.
 `crates/record` stores the reported measurements and their source references. The browser
 recalculates paired comparisons from the original counts.
 
+The scientific content was reviewed on 7 September 2026. The private learning study is a
+dated snapshot, not a live status feed. Original run artifacts remain in the private Loopseed
+repository and can be requested through the site's evidence contact.
+
 ## Run it locally
+
 ```bash
 make dev    # preview with live reload
 ```
@@ -88,6 +97,16 @@ LoopseedSite/
 
 - Edit results in `crates/record/src/`. Keep original counts, source paths, hashes and decisions.
 - Use plain language and no periods in headings. Define terms and separate findings from goals.
+- Distinguish observations, controlled comparisons, exploratory work and independent replication.
+  New parameter instances within trained families are not new-family generalisation.
+- Describe the exact instrument. Prediction loss, embedding discrepancy, word-based association,
+  task correctness and retention measure different things. A descriptive band is not a confidence interval.
+- Preserve frozen task-level statistics and explain their independence assumptions. Shared templates
+  can correlate errors; the current bounds do not adjust for family clustering.
+- Identify AI review as AI review and local protocol freezing as local protocol freezing. Hashes
+  verify artifact identity, not truth, public preregistration or complete absence of leakage.
+- Update dated study summaries only from saved outcomes. Training completion, validation-loss
+  reduction and probe eligibility are not interchangeable with a measured behavioural gain.
 - Run `make test` to check that recorded statistics still reproduce from their counts.
 - Set `REPOSITORY_URL` and `CONTACT_EMAIL` in `crates/record/src/lib.rs` when available.
   Until then, the site directs evidence requests to Dilate Technologies.

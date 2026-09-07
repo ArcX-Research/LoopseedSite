@@ -12,11 +12,11 @@ use leptos_router::path;
 use loopseed_record::{ORGANISATION, ORGANISATION_URL, REPOSITORY_URL};
 
 pub const NAV: &[(&str, &str)] = &[
-    ("/", "Overview"),
+    ("/", "Mission"),
     ("/results", "Results"),
     ("/method", "Method"),
     ("/record", "Reports"),
-    ("/promise", "Research goals"),
+    ("/promise", "Promise"),
 ];
 
 #[component]
@@ -94,8 +94,8 @@ fn Footer() -> impl IntoView {
                     <div>
                         <div class="footer-h">"This site"</div>
                         <div class="footer-meta mono">
-                            <div>"Rust · Leptos · WebAssembly"</div>
-                            <div>"statistics recomputed in your browser"</div>
+                            <div>"Research summary · reviewed 7 September 2026"</div>
+                            <div>"Recorded paired statistics recalculated in your browser"</div>
                         </div>
                     </div>
                 </div>

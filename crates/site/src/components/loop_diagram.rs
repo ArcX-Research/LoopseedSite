@@ -12,10 +12,10 @@ pub struct Step {
 
 pub const STEPS: &[Step] = &[
     Step { ordinal: "01", label: "Predict", organ: "Ŵ → Î", gloss: "Record a prediction of the next external input before observing it." },
-    Step { ordinal: "02", label: "Compare", organ: "δ = I − Î", gloss: "Compare the observation with the prediction. Track the error score, δ, over time." },
-    Step { ordinal: "03", label: "Remember", organ: "σ, M", gloss: "Select experiences for memory when prediction error exceeds the threshold θ. Reduce the weight of unused records over time." },
-    Step { ordinal: "04", label: "Act", organ: "π, V", gloss: "Choose actions using the current state. Balance prediction accuracy with the variety of external input." },
-    Step { ordinal: "05", label: "Update", organ: "λ, η", gloss: "Use selected experience to update the system. Test proposed changes before adopting them." },
+    Step { ordinal: "02", label: "Compare", organ: "δ", gloss: "Measure the discrepancy between prediction and observation using a specified instrument. Track task correctness separately." },
+    Step { ordinal: "03", label: "Remember", organ: "σ, M", gloss: "Select admitted exchanges for active memory using the surprise threshold. Keep source history and review correctness before training." },
+    Step { ordinal: "04", label: "Act", organ: "π", gloss: "Generate a reply or use an available tool under the current configuration. Observe what happens next." },
+    Step { ordinal: "05", label: "Update", organ: "LoRA", gloss: "Train separate adapters from admitted experience. Compare gains and regressions on held-out data before adopting a candidate." },
 ];
 
 pub fn loop_svg() -> String {

@@ -10,9 +10,30 @@ pub struct Ruling {
 
 pub const RULINGS: &[Ruling] = &[
     Ruling {
+        date: "2026-09-07",
+        title: "Private continuation: both candidates failed adoption criteria",
+        result: "Prediction loss rose on the new and historical held-out sets. The speaking adapter lowered validation loss from 1.919 to 0.035 but produced 12 paired gains and 17 losses across 84 task–seed comparisons. Both candidates remain unworn; the clone retains its previous configuration. The main live database hash matched before and after.",
+        path: "fish/album/2026-09-07T0335-EAT-private-continuing-learning-result.md",
+        hash: Some("e7154d70e19b88564b8248ac40c329f7d41591ff64a2044019d22000640e8ebc"),
+    },
+    Ruling {
+        date: "2026-09-07",
+        title: "Study plan: preserve experience and test prediction and speech separately",
+        result: "A continuing private clone archives exchanges, replays admitted history and trains separate adapters for predicting incoming messages and producing checked answers. Preset comparison and retention criteria govern clone-only activation. This preparation record reports the design; it is not a completed learning result.",
+        path: "fish/album/2026-09-07T0048-EAT-private-continuing-learning.md",
+        hash: None,
+    },
+    Ruling {
+        date: "2026-09-06",
+        title: "Protocol preparation: qualifying probes before the causal test",
+        result: "The controlled learning study is checking whether enough probes meet its frozen eligibility and classroom requirements. Pilot completion and successful screening do not establish learning gains. Failed allocation attempts remain recorded separately from an eventual efficacy comparison.",
+        path: "fish/album/2026-09-06T2328-EAT-decisive-eligibility-search.md",
+        hash: None,
+    },
+    Ruling {
         date: "2026-09-04",
-        title: "Clean training transferred to new formal tasks",
-        result: "The candidate produced 43 accepted answers on 64 new tasks without supplied calculation steps. The base model and shuffled-reply placebo each scored zero. The candidate had no paired losses or negative constants. method_transfer = true; deployment was not authorised.",
+        title: "Clean training improved answers on new parameter instances",
+        result: "The candidate produced 43 accepted answers on 64 new parameter instances without supplied calculation steps. Gains occurred within eleven learned families. The base model and shuffled-reply placebo each scored zero. The project's transfer criterion passed; this result did not authorise live deployment or establish transfer beyond the tested families.",
         path: "fish/album/2026-09-04T0043-EAT-clean-formal-claim-transfer.md",
         hash: Some("0655eaba6047287f17792f14c4e3d09a58b902ad41fc617fb4a98e107f20f3ba"),
     },
@@ -47,7 +68,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-08-14",
         title: "Full-system comparison found no measured gain or loss",
-        result: "All 396 isolated requests completed, with the live database unchanged and no information leak. No memories were retrieved, even when retrieval was enabled. The result exposed a retrieval-threshold problem.",
+        result: "All 396 isolated requests completed, the checked live database was unchanged, and the instrument's leak checks passed. No memories were retrieved, even when retrieval was enabled. This exposed a retrieval-eligibility problem and left the benefit of functioning retrieval untested.",
         path: "fish/album/2026-08-14T074428-EAT-body-evolution.md",
         hash: None,
     },
@@ -82,14 +103,14 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-08-04",
         title: "Prediction error levelled off in the first observation period",
-        result: "Median δ fell from 0.479 to 0.369, then stayed near 0.40 ± 0.03 as the regular participant's messages became more varied. This records the plateau reached in that setting.",
+        result: "Session median δ fell from 0.479 to 0.369, then stayed near 0.40. The report's ± 0.03 describes the observed band, not a confidence interval. These interactions with one participant do not isolate the effect of training.",
         path: "fish/album/2026-08-04-the-plateau-era-close.png",
         hash: None,
     },
     Ruling {
         date: "2026-08-03",
         title: "Prediction error fell during the first full day",
-        result: "Median δ fell from 0.48 to 0.34 by afternoon, crossing the memory threshold θ. The predictor became more accurate for the regular participant during that observation period.",
+        result: "The early figure reported median δ falling from 0.48 to 0.34 by afternoon, below the reference memory threshold. It describes prediction discrepancy during one participant's interactions; changing conversation and context were not controlled.",
         path: "fish/album/2026-08-03-the-first-fall.png",
         hash: None,
     },

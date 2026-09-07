@@ -5,13 +5,13 @@ use loopseed_record::stages::{Stage, BECOMING_CLOSED, ORGANISM, SCALING};
 
 #[component]
 pub fn Promise() -> impl IntoView {
-    set_title("Research goals");
+    set_title("Promise and research goals");
     view! {
         <section class="wrap page">
-            <p class="eyebrow">"Research goals"</p>
-            <h1 class="display display-xl">"Can verified experience produce reliable learning?"</h1>
-            <p class="lede">"Through Dynamical Synthesis, Loopseed aims to guide learning in any system whose inputs, state, predictions and actions can be defined and measured. Language models are the current testbed. The broader effort is toward artificial general intelligence (AGI): systems that can learn and apply knowledge across a wide range of tasks and environments."</p>
-            <p class="prose-p">"The central question is whether learning transfers to new situations while preserving existing abilities. Each step toward that goal needs a stated test and a recorded result."</p>
+            <p class="eyebrow">"The promise · research goals"</p>
+            <h1 class="display display-xl">"Systems that improve through experience and keep what they learn"</h1>
+            <p class="lede">"The promise of Loopseed is cumulative learning: useful exchanges become improvements that persist, transfer to new situations and preserve earlier abilities. If demonstrated, this could support assistants that benefit from verified corrections and adaptive software that improves as its environment changes."</p>
+            <p class="prose-p">"Fish is our current language-model testbed. The longer-term ambition is broader adaptive intelligence, including artificial general intelligence (AGI). Here that means learning and applying knowledge across a wide range of tasks and environments. It is a research direction, not a capability established by the results on this site."</p>
         </section>
 
         <section class="wrap section" aria-labelledby="claim-h">
@@ -23,17 +23,17 @@ pub fn Promise() -> impl IntoView {
                 <div class="card">
                     <span class="n">"01"</span>
                     <h3>"Does interaction improve prediction?"</h3>
-                    <p>"Observed: prediction error for one regular participant fell, then levelled off above the memory threshold θ. The adapters tested so far have not visibly shifted that participant's curve."</p>
+                    <p>"An observational record shows lower prediction discrepancy followed by a plateau for one participant. It does not isolate the effect of training. The next requirement is improvement on excluded future messages under controlled comparisons, while retaining performance on earlier material."</p>
                 </div>
                 <div class="card">
                     <span class="n">"02"</span>
-                    <h3>"Does verified training improve new-task performance?"</h3>
-                    <p>"Observed on isolated copies: an adapter trained on reviewed examples succeeded on new instances in eleven task families. It had no losses against the base model or shuffled-reply placebo, both of which scored zero. This adapter has not been deployed to the live system."</p>
+                    <h3>"Does verified training improve useful answers?"</h3>
+                    <p>"The clean formal study accepted 43 of 64 answers on new parameter instances, with gains within eleven learned families. Both principal controls scored zero. That supports an effect in the tested setting; zero paired losses against zero-scoring controls provides little evidence about preserving other abilities."</p>
                 </div>
                 <div class="card">
                     <span class="n">"03"</span>
-                    <h3>"Does it replicate?"</h3>
-                    <p>"Unresolved. Replication uses model–supervisor pairs, called dyads. In each of two prospective protocols, only one of three pairs confirmed the predicted pattern. An unattended setup on an independent machine is also still required."</p>
+                    <h3>"Does the improvement persist and replicate?"</h3>
+                    <p>"Independent replication of the clean formal result is pending. A separate roadmap test of predicted patterns across model–supervisor pairs confirmed only one of three pairs in each of two protocols. Those tests concern a different endpoint; they do not replicate the 43-of-64 result. Sustained retention and independent setup also remain open."</p>
                 </div>
             </div>
         </section>
@@ -41,12 +41,13 @@ pub fn Promise() -> impl IntoView {
         <section class="wrap section" aria-labelledby="not-h">
             <div class="section-head">
                 <p class="eyebrow">"Limits of the evidence"</p>
-                <h2 id="not-h" class="display">"What these results establish"</h2>
+                <h2 id="not-h" class="display">"The scope of the present evidence"</h2>
             </div>
             <ul class="plain">
                 <li>"The measurements describe system behaviour. They provide no evidence of consciousness or subjective experience."</li>
                 <li>"The transfer test used new parameter values within a fixed formal language covering sixteen task families. It does not establish general theorem proving, code generation or reasoning outside that language."</li>
-                <li>"The September adapter experiments used disposable copies. Matching database hashes before and after each run confirm that the live system was unchanged."</li>
+                <li>"The formal adapter studies used disposable copies and verified that the checked live database file was unchanged. A later continuing study may activate passing adapters on its private clone. These are distinct from qualification for the main live system."</li>
+                <li>"A separate AI review strengthens answer assessment but can still make mistakes. The studies are internally conducted, and the underlying evidence is available on request from a private repository."</li>
                 <li>"Memory retrieval improved recall in some tests and reduced judgement accuracy in others. Reliable answers with references to their source records remain an open goal."</li>
                 <li>"The external-input study used approximate word-based measures. Later safeguards changed the conditions, so the two measurement periods cannot be compared directly."</li>
             </ul>
@@ -56,7 +57,7 @@ pub fn Promise() -> impl IntoView {
             <div class="section-head">
                 <p class="eyebrow">"Becoming track · research ambition"</p>
                 <h2 id="becoming-h" class="display">"A learning cycle for different kinds of systems"</h2>
-                <p class="lede-sm">"The aim is to use the same cycle in adaptive software, control systems, embodied agents and language models. Each application would define its own observations, actions, memory and measures of success. Evidence from one implementation would guide the next experiment."</p>
+                <p class="lede-sm">"We would like to test the approach in adaptive software, control systems and embodied agents as well as language models. Each would need its own operational definitions, suitable baselines and criteria for improvement. The language-model results do not establish that the same approach will work in those settings."</p>
             </div>
             <div class="cols-3">
                 <div class="card">
@@ -77,7 +78,7 @@ pub fn Promise() -> impl IntoView {
             </div>
             <div class="prose">
                 <h3>"Extend symbolic checking toward formal verification"</h3>
-                <p>"The current neurosymbolic lab gives this work a starting point: structured proposals, a deterministic compiler, exact calculation and independent review. The next goal is to verify reusable methods against explicit specifications on a wider range of tasks."</p>
+                <p>"The current neurosymbolic lab provides structured proposals, a deterministic compiler, exact calculation and separate AI review. The next goal is to verify reusable methods against explicit specifications on a wider range of tasks. Exact arithmetic on a generated instance is a useful check; proving correctness for all permitted inputs requires additional machinery."</p>
                 <p>"A later direction is to generate an implementation and a machine-checkable formal proof from the same specification. That would require proving that the implementation satisfies the specification, as well as checking that the specification represents the intended task. This capability remains a research goal."</p>
             </div>
             <p class="prose-p">"These are proposed directions. They require new protocols and independent tests. The current roadmap's unfinished criteria remain prerequisites for opening the Becoming experiments."</p>
@@ -89,7 +90,7 @@ pub fn Promise() -> impl IntoView {
                 <h2 id="tracks-h" class="display">"System development and replication"</h2>
                 <p class="lede-sm">{BECOMING_CLOSED}</p>
             </div>
-            <p class="prose-p">"Stage identifiers match the project roadmap. A closed stage may include an explicitly recorded waiver; the status column states where that occurred."</p>
+            <p class="prose-p">"Stage identifiers and status labels reproduce the project roadmap as reviewed on 7 September 2026. ‘Closed’ is a project decision, not independent scientific validation. A stage may close through a recorded supervisor waiver even when its original empirical criterion was not met."</p>
             <h3 class="track-h">"System development"</h3>
             <StageTable stages=ORGANISM/>
             <h3 class="track-h">"Scaling and replication"</h3>
@@ -104,7 +105,7 @@ pub fn Promise() -> impl IntoView {
             <div class="rules">
                 <div class="rule"><span class="n">"01"</span><p><b>"Verify reusable methods."</b>" Extract a general procedure from an answer produced without supplied steps. Check it on newly generated tasks and compare it with the base model in a blinded test. If a later task disproves it, deactivate the method and retain its history. Only methods that remain verified would be eligible for reply training."</p></div>
                 <div class="rule"><span class="n">"02"</span><p><b>"Test harder tasks."</b>" Compare the candidate, placebo and retained prediction adapter on tasks outside the sixteen templates. Check that the calculation steps match the requested problem before independent review."</p></div>
-                <div class="rule"><span class="n">"03"</span><p><b>"Check for losses before deployment."</b>" Test memory, uncertainty and performance within each family. Require a candidate advantage over the placebo and a separate test of reply generation before considering deployment. Experiments cannot automatically train or load a new adapter into the live system."</p></div>
+                <div class="rule"><span class="n">"03"</span><p><b>"Test retention through successive updates."</b>" Replay admitted earlier experience while preserving held-out sets. Compare prediction and spoken answers separately, including uncertainty and memory controls. The continuing private study takes an initial step; longer runs and independent test sets are needed before broader deployment claims."</p></div>
                 <div class="rule"><span class="n">"04"</span><p><b>"Repeat the setup independently."</b>" Run the packaged system unattended on another machine and record a signed result. Local setup tests alone do not meet the reproducibility criterion."</p></div>
             </div>
         </section>
@@ -115,9 +116,10 @@ pub fn Promise() -> impl IntoView {
                 <h2 id="falsify-h" class="display">"Findings that would change the conclusion"</h2>
             </div>
             <ul class="plain">
-                <li>"Failure on tasks outside the trained families would limit the transfer claim to the tested formal language."</li>
-                <li>"A shuffled-reply placebo matching the candidate under the loose grammar would weaken the claim that training taught a method beyond the output format."</li>
-                <li>"Lower prediction error after an approved deployment would support a benefit in live interaction. An unchanged curve would show that the isolated task gains did not improve that measure."</li>
+                <li>"Repeated failure on unfamiliar task families would limit the promise of broader transfer; the current within-family finding would remain bounded by its original test."</li>
+                <li>"A matched shuffled-reply control reaching the candidate's score in new loose-grammar tests would weaken the explanation that correct example pairings produce the advantage."</li>
+                <li>"Improvement on a new held-out task set, compared with a concurrent control, would support a benefit from the update. A before-and-after curve alone would still be vulnerable to changes in topics and interaction."</li>
+                <li>"Losses on earlier abilities across successive updates would challenge the claim of cumulative learning, even if each update improved its immediate training objective."</li>
                 <li>"A predicted pattern that fails its preset test across three model–supervisor pairs is rejected under that protocol."</li>
             </ul>
         </section>

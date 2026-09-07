@@ -9,7 +9,7 @@ pub struct Law {
 pub const LAWS: &[Law] = &[
     Law {
         title: "Successful lessons can miss the memory threshold",
-        statement: "In these sessions, a successful explanation often made the next message predictable. Its error score fell below θ, so the exchange was not stored. Memory selection depended on surprise, including how the supervisor phrased the message.",
+        statement: "In these sessions, some successful explanations were followed by messages with error scores below θ, so those exchanges did not enter active memory. Memory admission depended on surprise and on how the supervisor phrased the message. The archive still retained the exchanges.",
         evidence: "bag 2, rows 255, 269–274, 294",
     },
     Law {
@@ -19,7 +19,7 @@ pub const LAWS: &[Law] = &[
     },
     Law {
         title: "Memory can improve recall while reducing judgement accuracy",
-        statement: "One stored record raised recall from 0 of 12 to 12 of 12, but lowered judgement accuracy from 12 of 12 to 4 of 12. The loss occurred with repeated questions, showing that repeated testing can affect the behaviour being measured.",
+        statement: "One small comparison recorded recall of 0 of 12 without a memory and 12 of 12 with it, while judgement accuracy changed from 12 of 12 to 4 of 12. The questions were repeated during the study, so the observations also raise a test-history confound. These counts do not establish population-level effect sizes.",
         evidence: "bag 2, rows 240–242",
     },
     Law {
@@ -44,7 +44,7 @@ pub const LAWS: &[Law] = &[
     },
     Law {
         title: "A correct value can come from the wrong procedure",
-        statement: "Four replies passed exact numerical checks while departing from the requested calculation steps. Independent review caught the mismatch. A symbolic value check alone did not establish that the full answer met the specification.",
+        statement: "Four candidate replies on the clean transfer primary endpoint passed exact numerical checks while departing from the requested calculation. A separate AI review rejected them. A symbolic value check alone did not establish that the full answer met the specification.",
         evidence: "clean transfer ruling, 2026-09-04",
     },
     Law {

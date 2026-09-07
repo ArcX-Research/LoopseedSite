@@ -8,29 +8,30 @@ use loopseed_record::EQUATION;
 
 #[component]
 pub fn Overview() -> impl IntoView {
-    set_title("Overview");
+    set_title("Mission");
     let latest: Vec<_> = RULINGS.iter().take(3).collect();
     view! {
         <section class="hero">
             <div class="wrap hero-grid">
                 <div class="hero-copy">
                     <p class="eyebrow">"Dilate Technologies · research program"</p>
-                    <h1 class="display display-xl">"A Framework for Adaptive Intelligence"</h1>
-                    <p class="mono meta">"The Dynamical Synthesis equation"</p>
-                    <p class="eq">{EQUATION}</p>
+                    <h1 class="display display-xl">"Toward intelligence that keeps learning"</h1>
                     <p class="lede">
-                        "Loopseed is a framework for systems that learn from interaction. Built around Dynamical Synthesis, it connects prediction, feedback, memory and action in a repeating cycle. The framework is intended for different kinds of systems. Current experiments use language models and symbolic checking to test learning on new tasks."
+                        "Our mission is to build systems that turn verified experience into lasting improvements, apply what they learn to new situations, and retain earlier abilities. Loopseed is a research programme and experimental testbed for that question. Fish, its current implementation, combines a language model, memory, prediction and tools."
                     </p>
+                    <p class="prose-p">"Early controlled tests show improved answers on new instances of specific mathematical tasks. Reliable learning across unfamiliar tasks and sustained interaction remains the goal."</p>
                     <div class="hero-actions">
                         <a class="btn btn-primary" href="/results">"Read the results"</a>
                         <a class="btn" href="/method">"How we test learning"</a>
+                        <a class="btn" href="/promise">"The promise and next tests"</a>
                     </div>
                     <dl class="hero-stats mono">
-                        <div><dt>"prediction error δ, first-period plateau"</dt><dd>{format!("≈ {:.2} ± {:.2}", ERA_ONE.plateau, ERA_ONE.plateau_band)}</dd></div>
-                        <div><dt>"accepted answers on new formal tasks"</dt><dd>"43 / 64"</dd></div>
+                        <div><dt>"accepted answers · new parameter instances"</dt><dd>"43 / 64"</dd></div>
                         <div><dt>"base model and placebo, same tasks"</dt><dd>"0 / 64 · 0 / 64"</dd></div>
-                        <div><dt>"automatic deployment of experimental adapters"</dt><dd>"none"</dd></div>
+                        <div><dt>"task families with at least one success"</dt><dd>"11 / 16"</dd></div>
+                        <div><dt>"independent replication of this result"</dt><dd>"pending"</dd></div>
                     </dl>
+                    <p class="source">"Clean transfer study · 4 September 2026. Exact calculation plus a separate AI review of complete answers. "<a href="/results#transfer-clean">"Design, counts and limitations"</a>"."</p>
                 </div>
                 <div class="hero-visual"><LoopDiagram/></div>
             </div>
@@ -38,9 +39,11 @@ pub fn Overview() -> impl IntoView {
 
         <section class="wrap section" aria-labelledby="loop-h">
             <div class="section-head">
-                <p class="eyebrow">"The loop"</p>
+                <p class="eyebrow">"The approach"</p>
                 <h2 id="loop-h" class="display">"Five steps in the learning cycle"</h2>
-                <p class="lede-sm">"The cycle requires a system that can receive input, maintain state, make predictions and act. Each step has a measurable role. Fish, our current implementation, uses a language model with memory and tools."</p>
+                <p class="lede-sm">"The project calls its organising idea Dynamical Synthesis: a system repeatedly combines its own activity with external input. This is a design framework. Its value must be established through defined implementations and controlled tests."</p>
+                <p class="eq">{EQUATION}</p>
+                <p class="prose-p">"This shorthand names the idea; it is not a complete learning algorithm or an established law of intelligence. The Method page distinguishes the implemented state update, measured signals and offline training procedure."</p>
             </div>
             <ol class="steps">
                 {STEPS.iter().map(|s| view! {
@@ -63,18 +66,18 @@ pub fn Overview() -> impl IntoView {
             <div class="cols-3">
                 <div class="card">
                     <span class="n">"01"</span>
-                    <h3>"Measure improvement before adopting a change"</h3>
-                    <p>"The framework calls for testing updates on data excluded from training. In Fish, a prediction adapter must reduce held-out error before it can be loaded. This tests improvement; it does not by itself prove the design's mathematical contraction objective, ‖W‖ < 1."</p>
+                    <h3>"Test prediction and answers separately"</h3>
+                    <p>"Predicting a participant's next message and answering a problem correctly are different abilities. They use separate adapters and evaluation criteria. Lower prediction loss alone does not establish better answers."</p>
                 </div>
                 <div class="card">
                     <span class="n">"02"</span>
-                    <h3>"Track the variety of external input"</h3>
-                    <p>"The action objective, V = −‖δ‖ + β·H(you), balances prediction accuracy with input variety. In Fish, this means tracking incoming messages and increasing the weight β as conversational variety falls."</p>
+                    <h3>"Measure gains and losses"</h3>
+                    <p>"Compare the same tasks across candidate and control conditions. Reserve examples from training, test earlier abilities, and record failures alongside gains. A successful task comparison is one step toward demonstrating lasting learning."</p>
                 </div>
                 <div class="card">
                     <span class="n">"03"</span>
-                    <h3>"Use external input to select memories"</h3>
-                    <p>"The memory rule compares predictions with observed input. In Fish, exchanges generated only by the system's own predictor are excluded from memory."</p>
+                    <h3>"Keep experience traceable"</h3>
+                    <p>"Retain the original exchanges, identify who supplied a training target, and distinguish verified solutions from model attempts. Prediction error helps select memories; correctness requires its own checks."</p>
                 </div>
             </div>
         </section>
@@ -88,12 +91,12 @@ pub fn Overview() -> impl IntoView {
                 <a class="card card-link" href="/results#skin">
                     <span class="n">"prediction"</span>
                     <h3>"Prediction error fell, then levelled off"</h3>
-                    <p>{format!("In the first observation period, median prediction error for one regular human participant fell from {:.3} to {:.3}, then remained near {:.2}. This records a limit reached in that setting.", ERA_ONE.first_median, ERA_ONE.low_median, ERA_ONE.plateau)}</p>
+                    <p>{format!("In the first observation period, session medians for one participant fell from {:.3} to {:.3}, then stayed near {:.2}. This is an observational trend: changing topics, context and system settings prevent attributing it to training alone.", ERA_ONE.first_median, ERA_ONE.low_median, ERA_ONE.plateau)}</p>
                 </a>
                 <a class="card card-link" href="/results#coats">
-                    <span class="n">"formal methods"</span>
-                    <h3>"Training on verified examples improved new-task performance"</h3>
-                    <p>"An adapter trained on 60 reviewed examples produced 43 accepted answers on 64 new formal tasks, without a supplied solution procedure. The base model and an adapter trained on mismatched replies each scored zero."</p>
+                    <span class="n">"controlled comparison"</span>
+                    <h3>"Verified examples improved answers within tested families"</h3>
+                    <p>"A corpus of 60 reviewed examples supplied 48 training examples, six validation examples and six test examples. The resulting adapter produced 43 accepted answers on 64 further parameter instances; both controls scored zero. Gains occurred within eleven learned families. Broader transfer remains open."</p>
                 </a>
                 <a class="card card-link" href="/results#transfer-1">
                     <span class="n">"failure and follow-up"</span>
@@ -109,12 +112,12 @@ pub fn Overview() -> impl IntoView {
                 <h2 id="evidence-h" class="display">"How the adapter experiments are checked"</h2>
             </div>
             <div class="rules">
-                <div class="rule"><span class="n">"01"</span><p><b>"Plan before testing."</b>" Tasks, experimental conditions and pass criteria are fixed before the model runs. File hashes identify the exact software, data and adapters used."</p></div>
+                <div class="rule"><span class="n">"01"</span><p><b>"Plan before testing."</b>" The formal adapter studies freeze tasks, conditions and pass criteria in local protocol files before evaluation. Hashes identify the software, data and adapters used."</p></div>
                 <div class="rule"><span class="n">"02"</span><p><b>"Hide condition identities."</b>" Experimental groups receive coded labels. Their identities are revealed only after results and reviews are fixed and hashed."</p></div>
                 <div class="rule"><span class="n">"03"</span><p><b>"Recompute the mathematics."</b>" A checker validates the formal structure, and a computer algebra system calculates the results. Review also checks whether the steps answer the requested problem."</p></div>
-                <div class="rule"><span class="n">"04"</span><p><b>"Review complete replies."</b>" An independent reviewer reads each reply accepted by the checker. The reviewer can reject a reply but cannot turn a failed check into a pass."</p></div>
-                <div class="rule"><span class="n">"05"</span><p><b>"Preserve the record."</b>" Recorded decisions cannot be overwritten. The live database is checked before and after each run, and experiments cannot deploy adapters. Changes to a checker require a new test."</p></div>
-                <div class="rule"><span class="n">"06"</span><p><b>"Recalculate the statistics."</b>" This site calculates the reported paired comparisons in your browser from the recorded task counts."</p></div>
+                <div class="rule"><span class="n">"04"</span><p><b>"Review complete replies."</b>" A separate AI reviewer reads each reply accepted by the checker, with condition identities withheld. It may reject an answer. This is an additional assessment within the project; independent replication is still needed."</p></div>
+                <div class="rule"><span class="n">"05"</span><p><b>"Preserve the record."</b>" Failed runs retain their original decisions. These studies use isolated copies and compare live-database hashes before and after testing. A later private learning study can activate a passing adapter only on its clone."</p></div>
+                <div class="rule"><span class="n">"06"</span><p><b>"Make the evidence assessable."</b>" This site recalculates paired statistics from recorded counts and states their assumptions. Reports identify source files; the underlying repository is currently private, with evidence available on request."</p></div>
             </div>
         </section>
 
@@ -137,9 +140,9 @@ pub fn Overview() -> impl IntoView {
 
         <section class="wrap section" aria-labelledby="promise-h">
             <div class="section-head">
-                <p class="eyebrow">"Research goals"</p>
-                <h2 id="promise-h" class="display">"What remains to be tested"</h2>
-                <p class="lede-sm">"The Becoming track aims to apply the cycle to other adaptive systems and test learning across tasks and environments. This is an effort toward artificial general intelligence. Current evidence comes from specific language-model experiments; broader capability remains a research goal."</p>
+                <p class="eyebrow">"The promise"</p>
+                <h2 id="promise-h" class="display">"Useful experience that survives the next conversation"</h2>
+                <p class="lede-sm">"If verified experience can improve future behaviour without erasing earlier abilities, adaptive systems could become more reliable through use. Our next tests examine retention, unfamiliar task families and independent replication. Broader adaptive intelligence, including AGI, is a long-term ambition whose required evidence extends well beyond these initial results."</p>
             </div>
             <p class="more"><a class="btn" href="/promise">"Research goals and limits"</a></p>
         </section>
