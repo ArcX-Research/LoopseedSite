@@ -32,7 +32,7 @@ pub fn GuestChart() -> impl IntoView {
             "These figures contain 19,346 scores from other input sources. Fourteen entries from another guest identifier are outside these groups. The website and paper use the same generated figures and the same numeric export, saved on 5 September 2026. "
             <a href="/data/exchange-scores.json" download>"Download the exchange data"</a>
             " · "<a href="/data/exchange-audit.json" download>"Read the data and plotting audit"</a>
-            " · "<a href="/papers/dynamical-synthesis.pdf#page=11">"Figures 6–8 in the paper"</a>
+            " · "<a href="/papers/dynamical-synthesis.pdf#page=12">"Figures 6–8 in the paper"</a>
         </p>
     }
 }
