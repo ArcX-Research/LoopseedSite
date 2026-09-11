@@ -25,7 +25,7 @@ This repository contains the research website, built in Rust and compiled to Web
 recalculates paired comparisons from the original counts.
 
 The scientific content was reviewed on 11 September 2026, using experiment records through
-7 September. The studies are dated snapshots, not a live status feed. The working paper,
+7 September. The studies are dated snapshots, not a live status feed. The paper,
 eight scientific figures, LaTeX sources and aggregate data are available from `/record#paper-h`.
 Original run artifacts remain private and can be requested through the site's evidence contact.
 

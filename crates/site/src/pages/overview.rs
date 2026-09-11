@@ -47,9 +47,10 @@ pub fn Overview() -> impl IntoView {
 
         <section class="wrap section" aria-labelledby="paper-preview-h">
             <div class="paper-callout">
-                <p class="eyebrow">"Working paper · 11 September 2026"</p>
+                <p class="eyebrow">"Research paper · 11 September 2026"</p>
                 <h2 id="paper-preview-h" class="display">"Dynamical Synthesis: Learning through Interaction"</h2>
-                <p class="prose-p">"The paper presents the Dynamical Synthesis framework and experiments with Fish. It examines whether learning improves performance on new problems and preserves earlier abilities, reporting both improvements and failed tests. It also discusses how feedback can repeat a system’s own claims without providing new evidence, and outlines further tests of learning and human oversight."</p>
+                <p class="prose-p">"The paper presents the Dynamical Synthesis framework and experiments with Fish. It examines whether learning improves performance on new problems and preserves earlier abilities, reporting both improvements and failed tests. It also discusses how feedback can repeat a system’s own claims without providing new evidence, and identifies gaps for further research."</p>
+                <p class="prose-p">"A second paper will report follow-up studies aimed at closing gaps in the current findings. We plan to publish the research in phases, with each paper reporting new findings, unsuccessful tests and remaining gaps. The "<a href="/goals#next-h">"next research priorities"</a>" guide this work."</p>
                 <div class="paper-downloads">
                     <a class="btn btn-primary" href="/papers/dynamical-synthesis.pdf" rel="external">"Read the paper"</a>
                     <a class="btn" href="/results">"View experimental results"</a>
@@ -168,10 +169,11 @@ pub fn Overview() -> impl IntoView {
             <div class="wrap">
                 <div class="section-head">
                     <p class="eyebrow">"Research goals"</p>
-                    <h2 id="goals-h" class="display">"Learning that persists across tasks and environments"</h2>
-                    <p class="lede-sm">"If verified experience can improve future behaviour without erasing earlier abilities, adaptive systems could become more reliable through use. Our next tests examine retention, unfamiliar task families and independent replication. Broader adaptive intelligence, including AGI, is a long-term ambition whose required evidence extends well beyond these initial results."</p>
+                    <h2 id="goals-h" class="display">"Next studies and broader research goals"</h2>
+                    <p class="lede-sm">"We intend to continue the research to close the gaps identified in the paper. The next studies will examine learning on unfamiliar tasks, retention of earlier abilities, rule learning and the effects of memory and training. They will also address feedback, human control and independent replication."</p>
+                    <p class="prose-p">"The broader goals are lasting learning, useful new ideas and an understanding of learning across computational systems. These goals support the long-term aim of general intelligence that preserves human agency and wellbeing."</p>
                 </div>
-                <p class="more"><a class="btn" href="/goals">"Research goals and limits"</a></p>
+                <p class="more"><a class="btn" href="/goals">"Next studies and research goals"</a></p>
             </div>
         </section>
     }

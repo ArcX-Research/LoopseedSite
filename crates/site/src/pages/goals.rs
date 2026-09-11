@@ -6,11 +6,11 @@ use leptos::prelude::*;
 use loopseed_record::stages::{Stage, BECOMING_CLOSED, ORGANISM, SCALING};
 
 const SECTIONS: &[(&str, &str)] = &[
+    ("#next-h", "Next studies"),
     ("#benefit-h", "Human benefit"),
     ("#claim-h", "Learning"),
     ("#novelty-h", "New ideas"),
     ("#becoming", "Computational universe"),
-    ("#next-h", "Planned tests"),
     ("#not-h", "Evidence limits"),
     ("#tracks", "Roadmap"),
 ];
@@ -22,16 +22,34 @@ pub fn Goals() -> impl IntoView {
         <section class="page-intro page-intro-goals">
             <div class="wrap">
                 <p class="eyebrow">"Research goals"</p>
-                <h1 class="display display-xl">"Learning, discovery and reliable human control"</h1>
-                <p class="lede">"We aim to develop systems that learn from verified experience, generate useful new ideas and remain open to correction. The long-term objective is broadly capable intelligence that supports human agency and wellbeing."</p>
-                <p class="prose-p">"Progress requires evidence that useful abilities persist, new proposals survive testing and people retain effective control over how systems are used. The directions below set out the questions and proposed tests; the "<a href="/results">"Results page"</a>" states what has been measured so far."</p>
+                <h1 class="display display-xl">"Next studies and long-term research goals"</h1>
+                <p class="lede">"We intend to continue the research to close the gaps identified in "<a href="/papers/dynamical-synthesis.pdf">"Dynamical Synthesis: Learning through Interaction"</a>". The next phase focuses on learning beyond familiar tasks, preserving earlier abilities and identifying what interaction contributes."</p>
+                <p class="prose-p">"Follow-up findings will form a second paper. Later papers will report subsequent research phases, including their results and remaining questions."</p>
             </div>
         </section>
 
         <PageNav items=SECTIONS/>
+
+        <section class="wrap section" aria-labelledby="next-h">
+            <div class="section-head">
+                <p class="eyebrow">"Next research phase"</p>
+                <h2 id="next-h" class="display">"Closing the gaps identified in the paper"</h2>
+                <p class="lede-sm">"These priorities follow the paper’s findings and limitations. Each study will specify its comparison, measurements and failure criteria before evaluation, and report improvements and unsuccessful outcomes."</p>
+            </div>
+            <div class="rules">
+                <div class="rule"><span class="n">"01"</span><p><b>"Transfer to unfamiliar tasks."</b>" The harder mathematics study found no advantage over the shuffled-answer control. Test whole problem types excluded from training, with matched computing budgets and the same access to tools."</p></div>
+                <div class="rule"><span class="n">"02"</span><p><b>"Retention through further learning."</b>" A later update caused more answer losses than gains. Compare ways to preserve earlier abilities across repeated updates, including reuse of earlier training examples. Test new and previously successful tasks after each update."</p></div>
+                <div class="rule"><span class="n">"03"</span><p><b>"Rule learning and later use."</b>" Learning hidden rules and using saved descriptions remained unreliable. Test the full sequence from observations to a correct rule and successful use on new cases after a reset. Count failed attempts to learn a rule in the overall result."</p></div>
+                <div class="rule"><span class="n">"04"</span><p><b>"Effects of memory and training."</b>" The broader learning comparison did not reach a final result. Complete controlled comparisons that vary memory and parameter updates separately. This will test what each component contributes beyond the effects of additional training alone."</p></div>
+                <div class="rule"><span class="n">"05"</span><p><b>"Feedback and human control."</b>" Direct tests of misleading feedback, correction and authorised intervention through repeated updates remain open. Measure these responses before and after learning in bounded settings, including when a system receives copies of its own earlier errors."</p></div>
+                <div class="rule"><span class="n">"06"</span><p><b>"Replication and comparison with existing methods."</b>" Training has not been independently repeated. Repeat studies across random seeds and model families, compare with established learning methods, and prepare the study records needed for another team to replicate the results."</p></div>
+            </div>
+            <p class="more"><a href="/results">"Findings and study limitations"</a></p>
+        </section>
+
         <section class="wrap section" aria-labelledby="benefit-h">
             <div class="section-head">
-                <p class="eyebrow">"Research commitments"</p>
+                <p class="eyebrow">"Broader research goals · Human benefit"</p>
                 <h2 id="benefit-h" class="display">"Useful learning under human control"</h2>
                 <p class="lede-sm">"As a system learns, its response to evidence, instructions and intervention can change. Our central question is whether useful abilities can accumulate while people retain effective ways to inspect, correct and stop the system. The requirements below guide how we intend to evaluate that question."</p>
             </div>
@@ -141,22 +159,6 @@ pub fn Goals() -> impl IntoView {
             </details>
         </section>
 
-        <section class="wrap section" aria-labelledby="next-h">
-            <div class="section-head">
-                <p class="eyebrow">"Proposed experiments"</p>
-                <h2 id="next-h" class="display">"What the next tests need to establish"</h2>
-                <p class="lede-sm">"Each proposal needs a protocol specifying the comparison, measurements and failure criteria before evaluation."</p>
-            </div>
-            <div class="rules">
-                <div class="rule"><span class="n">"01"</span><p><b>"Learning through successive updates."</b>" Compare an updated system with its previous version on new tasks and a fixed set of earlier tasks. Keep prediction and task-success measures separate. Preserve the original evaluation sets and report the effect of each update."</p></div>
-                <div class="rule"><span class="n">"02"</span><p><b>"Generation of useful proposals."</b>" Define novelty criteria before collection, freeze the reference material and keep the final evaluation examples out of the feedback loop. Compare valid, useful proposals per unit of computation under different input conditions."</p></div>
-                <div class="rule"><span class="n">"03"</span><p><b>"Correction and human intervention."</b>" In bounded simulations, test returned copies of incorrect claims against fresh observations or exact checks. Separately test authorised interruption and changes to permissions before and after learning. Record failures to correct or comply with the permitted intervention."</p></div>
-                <div class="rule"><span class="n">"04"</span><p><b>"Learning in computational worlds."</b>" Reserve whole rule classes and initial conditions from training. Compare prediction and action with direct simulation, search and unchanged-model baselines. Record which observations were available and how much computation each method used."</p></div>
-                <div class="rule"><span class="n">"05"</span><p><b>"Verification of reusable programs."</b>" Extend checking from individual answers to programs with explicit specifications. Where feasible, require a machine-checkable proof covering the permitted inputs. Review the specification itself to establish whether it represents the intended task."</p></div>
-                <div class="rule"><span class="n">"06"</span><p><b>"Independent reproduction."</b>" Package the software, settings, protocols and necessary data so another team can repeat a study. Reproducing a figure from supplied counts and independently rerunning the experiment should be reported as separate achievements."</p></div>
-            </div>
-        </section>
-
         <section class="wrap section" aria-labelledby="not-h">
             <div class="section-head">
                 <p class="eyebrow">"Evidence limits"</p>
@@ -179,7 +181,7 @@ pub fn Goals() -> impl IntoView {
                 <h2 id="tracks-h" class="display">"Roadmap and unresolved criteria"</h2>
                 <p class="lede-sm">{BECOMING_CLOSED}</p>
             </div>
-            <p class="prose-p">"These tables preserve the project’s stage identifiers and recorded decisions. Most statuses reflect the 7 September review; the paper entry now records the available working draft. ‘Closed’ means the project closed a stage, sometimes through an explicit waiver. It does not mean every original scientific criterion passed."</p>
+            <p class="prose-p">"These tables preserve the project’s stage identifiers and recorded decisions. Most statuses reflect the 7 September review; the paper entry reflects the paper and supporting data now available. ‘Closed’ means the project closed a stage, sometimes through an explicit waiver. It does not mean every original scientific criterion passed."</p>
             <details class="study-details">
                 <summary>"System components and their recorded checks"</summary>
                 <div class="study-details-content">

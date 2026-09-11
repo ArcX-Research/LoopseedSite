@@ -34,7 +34,7 @@ pub fn Results() -> impl IntoView {
                 <p class="eyebrow">"Results"</p>
                 <h1 class="display display-xl">"Results from learning experiments"</h1>
                 <p class="lede">"One controlled mathematics study found 43 accepted answers out of 64 after training, compared with zero from each of two control models. The problems used new numbers in problem types included in training. Follow-up studies found limited success on harder problems and losses in some earlier abilities."</p>
-                <p class="prose-p">"This page brings together the findings available on 11 September 2026. The studies used different tasks and scoring rules, so their scores cannot be combined into one overall success rate. The "<a href="/record#paper-h">"working paper, summary data and analysis code"</a>" are available for review; detailed experiment records are available on request. Independent replication is still needed."</p>
+                <p class="prose-p">"This page brings together the findings available on 11 September 2026. The studies used different tasks and scoring rules, so their scores cannot be combined into one overall success rate. The "<a href="/record#paper-h">"paper, summary data and analysis code"</a>" are available for review; detailed experiment records are available on request. Independent replication is still needed."</p>
             </div>
         </section>
         <PageNav items=SECTIONS/>
@@ -191,6 +191,7 @@ pub fn Results() -> impl IntoView {
                 <h2 id="skin-h" class="display">"How prediction error changed across sessions"</h2>
                 <p class="lede-sm">"Prediction error decreased between early sessions and varied across later ones. Topics, context and system settings changed during the observation period, so these records do not isolate an effect of training."</p>
                 <p class="prose-p">"Before each incoming message, the system recorded a prediction. The score δ measures the difference between the prediction and observation. Two versions were used and are shown in separate panels; lower values mean a closer match under that version’s measure. The dashed line marked θₘ is the reference threshold for selecting memories. These are the same figures shown in the paper. See the "<a href="/method#symbols">"symbol guide"</a>" for the notation."</p>
+                <p id="prediction-settings" class="prose-p">"The recorded text encoder for these interaction measurements is "<code>"bge-small-en-v1.5"</code>", with d = 384. The same setting is reported in Section 5.8 of the paper."</p>
             </div>
 
             <h3 id="participant" class="figure-h">"Interactions with one regular participant"</h3>
@@ -212,7 +213,7 @@ pub fn Results() -> impl IntoView {
             <details class="study-details">
                 <summary>"Prediction-error formulas and definitions"</summary>
                 <div class="study-details-content">
-                    <p class="prose-p">"In these formulas, E converts text to a numerical vector, Î is the recorded prediction and ‘you’ is the observed message. Cosine distance compares the directions of the two vectors."</p>
+                    <p class="prose-p">"In these formulas, E converts text to a vector of dimension d, Î is the recorded prediction and ‘you’ is the observed message. Cosine distance compares the directions of the two vectors."</p>
                     <p class="prose-p"><code>{DELTA_V1}</code></p>
                     <p class="prose-p"><code>{DELTA_V2}</code></p>
                     <p class="prose-p">"In version 2, ppl_norm = 1 − exp(−L). L is the mean negative log probability of the observed tokens, evaluated using the context available before the message arrived. Both scores are dimensionless."</p>

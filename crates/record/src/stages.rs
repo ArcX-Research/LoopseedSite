@@ -6,7 +6,7 @@ pub enum Status {
     Built,
     Open,
     Parked,
-    Draft,
+    Available,
     NotBuilt,
 }
 
@@ -17,7 +17,7 @@ impl Status {
             Status::Built => "built; evaluation pending",
             Status::Open => "open",
             Status::Parked => "paused",
-            Status::Draft => "draft available",
+            Status::Available => "paper available",
             Status::NotBuilt => "not built",
         }
     }
@@ -25,7 +25,7 @@ impl Status {
     pub fn class(self) -> &'static str {
         match self {
             Status::Done => "st-done",
-            Status::Built | Status::Draft => "st-built",
+            Status::Built | Status::Available => "st-built",
             Status::Open => "st-open",
             Status::Parked => "st-parked",
             Status::NotBuilt => "st-none",
@@ -238,8 +238,8 @@ pub const SCALING: &[Stage] = &[
         name: "Research paper",
         what: "report observed patterns, training effects and retention",
         pass_test: "every claim cites database records; every figure reproduces using S1 metrics",
-        state: "working draft 0.4, eight figures and supporting data available; full reporting criterion remains unverified",
-        status: Status::Draft,
+        state: "paper, eight figures and supporting data available; full reporting criterion remains unverified",
+        status: Status::Available,
     },
 ];
 

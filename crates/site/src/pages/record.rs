@@ -19,7 +19,7 @@ pub fn Record() -> impl IntoView {
             <div class="wrap">
                 <p class="eyebrow">"Reports"</p>
                 <h1 class="display display-xl">"Study reports and supporting evidence"</h1>
-                <p class="lede">"Read the working paper, follow the findings from individual studies and locate the records behind them. The report list includes completed comparisons, unsuccessful tests, study plans and observations."</p>
+                <p class="lede">"Read the paper, follow the findings from individual studies and locate the records behind them. The report list includes completed comparisons, unsuccessful tests, study plans and observations."</p>
                 <p class="prose-p">"Reports were reviewed on 11 September 2026 and cover experiments recorded through 7 September. Each entry identifies the type of record and its source. The "<a href="/results">"Results page"</a>" brings the measurements together with their methods and limitations."</p>
             </div>
         </section>
@@ -27,9 +27,9 @@ pub fn Record() -> impl IntoView {
         <PageNav items=SECTIONS/>
         <section class="wrap section" aria-labelledby="paper-h">
             <div class="paper-callout">
-                <p class="eyebrow">"Working paper · draft 0.4"</p>
+                <p class="eyebrow">"Research paper · 11 September 2026"</p>
                 <h2 id="paper-h" class="display">"Dynamical Synthesis: Learning through Interaction"</h2>
-                <p class="prose-p">"The paper sets out the computational framework and reviews the learning experiments, including improvements, failed tests and incomplete comparisons. Eight figures include the exchange plots, with measurement versions and observational limitations stated separately. The manuscript has not been peer reviewed."</p>
+                <p class="prose-p">"The paper sets out the computational framework and reviews the learning experiments, including improvements, failed tests and incomplete comparisons. Eight figures include the exchange plots, with measurement versions and observational limitations stated separately. The paper has not been peer reviewed."</p>
                 <div class="paper-downloads">
                     <a class="btn btn-primary" href="/papers/dynamical-synthesis.pdf" rel="external">"Read the paper"</a>
                     <a class="btn" href="/papers/dynamical-synthesis-source.zip" download="dynamical-synthesis-source.zip">"Download LaTeX and analysis code"</a>

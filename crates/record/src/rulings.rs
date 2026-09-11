@@ -13,9 +13,9 @@ pub struct Ruling {
 pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-11",
-        kind: "Working paper",
-        title: "Working paper and supporting research data",
-        result: "A working draft and supporting data were assembled from the existing experiment records. This step added no new model experiments. The downloadable manuscript and analysis files document measured outcomes, failed tests and questions for further research.",
+        kind: "Research paper",
+        title: "Research paper and supporting data",
+        result: "The paper and supporting data bring together the existing experiment records. This step added no new model experiments. The downloadable manuscript and analysis files document measured outcomes, failed tests and questions for further research.",
         path: "docs/papers/dynamical-synthesis/manuscript.tex",
         hash: None,
     },

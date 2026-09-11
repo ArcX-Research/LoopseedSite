@@ -12,6 +12,7 @@ pub fn WorldResults() -> impl IntoView {
                 <h2 id="worlds-h" class="display">"Identifying and reusing rules remained unreliable"</h2>
                 <p class="lede-sm">"In the six-environment study, the model identified two hidden rules correctly and answered 3 of 12 later questions using its own rule descriptions. Separate tests showed that supplying a correct rule could support better answers, depending on the generation settings."</p>
                 <p class="prose-p">"The environments followed hidden rules that the model tried to infer from observations. Later questions asked it to predict the outcome of new action sequences. Model weights stayed fixed, and saved descriptions were supplied in each prompt. These tests assess finding and using rules in context; they do not establish long-term retention."</p>
+                <p class="prose-p">"The Meridian engine generated and checked the simulated worlds "<a href="/papers/dynamical-synthesis.pdf#nameddest=cite.dilate2026meridian">"(Dilate Technologies, 2026)"</a>"."</p>
             </div>
             <ResearchFigure name="world-learning"
                 alt="Separate studies of rule use and discovery: 9 of 12 correct answers with a supplied rule in one generation setting; 2 of 6 hidden rules identified correctly; an earlier eight-environment test produced 0 of 16 correct answers using its own records. Full comparisons follow."
