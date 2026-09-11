@@ -1,0 +1,117 @@
+{
+  "created_at": "2026-09-11T07:02:58.557049+00:00",
+  "groups": {
+    "Loopseed-decisive-v10-exec/data": {
+      "bytes": 67744632,
+      "regular": 114,
+      "symlink-reference-only": 1
+    },
+    "Loopseed-decisive-v11-exec/data": {
+      "bytes": 83104225,
+      "regular": 168
+    },
+    "Loopseed-decisive-v12-exec/data": {
+      "bytes": 96831175,
+      "regular": 196
+    },
+    "Loopseed-decisive-v13-exec/data": {
+      "bytes": 117404491,
+      "regular": 270
+    },
+    "Loopseed-decisive-v14-exec/data": {
+      "bytes": 88562752,
+      "regular": 189
+    },
+    "Loopseed-decisive-v15-exec/data": {
+      "bytes": 81416888,
+      "regular": 159
+    },
+    "Loopseed-decisive-v9-exec/data": {
+      "bytes": 104321011,
+      "regular": 92
+    },
+    "Loopseed/data/dyad": {
+      "bytes": 34860,
+      "regular": 15
+    },
+    "Loopseed/data/fish": {
+      "bytes": 10519965,
+      "regular": 33
+    },
+    "Loopseed/data/fish-b": {
+      "bytes": 13456,
+      "regular": 1
+    },
+    "Loopseed/data/fish-c": {
+      "bytes": 12356,
+      "regular": 1
+    },
+    "Loopseed/data/fish/classrooms": {
+      "bytes": 4061283,
+      "regular": 10
+    },
+    "Loopseed/data/fish/experiments": {
+      "bytes": 281598140,
+      "excluded-build-or-cache-directory": 1,
+      "regular": 2775
+    },
+    "Loopseed/data/fish/labs": {
+      "bytes": 10950863475,
+      "regular": 18327,
+      "symlink-reference-only": 444
+    },
+    "Loopseed/data/fish/manual-close": {
+      "bytes": 25025,
+      "regular": 48
+    },
+    "Loopseed/data/fish/night": {
+      "bytes": 4286558,
+      "regular": 39
+    },
+    "Loopseed/data/fish/speaking": {
+      "bytes": 42691086,
+      "regular": 8
+    },
+    "Loopseed/data/root": {
+      "excluded-authentication-or-os-metadata": 1
+    },
+    "Loopseed/data/runs": {
+      "bytes": 13870929,
+      "excluded-authentication-or-os-metadata": 2,
+      "regular": 18
+    },
+    "Loopseed/fish/album": {
+      "bytes": 48139860,
+      "regular": 271
+    },
+    "Loopseed/fish/lab": {
+      "bytes": 13797867,
+      "excluded-build-or-cache-directory": 1,
+      "regular": 365
+    }
+  },
+  "inventory_entries": 23549,
+  "limits": [
+    "Census of files available under the named roots, not of all experiments ever performed.",
+    "Copies and overlapping studies are retained; file totals are not independent observations.",
+    "Symlinks record dependencies without copying their targets, including model weights.",
+    "Authentication material, operating-system metadata and generated caches are excluded.",
+    "Individual files are checked for changes during copying; this is not an atomic database snapshot.",
+    "No training, inference, experiment resumption, activation or external publication is performed."
+  ],
+  "manifest_sha256": "87fbd6b3ff843332446e1e58e86e4d60910b8ac22a8c20f567a5fc4afce15b25",
+  "regular_files": 23099,
+  "scope": [
+    "Loopseed/data",
+    "Loopseed/fish/album",
+    "Loopseed/fish/lab",
+    "Loopseed-decisive-v10-exec/data",
+    "Loopseed-decisive-v11-exec/data",
+    "Loopseed-decisive-v12-exec/data",
+    "Loopseed-decisive-v13-exec/data",
+    "Loopseed-decisive-v14-exec/data",
+    "Loopseed-decisive-v15-exec/data",
+    "Loopseed-decisive-v9-exec/data"
+  ],
+  "source_bytes": 12009300034
+}

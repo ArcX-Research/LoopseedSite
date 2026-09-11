@@ -6,6 +6,7 @@ pub enum Status {
     Built,
     Open,
     Parked,
+    Draft,
     NotBuilt,
 }
 
@@ -16,6 +17,7 @@ impl Status {
             Status::Built => "built; evaluation pending",
             Status::Open => "open",
             Status::Parked => "paused",
+            Status::Draft => "draft available",
             Status::NotBuilt => "not built",
         }
     }
@@ -23,7 +25,7 @@ impl Status {
     pub fn class(self) -> &'static str {
         match self {
             Status::Done => "st-done",
-            Status::Built => "st-built",
+            Status::Built | Status::Draft => "st-built",
             Status::Open => "st-open",
             Status::Parked => "st-parked",
             Status::NotBuilt => "st-none",
@@ -44,16 +46,16 @@ pub const ORGANISM: &[Stage] = &[
     Stage {
         id: "0",
         name: "State decay",
-        what: "x ← a·x + u",
+        what: "combine a weighted previous state with new input",
         pass_test: "a plot shows exponential decay of past input",
         state: "implemented in the core state update",
         status: Status::Done,
     },
     Stage {
         id: "1",
-        name: "Conversation",
+        name: "Model connection",
         what: "connect the service to the language model",
-        pass_test: "a conversation happens",
+        pass_test: "the service sends a message and receives a model reply",
         state: "done",
         status: Status::Done,
     },
@@ -68,7 +70,7 @@ pub const ORGANISM: &[Stage] = &[
     Stage {
         id: "3",
         name: "Memory",
-        what: "vector memory selected by the surprise rule σ",
+        what: "select exchanges for retrieval using prediction error",
         pass_test: "retrieval improves replies in a blinded A/B test",
         state: "A/B test tied; closed by an explicit supervisor waiver",
         status: Status::Done,
@@ -84,7 +86,7 @@ pub const ORGANISM: &[Stage] = &[
     Stage {
         id: "4.5",
         name: "Combined error measure",
-        what: "give normalised perplexity half the weight in δ",
+        what: "combine token loss and embedding distance in the prediction score",
         pass_test: "mark the change to v2 on the chart",
         state: "implemented 2026-08-07 using constrained scoring output",
         status: Status::Done,
@@ -92,7 +94,7 @@ pub const ORGANISM: &[Stage] = &[
     Stage {
         id: "5",
         name: "Tool use",
-        what: "tools and the action objective V",
+        what: "invoke tools and record the score V",
         pass_test:
             "the system with actions outperforms a passive control; input variety is monitored",
         state: "done 2026-08-05",
@@ -100,8 +102,8 @@ pub const ORGANISM: &[Stage] = &[
     },
     Stage {
         id: "5a",
-        name: "H(you)",
-        what: "measure the variety of incoming messages",
+        name: "Input variety",
+        what: "measure dispersion among one source's recent messages, H(you)",
         pass_test: "use measurements to assess proposed changes to β",
         state: "measurements supported a minimum value for β",
         status: Status::Done,
@@ -109,7 +111,7 @@ pub const ORGANISM: &[Stage] = &[
     Stage {
         id: "0b",
         name: "Dynamical Synthesis",
-        what: "state update I[t] = α·E(W(I[t−1])) + E(you[t])",
+        what: "combine the actual previous reply and current input for memory retrieval",
         pass_test: "each vector component matches the equation, including after restarts",
         state: "verified again on 2026-08-13",
         status: Status::Done,
@@ -119,16 +121,16 @@ pub const ORGANISM: &[Stage] = &[
         name: "Parameter regulation",
         what: "adjust θ, k, λ and ε within limits using input variety and prediction error",
         pass_test: "a parameter change produces a measured response",
-        state: "active since 2026-08-07; effect still requires supervisor evaluation",
+        state: "implemented 2026-08-07; its effect remains to be evaluated",
         status: Status::Built,
     },
     Stage {
         id: "5c",
         name: "Response effects",
-        what: "measure how the participant changes direction after a reply",
+        what: "measure how the next input differs from the source's recent messages",
         pass_test:
             "record the distribution; training weighted by this measure passes held-out evaluation",
-        state: "measurement active; weighted training disabled",
+        state: "measurement implemented; weighted training disabled in the recorded configuration",
         status: Status::Built,
     },
     Stage {
@@ -236,13 +238,13 @@ pub const SCALING: &[Stage] = &[
         name: "Research paper",
         what: "report observed patterns, training effects and retention",
         pass_test: "every claim cites database records; every figure reproduces using S1 metrics",
-        state: "not started, by the supervisor's decision",
-        status: Status::NotBuilt,
+        state: "working draft 0.4, eight figures and supporting data available; full reporting criterion remains unverified",
+        status: Status::Draft,
     },
 ];
 
 /// Existing criteria must pass before Becoming experiments begin.
-pub const BECOMING_CLOSED: &str = "The scaling track is incomplete, so the Becoming experiments have not opened. The remaining criteria require evidence before the next phase can begin.";
+pub const BECOMING_CLOSED: &str = "The next experimental phase has not begun. Independent setup, reliable state tracking, memory references and replication checks remain unresolved.";
 
 #[cfg(test)]
 mod tests {

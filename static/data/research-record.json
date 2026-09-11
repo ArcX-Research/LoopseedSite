@@ -1,0 +1,813 @@
+{
+  "acquisition": {
+    "calls": 48,
+    "conditions": {
+      "foreign-p1": {
+        "capped": 0,
+        "exact": 0,
+        "n": 6
+      },
+      "none-p1": {
+        "capped": 0,
+        "exact": 0,
+        "n": 6
+      },
+      "own-p1": {
+        "capped": 0,
+        "exact": 2,
+        "n": 6
+      },
+      "own-p2": {
+        "capped": 0,
+        "exact": 1,
+        "n": 6
+      },
+      "raw-p1": {
+        "capped": 1,
+        "exact": 0,
+        "n": 6
+      },
+      "supplied-p1": {
+        "capped": 0,
+        "exact": 2,
+        "n": 6
+      },
+      "supplied-p2": {
+        "capped": 0,
+        "exact": 3,
+        "n": 6
+      }
+    },
+    "honest_unknown": {
+      "foreign": 6,
+      "none": 5
+    },
+    "rules_correct": 2,
+    "source": "Loopseed/data/fish/labs/decisive-acquisition-2026-09-05T221330Z/verdict.json",
+    "worlds": 6
+  },
+  "decisive_pilots": [
+    {
+      "cells": {
+        "OFF": {
+          "FAIL": 6,
+          "INVALID": 1,
+          "SOUND": 8,
+          "timed_out": 0,
+          "truncated_by_grader": 4
+        }
+      },
+      "learning_effect_established": false,
+      "pilot_complete": false,
+      "reason": "Independent schedule audit: the pilot selected protocol.seeds (three ordinary request seeds), but the sealed calibration requires its two disjoint calibration_seeds. Abort this attempt and preserve all checkpoints. No model score selected the refusal.",
+      "run": "Loopseed-decisive-v11-exec/data/fish/experiments/decisive-2026-09-06T133016Z",
+      "saved": 15,
+      "scheduled": 336,
+      "status": "Invalid / closed",
+      "version": 11
+    },
+    {
+      "cells": {
+        "OFF": {
+          "FAIL": 50,
+          "INVALID": 1,
+          "SOUND": 79,
+          "timed_out": 0,
+          "truncated_by_grader": 11
+        }
+      },
+      "learning_effect_established": false,
+      "pilot_complete": false,
+      "reason": "Keeper requested a larger per-reply token budget. This 2048-token attempt is closed before changing conditions; saved pilot replies remain separate budget-feasibility evidence. The pilot did not complete postflight, and no calibration or causal allocation was produced. The frozen calibrator also omits the inherited cap eligibility rule; the tested correction will accompany the separately sealed 4096-token continuation.",
+      "run": "Loopseed-decisive-v12-exec/data/fish/experiments/decisive-2026-09-06T142406Z",
+      "saved": 130,
+      "scheduled": 336,
+      "status": "Invalid / closed",
+      "version": 12
+    },
+    {
+      "cells": {
+        "OFF": {
+          "FAIL": 89,
+          "INVALID": 7,
+          "SOUND": 72,
+          "timed_out": 0,
+          "truncated_by_grader": 6
+        },
+        "OFF-rep": {
+          "FAIL": 90,
+          "INVALID": 8,
+          "SOUND": 70,
+          "timed_out": 0,
+          "truncated_by_grader": 6
+        }
+      },
+      "learning_effect_established": false,
+      "pilot_complete": true,
+      "reason": "arm-exit: fish.lab.typed_probes derive exited 1: ValueError: room_sampling class07-paths: 0 immediate probes, 8 required",
+      "run": "Loopseed-decisive-v13-exec/data/fish/experiments/decisive-2026-09-06T154922Z",
+      "saved": 336,
+      "scheduled": 336,
+      "status": "Allocation refused",
+      "version": 13
+    },
+    {
+      "cells": {
+        "OFF": {
+          "FAIL": 77,
+          "INVALID": 3,
+          "SOUND": 88,
+          "timed_out": 0,
+          "truncated_by_grader": 4
+        },
+        "OFF-rep": {
+          "FAIL": 79,
+          "INVALID": 4,
+          "SOUND": 85,
+          "timed_out": 0,
+          "truncated_by_grader": 6
+        }
+      },
+      "learning_effect_established": false,
+      "pilot_complete": true,
+      "reason": "arm-exit: fish.lab.typed_probes derive exited 1: ValueError: room_sampling class06-cancel: 0 immediate probes, 8 required",
+      "run": "Loopseed-decisive-v14-exec/data/fish/experiments/decisive-2026-09-06T201630Z",
+      "saved": 336,
+      "scheduled": 336,
+      "status": "Allocation refused",
+      "version": 14
+    },
+    {
+      "cells": {
+        "OFF": {
+          "FAIL": 88,
+          "INVALID": 2,
+          "SOUND": 78,
+          "timed_out": 0,
+          "truncated_by_grader": 14
+        },
+        "OFF-rep": {
+          "FAIL": 1,
+          "INVALID": 1,
+          "SOUND": 5,
+          "timed_out": 0,
+          "truncated_by_grader": 1
+        }
+      },
+      "learning_effect_established": false,
+      "pilot_complete": false,
+      "reason": "Paused by user; server stopped; no final learning verdict",
+      "run": "Loopseed-decisive-v15-exec/data/fish/experiments/decisive-2026-09-07T004253Z",
+      "saved": 175,
+      "scheduled": 336,
+      "status": "Paused",
+      "version": 15
+    }
+  ],
+  "earlier_decisive_voids": [
+    {
+      "reason": "arm-exit: fish.lab.interaction_arm run exited 1: ValueError: 'hundreds-carry-join' is not a kind of the provenance contract",
+      "run": "Loopseed/data/fish/experiments/decisive-2026-08-20T135204Z",
+      "source": "Loopseed/data/fish/experiments/decisive-2026-08-20T135204Z/void.json",
+      "status": "Void"
+    },
+    {
+      "reason": "arm-exit: fish.lab.interaction_arm run exited 1: ValueError: plan pins a different interaction_arm_sha256; this is not the sealed instrument",
+      "run": "Loopseed/data/fish/experiments/decisive-2026-08-21T040000Z",
+      "source": "Loopseed/data/fish/experiments/decisive-2026-08-21T040000Z/void.json",
+      "status": "Void"
+    },
+    {
+      "reason": "arm-exit: fish.lab.memory_arm run exited 1: ValueError: the frozen shelf replays a probe's own numbers: [{'probe': 's2-class04-euclid-gaussian-square-r2-pilot-01', 'kind': 'gaussian-square', 'replays': [{'lesson': 1679, 'column': 'content', 'leaks': 'parameters'}]}]",
+      "run": "Loopseed/data/fish/experiments/decisive-2026-08-22T160500Z",
+      "source": "Loopseed/data/fish/experiments/decisive-2026-08-22T160500Z/void.json",
+      "status": "Void"
+    },
+    {
+      "reason": "arm-exit: fish.lab.interaction_arm run exited 1: ValueError: prelude pool short for s3-class04-euclid-gaussian-square-r2-immediate-07 in I2: 0 eligible, 2 wanted",
+      "run": "Loopseed/data/fish/experiments/decisive-2026-08-22T163219Z",
+      "source": "Loopseed/data/fish/experiments/decisive-2026-08-22T163219Z/void.json",
+      "status": "Void"
+    },
+    {
+      "reason": "arm-exit: fish.lab.memory_arm run exited 1: ValueError: sham prompts do not all name two-column-expanded alone: [{'probe': 's4-control-hundreds-carry-join-r1-immediate-01', 'kind': 'hundreds-carry-join', 'verdict': 'absent'}, {'probe': 's4-control-hundreds-carry-join-r1-immediate-02', 'kind': 'hundreds-carry-join', 'verdict': 'absent'}, {'probe': 's4-control-hundreds-carry-join-r1-immediate-03', 'kind': 'hundreds-carry-join', 'verdict': 'absent'}, {'probe': 's4-control-hundreds-carry-join-r1-immediate-04', 'kind': 'hundreds-carry-join', 'verdict': 'absent'}, {'probe': 's4-control-hundreds-carry-join-r1-immediate-05', 'kind': 'hundreds-carry-join', 'verdict': 'absent'}, {'probe': 's4-control-hundreds-carry-join-r1-immediate-06', 'kind': 'hundreds-carry-join', 'verdict': 'absent'}, {'probe': 's4-control-fraction-reduction-r1-immediate-01', 'kind': 'fraction-reduction', 'verdict': 'absent'}, {'probe': 's4-control-fraction-reduction-r1-immediate-02', 'kind': 'fraction-reduction', 'verdict': 'absent'}, {'probe': 's4-control-fraction-reduction-r1-immediate-03', 'kind': 'fraction-reduction', 'verdict': 'absent'}, {'probe': 's4-control-fraction-reduction-r1-immediate-04', 'kind': 'fraction-reduction', 'verdict': 'absent'}, {'probe': 's4-control-fraction-reduction-r1-immediate-05', 'kind': 'fraction-reduction', 'verdict': 'absent'}, {'probe': 's4-control-fraction-reduction-r1-immediate-06', 'kind': 'fraction-reduction', 'verdict': 'absent'}, {'probe': 's4-collateral-tens-carry-join-r1-immediate-01', 'kind': 'tens-carry-join', 'verdict': 'absent'}, {'probe': 's4-collateral-tens-carry-join-r1-immediate-02', 'kind': 'tens-carry-join', 'verdict': 'absent'}, {'probe': 's4-collateral-three-column-expanded-r1-immediate-01', 'kind': 'three-column-expanded', 'verdict': 'absent'}, {'probe': 's4-collateral-three-column-expanded-r1-immediate-02', 'kind': 'three-column-expanded', 'verdict': 'absent'}, {'probe': 's4-collateral-three-column-lower-block-r1-immediate-01', 'kind': 'three-column-lower-block', 'verdict': 'absent'}, {'probe': 's4-collateral-three-column-lower-block-r1-immediate-02', 'kind': 'three-column-lower-block', 'verdict': 'absent'}, {'probe': 's4-collateral-three-column-upper-block-r1-immediate-01', 'kind': 'three-column-upper-block', 'verdict': 'absent'}, {'probe': 's4-collateral-three-column-upper-block-r1-immediate-02', 'kind': 'three-column-upper-block', 'verdict': 'absent'}, {'probe': 's4-collateral-place-value-terms-r1-immediate-01', 'kind': 'place-value-terms', 'verdict': 'absent'}, {'probe': 's4-collateral-place-value-terms-r1-immediate-02', 'kind': 'place-value-terms', 'verdict': 'absent'}, {'probe': 's4-collateral-place-value-sum-r1-immediate-01', 'kind': 'place-value-sum', 'verdict': 'absent'}, {'probe': 's4-collateral-place-value-sum-r1-immediate-02', 'kind': 'place-value-sum', 'verdict': 'absent'}, {'probe': 's4-collateral-quotient-remainder-r1-immediate-01', 'kind': 'quotient-remainder', 'verdict': 'absent'}, {'probe': 's4-collateral-quotient-remainder-r1-immediate-02', 'kind': 'quotient-remainder', 'verdict': 'absent'}, {'probe': 's4-collateral-gcd-reduction-r1-immediate-01', 'kind': 'gcd-reduction', 'verdict': 'absent'}, {'probe': 's4-collateral-gcd-reduction-r1-immediate-02', 'kind': 'gcd-reduction', 'verdict': 'absent'}, {'probe': 's4-collateral-column-step-r1-immediate-01', 'kind': 'column-step', 'verdict': 'absent'}, {'probe': 's4-collateral-column-step-r1-immediate-02', 'kind': 'column-step', 'verdict': 'absent'}]",
+      "run": "Loopseed/data/fish/experiments/decisive-2026-08-24T032145Z",
+      "source": "Loopseed/data/fish/experiments/decisive-2026-08-24T032145Z/void.json",
+      "status": "Void"
+    }
+  ],
+  "factorial": [
+    {
+      "arms": {
+        "bare": {
+          "audit_accepted": 1,
+          "exact_proved": 2,
+          "reply_cap_cuts": 52,
+          "tasks": 64
+        },
+        "candidate": {
+          "audit_accepted": 4,
+          "exact_proved": 7,
+          "reply_cap_cuts": 11,
+          "tasks": 64
+        },
+        "placebo": {
+          "audit_accepted": 12,
+          "exact_proved": 12,
+          "reply_cap_cuts": 1,
+          "tasks": 64
+        },
+        "retained": {
+          "audit_accepted": 1,
+          "exact_proved": 2,
+          "reply_cap_cuts": 18,
+          "tasks": 64
+        }
+      },
+      "grammar": "task-scoped",
+      "prompt": "node-specified"
+    },
+    {
+      "arms": {
+        "bare": {
+          "audit_accepted": 0,
+          "exact_proved": 1,
+          "reply_cap_cuts": 49,
+          "tasks": 64
+        },
+        "candidate": {
+          "audit_accepted": 4,
+          "exact_proved": 7,
+          "reply_cap_cuts": 8,
+          "tasks": 64
+        },
+        "placebo": {
+          "audit_accepted": 0,
+          "exact_proved": 0,
+          "reply_cap_cuts": 0,
+          "tasks": 64
+        },
+        "retained": {
+          "audit_accepted": 1,
+          "exact_proved": 1,
+          "reply_cap_cuts": 14,
+          "tasks": 64
+        }
+      },
+      "grammar": "loose-v2",
+      "prompt": "node-specified"
+    },
+    {
+      "arms": {
+        "bare": {
+          "audit_accepted": 0,
+          "exact_proved": 1,
+          "reply_cap_cuts": 4,
+          "tasks": 64
+        },
+        "candidate": {
+          "audit_accepted": 43,
+          "exact_proved": 47,
+          "reply_cap_cuts": 0,
+          "tasks": 64
+        },
+        "placebo": {
+          "audit_accepted": 18,
+          "exact_proved": 18,
+          "reply_cap_cuts": 0,
+          "tasks": 64
+        },
+        "retained": {
+          "audit_accepted": 5,
+          "exact_proved": 5,
+          "reply_cap_cuts": 1,
+          "tasks": 64
+        }
+      },
+      "grammar": "task-scoped",
+      "prompt": "names-only"
+    },
+    {
+      "arms": {
+        "bare": {
+          "audit_accepted": 0,
+          "exact_proved": 0,
+          "reply_cap_cuts": 0,
+          "tasks": 64
+        },
+        "candidate": {
+          "audit_accepted": 43,
+          "exact_proved": 47,
+          "reply_cap_cuts": 2,
+          "tasks": 64
+        },
+        "placebo": {
+          "audit_accepted": 0,
+          "exact_proved": 0,
+          "reply_cap_cuts": 0,
+          "tasks": 64
+        },
+        "retained": {
+          "audit_accepted": 5,
+          "exact_proved": 5,
+          "reply_cap_cuts": 0,
+          "tasks": 64
+        }
+      },
+      "grammar": "loose-v2",
+      "prompt": "names-only"
+    }
+  ],
+  "formal": {
+    "arms": {
+      "bare": {
+        "audit_accepted": 0,
+        "exact_proved": 0,
+        "reply_cap_cuts": 0,
+        "tasks": 64
+      },
+      "candidate": {
+        "audit_accepted": 43,
+        "exact_proved": 47,
+        "reply_cap_cuts": 2,
+        "tasks": 64
+      },
+      "placebo": {
+        "audit_accepted": 0,
+        "exact_proved": 0,
+        "reply_cap_cuts": 0,
+        "tasks": 64
+      },
+      "retained": {
+        "audit_accepted": 5,
+        "exact_proved": 5,
+        "reply_cap_cuts": 0,
+        "tasks": 64
+      }
+    },
+    "grammar": "loose-v2",
+    "prompt": "names-only"
+  },
+  "harder": {
+    "candidate_vs_placebo": {
+      "boundary": {
+        "candidate_accepted": 9,
+        "comparator_accepted": 9,
+        "recomputed_one_sided_sign_p": 1.0,
+        "replies_per_arm": 12,
+        "seeds": 3,
+        "task_gains": 0,
+        "task_losses": 0,
+        "task_ties": 4,
+        "tasks": 4
+      },
+      "retention": {
+        "candidate_accepted": 0,
+        "comparator_accepted": 0,
+        "recomputed_one_sided_sign_p": 1.0,
+        "replies_per_arm": 15,
+        "seeds": 3,
+        "task_gains": 0,
+        "task_losses": 0,
+        "task_ties": 5,
+        "tasks": 5
+      },
+      "transfer": {
+        "candidate_accepted": 2,
+        "comparator_accepted": 2,
+        "recomputed_one_sided_sign_p": 0.6875,
+        "replies_per_arm": 81,
+        "seeds": 3,
+        "task_gains": 2,
+        "task_losses": 2,
+        "task_ties": 23,
+        "tasks": 27
+      }
+    },
+    "candidate_vs_retained": {
+      "boundary": {
+        "candidate_accepted": 9,
+        "comparator_accepted": 9,
+        "recomputed_one_sided_sign_p": 1.0,
+        "replies_per_arm": 12,
+        "seeds": 3,
+        "task_gains": 0,
+        "task_losses": 0,
+        "task_ties": 4,
+        "tasks": 4
+      },
+      "retention": {
+        "candidate_accepted": 0,
+        "comparator_accepted": 0,
+        "recomputed_one_sided_sign_p": 1.0,
+        "replies_per_arm": 15,
+        "seeds": 3,
+        "task_gains": 0,
+        "task_losses": 0,
+        "task_ties": 5,
+        "tasks": 5
+      },
+      "transfer": {
+        "candidate_accepted": 2,
+        "comparator_accepted": 3,
+        "recomputed_one_sided_sign_p": 0.875,
+        "replies_per_arm": 81,
+        "seeds": 3,
+        "task_gains": 1,
+        "task_losses": 2,
+        "task_ties": 24,
+        "tasks": 27
+      }
+    }
+  },
+  "interface": {
+    "arms": {
+      "candidate": {
+        "accepted": {
+          "direct-answer": 3,
+          "formal-free": 4,
+          "formal-grammar": 4
+        },
+        "both": 4,
+        "cap_cuts": {
+          "direct-answer": 0,
+          "formal-free": 0,
+          "formal-grammar": 0
+        },
+        "clean_failures": {
+          "direct-answer": 0,
+          "formal-free": 0,
+          "formal-grammar": 0
+        },
+        "free_only": 0,
+        "grammar_only": 0,
+        "neither": 4,
+        "tasks": 8
+      },
+      "placebo": {
+        "accepted": {
+          "direct-answer": 2,
+          "formal-free": 0,
+          "formal-grammar": 0
+        },
+        "both": 0,
+        "cap_cuts": {
+          "direct-answer": 0,
+          "formal-free": 0,
+          "formal-grammar": 0
+        },
+        "clean_failures": {
+          "direct-answer": 0,
+          "formal-free": 0,
+          "formal-grammar": 0
+        },
+        "free_only": 0,
+        "grammar_only": 0,
+        "neither": 8,
+        "tasks": 8
+      }
+    },
+    "candidate_minus_placebo_grammar_effect": 0
+  },
+  "latest_experiment_date": "2026-09-07",
+  "notes": [
+    "Acceptance definitions differ across studies; do not pool them into one success rate.",
+    "Repeated seeds, related task families and copied artifacts are not independent replications.",
+    "Pilots assess feasibility; invalid and incomplete runs do not establish learning effects.",
+    "Generated-data provenance and resistance to circular corroboration remain research questions."
+  ],
+  "private_continuation": {
+    "candidate_boundary_all_correct": true,
+    "decision_rules": {
+      "max_losses": 0,
+      "min_transfer_gains": 4,
+      "prediction_max_retention_loss_increase": 0.0,
+      "prediction_min_new_loss_drop": 0.01,
+      "reply_tokens": 4096,
+      "seeds": [
+        260907,
+        260908
+      ],
+      "speaking_scale": 0.25
+    },
+    "historical_live_activation": false,
+    "historical_status": "retained-current-coats",
+    "prediction_counts": {
+      "new_witness": 3,
+      "retention_witness": 16,
+      "train": 96,
+      "valid": 19
+    },
+    "prediction_loss": {
+      "after": {
+        "new_witness": 2.201,
+        "retention_witness": 2.676
+      },
+      "before": {
+        "new_witness": 1.967,
+        "retention_witness": 1.977
+      },
+      "loss_passed": false
+    },
+    "prediction_new_training_pairs": 11,
+    "speaking_groups": {
+      "boundary": {
+        "gains": 0,
+        "losses": 0,
+        "pairs": 6,
+        "ties": 6
+      },
+      "retention": {
+        "gains": 3,
+        "losses": 7,
+        "pairs": 18,
+        "ties": 8
+      },
+      "transfer": {
+        "gains": 9,
+        "losses": 10,
+        "pairs": 60,
+        "ties": 41
+      }
+    },
+    "speaking_loss": {
+      "after": {
+        ".": 0.035
+      },
+      "before": {
+        ".": 1.919
+      },
+      "loss_passed": true
+    },
+    "speaking_passed": false,
+    "speaking_target_origin": "teacher-derived-worked-solutions-to-completed-pilot-questions",
+    "speaking_totals": {
+      "gains": 12,
+      "losses": 17,
+      "pairs": 84,
+      "ties": 55
+    },
+    "speaking_training_counts": {
+      "train": 63,
+      "valid": 21
+    }
+  },
+  "repair_context": {
+    "observations": {
+      "actual_campaign_completions": 71,
+      "becoming_established": false,
+      "checked_repair": {
+        "exact_final_rules": 2,
+        "initially_incorrect_or_ineligible_n": 4,
+        "n": 6,
+        "newly_exact_from_initially_incorrect_or_ineligible": 0,
+        "query_1_exact": 1,
+        "query_2_exact": 2,
+        "whole_world_exact": 1
+      },
+      "collected_fish_calls": 70,
+      "complete_final_replies": 68,
+      "failure_upgrades": 0,
+      "forced_reasoning_closures": 31,
+      "generated_tokens": 145911,
+      "generic_self_check": {
+        "exact_final_rules": 1,
+        "initially_incorrect_or_ineligible_n": 4,
+        "n": 6,
+        "newly_exact_from_initially_incorrect_or_ineligible": 0,
+        "query_1_exact": 0,
+        "query_2_exact": 1,
+        "whole_world_exact": 0
+      },
+      "initially_exact_rules": {
+        "exact": 2,
+        "n": 6
+      },
+      "interpretation": "One checked pipeline preserved and used an already correct rule. None of four initially incorrect/ineligible rules became exact. These descriptive counts do not issue or replace a scientific verdict.",
+      "machine_positive_vetoes": 0,
+      "native_learning_established": false,
+      "native_memory_retention_established": false,
+      "natural_reasoning_closures": 39,
+      "primary_calls": 66,
+      "prior_unscored_mechanically_refused_completion": 1,
+      "repeated_calls": 4,
+      "repeats": {
+        "deterministic_generation_established": false,
+        "pairs": 4,
+        "raw_and_final_identical": 4,
+        "success_booleans_stable": 4
+      },
+      "reviewed_exact_positive_cells": 18,
+      "reviewed_uncertainty_positive_cells": 10,
+      "supplied_correct_rule": {
+        "n": 6,
+        "query_1_exact": 2,
+        "query_2_exact": 5,
+        "whole_world_exact": 2
+      },
+      "total_generation_caps": 2,
+      "uncertainty": {
+        "foreign_exact_unknown": 6,
+        "n_per_control": 6,
+        "none_exact_unknown": 4
+      },
+      "weight_learning_established": false,
+      "withheld_replies": 0
+    },
+    "scientific_verdict": null,
+    "source": "Loopseed/data/fish/labs/decisive-repair-context-2026-09-06T035210Z/descriptive-reconciliation.json",
+    "status": "refused"
+  },
+  "reviewed_on": "2026-09-11",
+  "rule_use": {
+    "calls": 60,
+    "conditions": {
+      "candidate-off": {
+        "by_stratum": {
+          "delayed_composed": 0,
+          "immediate_basic": 2,
+          "immediate_composed": 0
+        },
+        "exact": 2,
+        "n": 12,
+        "ready": false,
+        "total_generated_tokens": 108
+      },
+      "candidate-on": {
+        "by_stratum": {
+          "delayed_composed": 3,
+          "immediate_basic": 2,
+          "immediate_composed": 2
+        },
+        "exact": 7,
+        "n": 12,
+        "ready": false,
+        "total_generated_tokens": 15280
+      },
+      "retained-off": {
+        "by_stratum": {
+          "delayed_composed": 0,
+          "immediate_basic": 2,
+          "immediate_composed": 0
+        },
+        "exact": 2,
+        "n": 12,
+        "ready": false,
+        "total_generated_tokens": 126
+      },
+      "retained-on": {
+        "by_stratum": {
+          "delayed_composed": 3,
+          "immediate_basic": 3,
+          "immediate_composed": 3
+        },
+        "exact": 9,
+        "n": 12,
+        "ready": true,
+        "total_generated_tokens": 9968
+      }
+    },
+    "learning_established": false,
+    "source": "Loopseed/data/fish/labs/decisive-ruleuse-2026-09-05T213200Z/verdict.json"
+  },
+  "sources": {
+    "Loopseed-decisive-v11-exec/data/fish/experiments/decisive-2026-09-06T133016Z/arms/pilot/memory_arm/cells/OFF/seed-1160171706.json": {
+      "bytes": 130339,
+      "sha256": "0c2da5beefab43ce9604da1347cf778edc2ba05e68792fa7a33803d4d46395bb"
+    },
+    "Loopseed-decisive-v11-exec/data/fish/experiments/decisive-2026-09-06T133016Z/arms/pilot/memory_arm/cells/OFF/seed-1179775027.json": {
+      "bytes": 103179,
+      "sha256": "bc01f8120d62020a25f86fed601ddcd4bbdcd986837a7e90b04c97bdbca20698"
+    },
+    "Loopseed-decisive-v11-exec/data/fish/experiments/decisive-2026-09-06T133016Z/void.json": {
+      "bytes": 3796,
+      "sha256": "4244d9f73dd48168a395fad0043a6019f14550d92619f49437c9047434998b80"
+    },
+    "Loopseed-decisive-v12-exec/data/fish/experiments/decisive-2026-09-06T142406Z/arms/pilot/memory_arm/cells/OFF/seed-1680425582.json": {
+      "bytes": 946484,
+      "sha256": "e829e8c8bf13c0541571b905b6e2efe0f858ab10f08658b922e0a4a644c4c279"
+    },
+    "Loopseed-decisive-v12-exec/data/fish/experiments/decisive-2026-09-06T142406Z/arms/pilot/memory_arm/cells/OFF/seed-275823436.json": {
+      "bytes": 856204,
+      "sha256": "cdb32c41db0cab71f2de795a557123d6a7fbddfc0eceda964a12c53cb3e9a50c"
+    },
+    "Loopseed-decisive-v12-exec/data/fish/experiments/decisive-2026-09-06T142406Z/void.json": {
+      "bytes": 3674,
+      "sha256": "55c8b9521ad8b1da6d3f8035bce13e96dc841938d8b7454ba29cd649714b7c30"
+    },
+    "Loopseed-decisive-v13-exec/data/fish/experiments/decisive-2026-09-06T154922Z/arms/pilot/memory_arm/cells/OFF-rep/seed-1757450303.json": {
+      "bytes": 1286835,
+      "sha256": "126a9c7dd607db9ad8319b9b086cd1d56edf85c59166dbb21d6b92d287e81930"
+    },
+    "Loopseed-decisive-v13-exec/data/fish/experiments/decisive-2026-09-06T154922Z/arms/pilot/memory_arm/cells/OFF-rep/seed-2145827743.json": {
+      "bytes": 1211986,
+      "sha256": "8f6cf86f22e1045b5d1670b841f61b80d738083dd1a7cc592b1fbe24ba261d0f"
+    },
+    "Loopseed-decisive-v13-exec/data/fish/experiments/decisive-2026-09-06T154922Z/arms/pilot/memory_arm/cells/OFF/seed-1757450303.json": {
+      "bytes": 1285350,
+      "sha256": "d68aef20ad7d4cc5bdd95b5c3f454170f08cbe7a63f1b30f1f633aeea5e96db9"
+    },
+    "Loopseed-decisive-v13-exec/data/fish/experiments/decisive-2026-09-06T154922Z/arms/pilot/memory_arm/cells/OFF/seed-2145827743.json": {
+      "bytes": 1210814,
+      "sha256": "a14147334ed49d7ae504cf7057bcd3c87f40212079f1796d5794249f2fa18bf8"
+    },
+    "Loopseed-decisive-v13-exec/data/fish/experiments/decisive-2026-09-06T154922Z/void.json": {
+      "bytes": 2240,
+      "sha256": "762338b9ac1fada4da305cdfd7602ef229fd9f2e346ece14c4c2837598ae4081"
+    },
+    "Loopseed-decisive-v14-exec/data/fish/experiments/decisive-2026-09-06T201630Z/arms/pilot/memory_arm/cells/OFF-rep/seed-388033213.json": {
+      "bytes": 1222931,
+      "sha256": "092da6328cc030a9fe4e305ef7d6b42a0d846a3d71ebca33d2595ed1adb26d93"
+    },
+    "Loopseed-decisive-v14-exec/data/fish/experiments/decisive-2026-09-06T201630Z/arms/pilot/memory_arm/cells/OFF-rep/seed-610401724.json": {
+      "bytes": 1205754,
+      "sha256": "48e1646bbce8ad35f54abbaa23ee28d098a7115e48fc0942d388b6edb1ab6a4c"
+    },
+    "Loopseed-decisive-v14-exec/data/fish/experiments/decisive-2026-09-06T201630Z/arms/pilot/memory_arm/cells/OFF/seed-388033213.json": {
+      "bytes": 1201902,
+      "sha256": "78c00fb2339beba35c82a3e61a09b2e917af00ade32737dd647b0d84d917e0ad"
+    },
+    "Loopseed-decisive-v14-exec/data/fish/experiments/decisive-2026-09-06T201630Z/arms/pilot/memory_arm/cells/OFF/seed-610401724.json": {
+      "bytes": 1201519,
+      "sha256": "b3bdc61dfb7f7370726b09a13afe102ca94cc706522471555a7847a28ef0ee46"
+    },
+    "Loopseed-decisive-v14-exec/data/fish/experiments/decisive-2026-09-06T201630Z/void.json": {
+      "bytes": 2244,
+      "sha256": "35712db2e22dd3513aa223f655e08edea4d9494a78b6e74414323787da1d17e4"
+    },
+    "Loopseed-decisive-v15-exec/data/fish/experiments/decisive-2026-09-07T004253Z/USER-PAUSE.json": {
+      "bytes": 564,
+      "sha256": "71ae880d2f5e5f742de32e65fa5ffed316a14d5d76bc38fb1fa2e66463645c42"
+    },
+    "Loopseed-decisive-v15-exec/data/fish/experiments/decisive-2026-09-07T004253Z/arms/pilot/memory_arm/cells/OFF-rep/seed-1474009173.json": {
+      "bytes": 74249,
+      "sha256": "409612a74831ff09ac12382b7f82731d054af1cba2893d0fc97ece9b92a1ac3e"
+    },
+    "Loopseed-decisive-v15-exec/data/fish/experiments/decisive-2026-09-07T004253Z/arms/pilot/memory_arm/cells/OFF-rep/seed-2093903032.json": {
+      "bytes": 55142,
+      "sha256": "ca567b38737506d5c7a55852b03625984df0b26b165f6468b1d44e9f723cd211"
+    },
+    "Loopseed-decisive-v15-exec/data/fish/experiments/decisive-2026-09-07T004253Z/arms/pilot/memory_arm/cells/OFF/seed-1474009173.json": {
+      "bytes": 1227790,
+      "sha256": "f64158f1549296bbb0b4beace9aef2911127c434bd363575c92081f7a0b93d43"
+    },
+    "Loopseed-decisive-v15-exec/data/fish/experiments/decisive-2026-09-07T004253Z/arms/pilot/memory_arm/cells/OFF/seed-2093903032.json": {
+      "bytes": 1282628,
+      "sha256": "ed7d32f0671cfa974ad1f22e71bd35d7e14441bb15e48e1ca4fbd2d17d08fe9e"
+    },
+    "Loopseed/data/fish/experiments/decisive-2026-08-20T135204Z/void.json": {
+      "bytes": 2236,
+      "sha256": "ba44740fcbbac4991c9e153eafe67f4e196d5da0ee7284ee0a1579604c762130"
+    },
+    "Loopseed/data/fish/experiments/decisive-2026-08-21T040000Z/void.json": {
+      "bytes": 2304,
+      "sha256": "1772421cdc7e7a7a1883c4e9cbceed6951a674fcc31b1026cfd91d08aee8feab"
+    },
+    "Loopseed/data/fish/experiments/decisive-2026-08-22T160500Z/void.json": {
+      "bytes": 2818,
+      "sha256": "dd307a1dc9147dddeac3855b03355d00e6009cf112733f25e709260167a5b08f"
+    },
+    "Loopseed/data/fish/experiments/decisive-2026-08-22T163219Z/void.json": {
+      "bytes": 2422,
+      "sha256": "94170e63d17771cdac9c501cf69e61c15b191bb744ab25a38b8fefb3ac4cec8a"
+    },
+    "Loopseed/data/fish/experiments/decisive-2026-08-24T032145Z/void.json": {
+      "bytes": 15726,
+      "sha256": "4eafd6e3e3da5ebf1d8fed0f6c68da36b0ba5135054392cf50f4bef2df95dbf1"
+    },
+    "Loopseed/data/fish/labs/decisive-acquisition-2026-09-05T221330Z/verdict.json": {
+      "bytes": 4019,
+      "sha256": "66e4deff6cc0f03675e6d6d515177f2e8b585a0b30505750d79eb0f4dee25565"
+    },
+    "Loopseed/data/fish/labs/decisive-repair-context-2026-09-06T035210Z/descriptive-reconciliation.json": {
+      "bytes": 8665,
+      "sha256": "db0ad728179d10d623ae5d6c190e41255a60fe4219e21345bf57a307c09100ce"
+    },
+    "Loopseed/data/fish/labs/decisive-ruleuse-2026-09-05T213200Z/verdict.json": {
+      "bytes": 5538,
+      "sha256": "380f9d1a09ed8f28b463b356860966f99494a54886c60a8907e2d1aa2005eca4"
+    },
+    "Loopseed/data/fish/labs/decisive-worlds-2026-09-05T192730Z/verdict.json": {
+      "bytes": 11451,
+      "sha256": "91f3b3081242903ae42d517be8f32cbe270f846cdeb90eb7c35f9d3e4e7a2cfe"
+    },
+    "Loopseed/docs/papers/dynamical-synthesis/evidence-snapshot.json": {
+      "bytes": 59047,
+      "sha256": "10059dcdb4ae6340ca9060388316024a4685ca6d3c600db374ab631633b6a794"
+    }
+  },
+  "status": "Dated research record; experiments paused; no new inference",
+  "version": 1,
+  "worlds": {
+    "calls": 90,
+    "gate_passed": false,
+    "initial_rules_correct": 0,
+    "none": 0,
+    "own": 0,
+    "queries_per_condition": 16,
+    "raw": 1,
+    "repaired_rules_correct": 1,
+    "source": "Loopseed/data/fish/labs/decisive-worlds-2026-09-05T192730Z/verdict.json",
+    "worlds": 8
+  }
+}

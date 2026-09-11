@@ -1,4 +1,4 @@
-//! Observations and source references from `docs/LAWS.md`.
+//! Observations that inform the methods, with references to the original records.
 
 pub struct Law {
     pub title: &'static str,
@@ -8,63 +8,33 @@ pub struct Law {
 
 pub const LAWS: &[Law] = &[
     Law {
-        title: "Successful lessons can miss the memory threshold",
-        statement: "In these sessions, some successful explanations were followed by messages with error scores below θ, so those exchanges did not enter active memory. Memory admission depended on surprise and on how the supervisor phrased the message. The archive still retained the exchanges.",
-        evidence: "bag 2, rows 255, 269–274, 294",
+        title: "Review the content selected for memory",
+        statement: "Some successful explanations were omitted from active memory because the next message produced a low prediction-error score. Incorrect exchanges could pass the same selection rule. In one recorded incident, an invented address was retrieved and repeated; removing the memory stopped its repetition on the next turn. These observations motivate reviewing correctness separately from prediction error.",
+        evidence: "Archive batch 2, rows 231, 236–237, 255, 269–274, 294; batch 3, cycles 70–71; batch 4, cycle 1026",
     },
     Law {
-        title: "Surprise does not establish correctness",
-        statement: "The memory rule stored some incorrect exchanges and omitted their corrections. Adding a correction beside an error did not prevent retrieval of the error. Human review was needed to remove it.",
-        evidence: "bag 2, rows 231, 236–237; bag 3, cycles 70–71",
+        title: "Test recall and reasoning separately",
+        statement: "A stored record improved factual recall in one small comparison while reducing accuracy on judgement questions. Repeated questions may also have influenced the responses. Counting successful retrievals would therefore miss an important part of the outcome: whether the retrieved material helps the system solve the current task.",
+        evidence: "Archive batch 2, rows 240–242",
     },
     Law {
-        title: "Memory can improve recall while reducing judgement accuracy",
-        statement: "One small comparison recorded recall of 0 of 12 without a memory and 12 of 12 with it, while judgement accuracy changed from 12 of 12 to 4 of 12. The questions were repeated during the study, so the observations also raise a test-history confound. These counts do not establish population-level effect sizes.",
-        evidence: "bag 2, rows 240–242",
+        title: "Account for model changes during interaction",
+        statement: "Changing an adapter used only for prediction altered the score governing memory selection, even though it was not used to generate replies. A study spanning that change could not attribute subsequent behaviour to the teaching material alone. Observations after adapter changes also motivated the period of memory review described above.",
+        evidence: "Cycle 3039, 15 August 2026; adapter change of 7 August 2026; docs/KEEPING.md",
     },
     Law {
-        title: "Corrections need a path into training",
-        statement: "A correction can affect the current prompt, but changing trained parameters requires storing it and including it in training. The surprise rule can exclude corrections, so writing one in conversation does not ensure that it will be learned.",
-        evidence: "bag 2, memory section",
+        title: "Check the method as well as the final value",
+        statement: "Some answers in the 4 September comparison passed exact numerical checks despite changing the requested calculation. A separate AI review rejected them. This motivated retaining both the numerical check and a review of the complete solution, with the limitations of each stated explicitly.",
+        evidence: "Transfer-study review and decision, 4 September 2026",
     },
     Law {
-        title: "Stored errors can reinforce themselves",
-        statement: "An invented address entered memory, was retrieved, and appeared again in later training. Removing that record stopped the repetition on the next turn. The incident led to a rule for removing these records when they enter memory.",
-        evidence: "bag 4, cycle 1026",
+        title: "Compare prompts and output constraints explicitly",
+        statement: "Adding calculation steps to the prompt reduced the trained adapter's score in one comparison. A more restrictive output grammar also helped the adapter trained on shuffled answers. Both observations show that prompts and format constraints can affect the measured outcome and need to be included in the comparison design.",
+        evidence: "Prompt and output-format comparison, 4 September 2026",
     },
     Law {
-        title: "Adapter changes require a period of memory review",
-        statement: "A new adapter can change reply style enough to make unwanted output pass the surprise threshold. The system therefore holds memories from the first hour after an adapter change for review. A monitor starts this period when it detects the changed adapter.",
-        evidence: "the 2026-08-07 wearing; docs/KEEPING.md",
-    },
-    Law {
-        title: "Prediction adapters can affect which memories are stored",
-        statement: "An adapter used only for prediction still changes the error score that controls memory selection. If an adapter changes during a teaching study, any observed effect cannot be attributed to the teaching material alone.",
-        evidence: "cycle 3039, 2026-08-15",
-    },
-    Law {
-        title: "A correct value can come from the wrong procedure",
-        statement: "Four candidate replies on the clean transfer primary endpoint passed exact numerical checks while departing from the requested calculation. A separate AI review rejected them. A symbolic value check alone did not establish that the full answer met the specification.",
-        evidence: "clean transfer ruling, 2026-09-04",
-    },
-    Law {
-        title: "More detailed prompts can reduce performance",
-        statement: "The candidate scored 43 of 64 when given the problem and result names, but 4 of 64 when also given the calculation steps. Both conditions used the same tasks. The longer prompt may have conflicted with the form used in training.",
-        evidence: "clean transfer factorial, 2026-09-04",
-    },
-    Law {
-        title: "Output rules can supply part of the task structure",
-        statement: "The shuffled-reply placebo scored 18 of 64 with the strict grammar and 0 of 64 with the loose grammar. A transfer test must account for help supplied by the output rules.",
-        evidence: "clean transfer factorial, 2026-09-04",
-    },
-    Law {
-        title: "Training prompts can copy the errors they describe",
-        statement: "An adapter trained on prompts containing raw corrections repeated an unrelated constant. Training a new adapter with prompts generated only from the task specification raised the affected family's score from 0 of 18 to 18 of 18, with no unrelated constants. This supports the prompt-contamination diagnosis.",
-        evidence: "stage-1 diagnosis and the safety slice, 2026-09-03",
-    },
-    Law {
-        title: "Keep decision criteria fixed",
-        statement: "Preset criteria determine whether an experiment passes. An unresolved test remains unresolved even when implementation is complete. Failed records are preserved, and a revised instrument requires a new test. Any waiver must be recorded explicitly.",
-        evidence: "docs/ROADMAP.md, both tracks",
+        title: "Keep unrelated corrections out of training prompts",
+        statement: "An adapter trained on prompts containing raw corrections repeated a number unrelated to the new questions. A follow-up regenerated prompts from the problem specifications and obtained correct answers on the tested problem type without that number appearing. This supports checking the origin and content of training prompts as well as their target answers.",
+        evidence: "Training-prompt diagnosis and 18-question follow-up, 3 September 2026",
     },
 ];

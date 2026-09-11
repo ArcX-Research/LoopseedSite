@@ -1,0 +1,43 @@
+{
+  "reviewed_on": "2026-09-11",
+  "playlist": "https://www.youtube.com/playlist?list=PLX7vesicHA47pr2ex_oCADd00MvaeoPyv",
+  "selection_basis": "Editorial selection from public playlist titles and video descriptions: introduction, adaptation mechanism, multi-agent extension. Not a full audiovisual review or ranking of scientific evidence.",
+  "recordings": [
+    {
+      "id": "xhSWNRaKHz8",
+      "title": "Live Sci: Teaching AI to Survive Chaotic Worlds: Adaptive Predictive Coding",
+      "duration_seconds": "5115",
+      "publish_date": "2025-12-01T11:34:30-08:00",
+      "broadcast": {
+        "isLiveNow": false,
+        "startTimestamp": "2025-12-01T18:04:56+00:00",
+        "endTimestamp": "2025-12-01T19:30:10+00:00"
+      },
+      "embed_allowed": true
+    },
+    {
+      "id": "qhwFHNvMXEA",
+      "title": "Live Science: Event\u2011modulated plasticity - Adaptive predictive coding",
+      "duration_seconds": "5625",
+      "publish_date": "2025-12-12T11:42:47-08:00",
+      "broadcast": {
+        "isLiveNow": false,
+        "startTimestamp": "2025-12-12T18:01:56+00:00",
+        "endTimestamp": "2025-12-12T19:36:35+00:00"
+      },
+      "embed_allowed": true
+    },
+    {
+      "id": "DXFEO41DoNQ",
+      "title": "Live Science: Multi-agent cultural dynamics - Adaptive predictive coding",
+      "duration_seconds": "6381",
+      "publish_date": "2025-12-23T12:07:32-08:00",
+      "broadcast": {
+        "isLiveNow": false,
+        "startTimestamp": "2025-12-23T18:01:16+00:00",
+        "endTimestamp": "2025-12-23T19:47:43+00:00"
+      },
+      "embed_allowed": true
+    }
+  ]
+}

@@ -14,14 +14,14 @@ pub fn ScrollTable(label: &'static str, children: Children) -> impl IntoView {
 #[component]
 pub fn ArmTable(arms: &'static [Arm]) -> impl IntoView {
     view! {
-        <ScrollTable label="Accepted answers by experimental condition">
+        <ScrollTable label="Answers passing the study’s checks by model version">
             <table class="table arm-table">
-                <caption class="sr-only">"Accepted answers and task-specific checks for negative constants"</caption>
+                <caption class="sr-only">"Answers passing study checks and replies containing negative numbers"</caption>
                 <thead>
                     <tr>
-                        <th scope="col">"Condition"</th>
-                        <th scope="col" class="num">"Accepted / tasks"</th>
-                        <th scope="col" class="num">"Negative-constant replies"</th>
+                        <th scope="col">"Model version"</th>
+                        <th scope="col" class="num">"Passed study checks / questions"</th>
+                        <th scope="col" class="num">"Replies containing negative numbers"</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +62,7 @@ pub fn GateList(gates: &'static [Gate]) -> impl IntoView {
 pub fn HashList(hashes: &'static [Hash]) -> impl IntoView {
     view! {
         <details class="hashes">
-            <summary>{format!("{} file hashes", hashes.len())}</summary>
+            <summary>{format!("Recorded hashes and versions ({})", hashes.len())}</summary>
             <dl>
                 {hashes.iter().map(|h| view! {
                     <div><dt>{h.label}</dt><dd class="mono">{h.value}</dd></div>

@@ -24,9 +24,10 @@ This repository contains the research website, built in Rust and compiled to Web
 `crates/record` stores the reported measurements and their source references. The browser
 recalculates paired comparisons from the original counts.
 
-The scientific content was reviewed on 7 September 2026. The private learning study is a
-dated snapshot, not a live status feed. Original run artifacts remain in the private Loopseed
-repository and can be requested through the site's evidence contact.
+The scientific content was reviewed on 11 September 2026, using experiment records through
+7 September. The studies are dated snapshots, not a live status feed. The working paper,
+eight scientific figures, LaTeX sources and aggregate data are available from `/record#paper-h`.
+Original run artifacts remain private and can be requested through the site's evidence contact.
 
 ## Run it locally
 
@@ -111,10 +112,24 @@ LoopseedSite/
 - Set `REPOSITORY_URL` and `CONTACT_EMAIL` in `crates/record/src/lib.rs` when available.
   Until then, the site directs evidence requests to Dilate Technologies.
 
+The expanded record is `static/data/research-record.json`. `crates/record/src/research.rs`
+reads this same downloadable JSON; figures under `static/figures/dynamical-synthesis/` are
+generated from it in the paper workspace. The typed record tests preserve denominators and
+distinguish completed pilots from successful allocation. Paper assets can be refreshed from
+the Loopseed checkout using `docs/papers/dynamical-synthesis/prepare_delivery.py --site`
+with this checkout's explicit path. That operation copies reviewed local files and does not deploy.
+
+Featured livestreams are selected in `crates/record/src/livestreams.rs`; their source
+metadata and selection rationale are in `docs/livestream-selection.json`. The home page uses
+local thumbnail files and loads a YouTube player only after a play button is pressed. Each
+card also links directly to the original recording, and the section links to the full playlist.
+These historical recordings are not scored efficacy observations.
+
 ## Design
 
 Light theme with Dilate colours: ink `#000020`, indigo `#4946ff` and warm off-whites.
-Geist for text, Adamina for equations, DM Mono for numbers and paths. No tracking.
+Geist for text, Adamina for equations, DM Mono for numbers and paths. No site analytics.
+The optional livestream players load third-party YouTube content when activated.
 
 ## Deploying
 

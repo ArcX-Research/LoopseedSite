@@ -1,0 +1,95 @@
+{
+  "daily_summary_rule": "UTC days; pooled teachers, pooled external text, each teaching programme separate; score versions separate.",
+  "exporter_source_sha256": "bfbcd7f21a9b01c0bdcf924de9071dbf38e95094e9fc776c1d8b1a0b5c152f36",
+  "guest_groups": {
+    "classrooms": {
+      "scores": 1953,
+      "scores_by_version": {
+        "1": 0,
+        "2": 1953
+      },
+      "sessions": 79,
+      "sessions_by_version": {
+        "2": 79
+      },
+      "utc_span": [
+        "2026-08-16T00:48:58+00:00",
+        "2026-08-31T16:34:17+00:00"
+      ]
+    },
+    "teachers": {
+      "scores": 14685,
+      "scores_by_version": {
+        "1": 3179,
+        "2": 11506
+      },
+      "sessions": 57,
+      "sessions_by_version": {
+        "1": 16,
+        "2": 41
+      },
+      "utc_span": [
+        "2026-08-05T12:58:37+00:00",
+        "2026-08-15T23:38:27+00:00"
+      ]
+    },
+    "weather": {
+      "scores": 2708,
+      "scores_by_version": {
+        "1": 0,
+        "2": 2708
+      },
+      "sessions": 36,
+      "sessions_by_version": {
+        "2": 36
+      },
+      "utc_span": [
+        "2026-08-08T16:00:19+00:00",
+        "2026-08-16T00:56:06+00:00"
+      ]
+    }
+  },
+  "limitations": [
+    "Guest individual scores are not present; guest medians and quartiles are preserved from the export, not independently recomputed.",
+    "Pooled group medians that mix versions are not plotted or interpreted.",
+    "The reference threshold is not a record of its value at every exchange.",
+    "These are repeated observations from changing tasks and configurations, not independent participants or causal training estimates."
+  ],
+  "omitted_guest_scores": 14,
+  "participant_max_median_rounding_difference": 5.0000000000050004e-05,
+  "participant_scores": 717,
+  "participant_scores_by_version": {
+    "1": 652,
+    "2": 65
+  },
+  "participant_sessions_by_version": {
+    "1": 15,
+    "2": 7
+  },
+  "participant_utc_span": [
+    "2026-08-02T22:14:24+00:00",
+    "2026-08-13T19:44:54+00:00"
+  ],
+  "plotting": {
+    "daily_lines": "Connect consecutive UTC dates only; do not bridge missing dates.",
+    "daily_marker_time": "12:00 UTC",
+    "matplotlib": "3.11.1",
+    "session_lines": "Break when a whole UTC date without scores separates sessions.",
+    "session_marker_time": "session start",
+    "shared_outputs": "The website displays SVG exports of the same figures included as PDF in the paper.",
+    "svg_text": "Glyph paths preserve the paper's typography in browsers without its fonts.",
+    "times": "UTC",
+    "y_limits": [
+      0,
+      1
+    ]
+  },
+  "quartile_method": "Python statistics.quantiles(n=4, method='exclusive'); one score uses that value for all quartiles.",
+  "reference_memory_threshold": 0.35,
+  "review_date": "2026-09-11",
+  "session_rule": "Within each source and score version, a gap >= 30 minutes starts a session.",
+  "source": "exchange-scores.json",
+  "source_exported_at": "2026-09-05T09:32:22Z",
+  "source_origin": "LoopseedSite/crates/record/data/skin.json",
+  "source_sha256": "4112a2fcbe515f69f950845bc7269576171246153f2f00e19eeca28c9933f7e3"
+}

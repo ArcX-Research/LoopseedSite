@@ -1,9 +1,9 @@
 //! Framework, findings and research goals.
+use crate::components::livestreams::FeaturedLivestreams;
 use crate::components::loop_diagram::{LoopDiagram, STEPS};
 use crate::util::set_title;
 use leptos::prelude::*;
 use loopseed_record::rulings::RULINGS;
-use loopseed_record::skin::ERA_ONE;
 use loopseed_record::EQUATION;
 
 #[component]
@@ -17,9 +17,9 @@ pub fn Overview() -> impl IntoView {
                     <p class="eyebrow">"Dilate Technologies · research program"</p>
                     <h1 class="display display-xl">"Toward Intelligence that keeps Learning"</h1>
                     <p class="lede">
-                        "Our mission is to build systems that turn verified experience into lasting improvements, apply what they learn to new situations, and retain earlier abilities."
+                        "Our mission is to develop intelligence that learns from verified experience, adapts to unfamiliar situations and preserves useful knowledge and abilities over time."
                     </p>
-                    <p class="prose-p">"Loopseed studies how computational systems can learn across tasks and environments. Fish, its current language-model testbed, explores this through memory, prediction and tools."</p>
+                    <p class="prose-p">"Loopseed is a research programme investigating how computational systems learn through interaction with their environments. Fish, its current experimental platform, combines a language model with memory, prediction and tool use for controlled studies of learning, transfer and retention."</p>
                     <div class="hero-actions">
                         <a class="btn btn-primary" href="/results">"Read the results"</a>
                         <a class="btn" href="/method">"How we test learning"</a>
@@ -32,15 +32,28 @@ pub fn Overview() -> impl IntoView {
                     <figcaption>"The Fish learning cycle"</figcaption>
                 </figure>
                 <div class="research-summary">
-                    <div class="summary-heading"><p class="eyebrow">"A measured starting point"</p><a class="text-link" href="/results#transfer-clean">"Read the study "<span aria-hidden="true">"↗"</span></a></div>
+                    <div class="summary-heading"><p class="eyebrow">"Results from one controlled mathematics study"</p><a class="text-link" href="/results#transfer-clean">"Read the study "<span aria-hidden="true">"↗"</span></a></div>
                     <dl class="hero-stats">
-                        <div><dt>"Accepted answers · new parameter instances"</dt><dd>"43"<span>" / 64"</span></dd></div>
-                        <div class="stat-controls"><dt>"Base model and placebo · same tasks"</dt><dd>"0 / 64"<span>" · "</span>"0 / 64"</dd></div>
-                        <div><dt>"Task families with at least one success"</dt><dd>"11"<span>" / 16"</span></dd></div>
-                        <div class="stat-status"><dt>"Independent replication of this result"</dt><dd>"Pending"</dd></div>
+                        <div><dt>"Answers accepted after training"</dt><dd>"43"<span>" / 64"</span></dd></div>
+                        <div class="stat-controls"><dt>"Accepted answers from the two control models"</dt><dd>"0 / 64"<span>" · "</span>"0 / 64"</dd></div>
+                        <div><dt>"Problem types with at least one accepted answer"</dt><dd>"11"<span>" / 16"</span></dd></div>
+                        <div class="stat-status"><dt>"Replication by an independent research team"</dt><dd>"Pending"</dd></div>
                     </dl>
-                    <p class="source">"Clean transfer study · 4 September 2026. Exact calculation plus a separate AI review of complete answers. "<a href="/results#transfer-clean">"Design, counts and limitations"</a>"."</p>
-                    <p class="prose-p summary-context">"Early controlled tests show improved answers on new instances of specific mathematical tasks. Reliable learning across unfamiliar tasks and sustained interaction remains the goal."</p>
+                    <p class="source">"4 September 2026. Answers were accepted only if they passed exact mathematical checks and a separate AI review. The controls were the base model and a model trained with answers reassigned to different questions. "<a href="/results#transfer-clean">"Methods and limitations"</a>"."</p>
+                    <p class="prose-p summary-context">"The test changed the numbers in problems from 16 types included in training. Later studies found limited success on harder problems and reduced performance on some earlier tasks. The figures above describe this study alone."</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="wrap section" aria-labelledby="paper-preview-h">
+            <div class="paper-callout">
+                <p class="eyebrow">"Working paper · 11 September 2026"</p>
+                <h2 id="paper-preview-h" class="display">"Dynamical Synthesis: Learning through Interaction"</h2>
+                <p class="prose-p">"The paper presents the Dynamical Synthesis framework and experiments with Fish. It examines whether learning improves performance on new problems and preserves earlier abilities, reporting both improvements and failed tests. It also discusses how feedback can repeat a system’s own claims without providing new evidence, and outlines further tests of learning and human oversight."</p>
+                <div class="paper-downloads">
+                    <a class="btn btn-primary" href="/papers/dynamical-synthesis.pdf" rel="external">"Read the paper"</a>
+                    <a class="btn" href="/results">"View experimental results"</a>
+                    <a class="text-link" href="/record#paper-h">"Data and LaTeX files ↗"</a>
                 </div>
             </div>
         </section>
@@ -49,16 +62,19 @@ pub fn Overview() -> impl IntoView {
             <div class="section-head">
                 <p class="eyebrow">"The approach"</p>
                 <h2 id="loop-h" class="display">"Five steps in the learning cycle"</h2>
-                <p class="lede-sm">"The project calls its organising idea Dynamical Synthesis: a system repeatedly combines its own activity with external input. This is a design framework. Its value must be established through defined implementations and controlled tests."</p>
+                <p class="lede-sm">"Dynamical Synthesis is Loopseed’s proposed framework for learning through interaction. It describes how a system combines its own computation with input from its environment as its state changes over time."</p>
                 <p class="eq">{EQUATION}</p>
-                <p class="prose-p">"This shorthand names the idea; it is not a complete learning algorithm or an established law of intelligence. The Method page distinguishes the implemented state update, measured signals and offline training procedure."</p>
+                <p class="prose-p">"Here, "<em>"I"</em>" represents the system’s state, "<em>"W(I)"</em>" the result of its internal computation, and "<em>"you"</em>" input from the environment, people or other systems. This equation is shorthand; an implementation must define these terms and how they change over time."</p>
+                <p class="prose-p">"A further research goal is to test whether external observations help the system generate useful new hypotheses, methods or designs. "<a href="/goals#novelty-h">"How we would evaluate new ideas"</a>"."</p>
+                <p class="prose-p">"If one system produces an incorrect answer and another copies it, the first system may receive its own error back as feedback. We propose testing whether the original system corrects the error when given new observations or verified calculations. "<a href="/method#boundary-h">"Read the computational model and proposed tests"</a>"."</p>
+                <p class="prose-p">"The symbols and abbreviations beside each step are explained in the "<a href="/method#symbols">"symbol guide"</a>". Select any symbol to open the guide."</p>
             </div>
             <ol class="steps">
                 {STEPS.iter().map(|s| view! {
                     <li class="step">
                         <span class="n">{s.ordinal}</span>
                         <div>
-                            <h3>{s.label}" "<span class="mono organ">{s.organ}</span></h3>
+                            <h3>{s.label}" "<a class="mono organ" href="/method#symbols" aria-label=format!("Symbol definitions for {}: {}", s.label, s.organ)>{s.organ}</a></h3>
                             <p>{s.gloss}</p>
                         </div>
                     </li>
@@ -68,70 +84,73 @@ pub fn Overview() -> impl IntoView {
 
         <section class="wrap section" aria-labelledby="premise-h">
             <div class="section-head">
-                <p class="eyebrow">"The premise"</p>
-                <h2 id="premise-h" class="display">"Three design principles"</h2>
+                <p class="eyebrow">"Research principles"</p>
+                <h2 id="premise-h" class="display">"How we evaluate learning"</h2>
             </div>
             <div class="cols-3">
                 <div class="card">
                     <span class="n">"01"</span>
-                    <h3>"Test prediction and answers separately"</h3>
-                    <p>"Predicting a participant's next message and answering a problem correctly are different abilities. They use separate adapters and evaluation criteria. Lower prediction loss alone does not establish better answers."</p>
+                    <h3>"Test prediction and task performance separately"</h3>
+                    <p>"Predicting an observation and completing a task correctly are different abilities. Evaluate both directly, using separate measures of prediction error and task performance."</p>
                 </div>
                 <div class="card">
                     <span class="n">"02"</span>
-                    <h3>"Measure gains and losses"</h3>
-                    <p>"Compare the same tasks across candidate and control conditions. Reserve examples from training, test earlier abilities, and record failures alongside gains. A successful task comparison is one step toward demonstrating lasting learning."</p>
+                    <h3>"Test new learning and earlier abilities"</h3>
+                    <p>"Compare an updated system with a control on the same tasks, using examples excluded from training. Test abilities demonstrated before the update as well as new learning, and report both improvements and declines."</p>
                 </div>
                 <div class="card">
                     <span class="n">"03"</span>
-                    <h3>"Keep experience traceable"</h3>
-                    <p>"Retain the original exchanges, identify who supplied a training target, and distinguish verified solutions from model attempts. Prediction error helps select memories; correctness requires its own checks."</p>
+                    <h3>"Document sources and checks"</h3>
+                    <p>"Preserve original observations and record how each training example was produced. Document the checks applied and their results, including failures. Keep unchecked examples clearly identified."</p>
                 </div>
             </div>
         </section>
 
         <section class="wrap section" aria-labelledby="measured-h">
             <div class="section-head">
-                <p class="eyebrow">"What has been measured"</p>
-                <h2 id="measured-h" class="display">"Three findings, with recorded evidence"</h2>
+                <p class="eyebrow">"Further experiments"</p>
+                <h2 id="measured-h" class="display">"Results beyond the initial mathematics study"</h2>
+                <p class="lede-sm">"These studies tested harder problems, the effects of further training and learning rules from observations. Each used different tasks and evaluation criteria."</p>
             </div>
             <div class="cols-3">
-                <a class="card card-link" href="/results#skin">
-                    <span class="n">"prediction"</span>
-                    <h3>"Prediction error fell, then levelled off"</h3>
-                    <p>{format!("In the first observation period, session medians for one participant fell from {:.3} to {:.3}, then stayed near {:.2}. This is an observational trend: changing topics, context and system settings prevent attributing it to training alone.", ERA_ONE.first_median, ERA_ONE.low_median, ERA_ONE.plateau)}</p>
+                <a class="card card-link" href="/results#harder">
+                    <span class="n">"harder mathematics"</span>
+                    <h3>"2 of 81 answers accepted after training"</h3>
+                    <p>"Each model answered 27 problems three times. A control trained with answers paired to different questions also scored 2 of 81; a model using the earlier prediction update scored 3 of 81. The study did not establish improved performance over the control."</p>
                 </a>
-                <a class="card card-link" href="/results#coats">
-                    <span class="n">"controlled comparison"</span>
-                    <h3>"Verified examples improved answers within tested families"</h3>
-                    <p>"A corpus of 60 reviewed examples supplied 48 training examples, six validation examples and six test examples. The resulting adapter produced 43 accepted answers on 64 further parameter instances; both controls scored zero. Gains occurred within eleven learned families. Broader transfer remains open."</p>
+                <a class="card card-link" href="/results#current">
+                    <span class="n">"further training"</span>
+                    <h3>"More declines than improvements"</h3>
+                    <p>"The update passed 12 cases the previous version failed, but failed 17 the previous version passed. Another 55 outcomes matched. The 84 comparisons covered 42 tasks tested twice. Seven declines involved earlier abilities, and the update was not adopted."</p>
                 </a>
-                <a class="card card-link" href="/results#transfer-1">
-                    <span class="n">"failure and follow-up"</span>
-                    <h3>"Higher scores still failed a preset error limit"</h3>
-                    <p>"The first transfer test improved scores but exceeded a limit on negative constants in failed replies. A later test of cleaner training prompts raised performance on the affected task family from 0 of 18 to 18 of 18."</p>
+                <a class="card card-link" href="/results#worlds">
+                    <span class="n">"learning rules"</span>
+                    <h3>"2 of 6 rules identified correctly"</h3>
+                    <p>"The model proposed rules after observing six simulated environments. With its saved rule descriptions supplied alongside new questions, it answered 3 of 12 correctly. No additional training was used. The study did not meet its criteria for learning and using the rules."</p>
                 </a>
             </div>
         </section>
 
+        <FeaturedLivestreams/>
+
         <section class="wrap section" aria-labelledby="evidence-h">
             <div class="section-head">
-                <p class="eyebrow">"Experimental safeguards"</p>
-                <h2 id="evidence-h" class="display">"How the adapter experiments are checked"</h2>
+                <p class="eyebrow">"Study methods"</p>
+                <h2 id="evidence-h" class="display">"How the mathematics studies were checked"</h2>
             </div>
             <div class="rules">
-                <div class="rule"><span class="n">"01"</span><p><b>"Plan before testing."</b>" The formal adapter studies freeze tasks, conditions and pass criteria in local protocol files before evaluation. Hashes identify the software, data and adapters used."</p></div>
-                <div class="rule"><span class="n">"02"</span><p><b>"Hide condition identities."</b>" Experimental groups receive coded labels. Their identities are revealed only after results and reviews are fixed and hashed."</p></div>
-                <div class="rule"><span class="n">"03"</span><p><b>"Recompute the mathematics."</b>" A checker validates the formal structure, and a computer algebra system calculates the results. Review also checks whether the steps answer the requested problem."</p></div>
-                <div class="rule"><span class="n">"04"</span><p><b>"Review complete replies."</b>" A separate AI reviewer reads each reply accepted by the checker, with condition identities withheld. It may reject an answer. This is an additional assessment within the project; independent replication is still needed."</p></div>
-                <div class="rule"><span class="n">"05"</span><p><b>"Preserve the record."</b>" Failed runs retain their original decisions. These studies use isolated copies and compare live-database hashes before and after testing. A later private learning study can activate a passing adapter only on its clone."</p></div>
-                <div class="rule"><span class="n">"06"</span><p><b>"Make the evidence assessable."</b>" This site recalculates paired statistics from recorded counts and states their assumptions. Reports identify source files; the underlying repository is currently private, with evidence available on request."</p></div>
+                <div class="rule"><span class="n">"01"</span><p><b>"Set the test criteria in advance."</b>" Tasks, model settings and success criteria were recorded before evaluation. The records identify the software, data and model versions used."</p></div>
+                <div class="rule"><span class="n">"02"</span><p><b>"Use coded labels during review."</b>" The AI reviewer received answers with coded model labels. The mapping to model versions was revealed after the scores and review decisions were recorded."</p></div>
+                <div class="rule"><span class="n">"03"</span><p><b>"Check the calculations."</b>" Software checked each proposed solution’s structure. The Wolfram kernel, run locally through WolframScript, evaluated its calculations using exact arithmetic. The results were compared with the expected answers."</p></div>
+                <div class="rule"><span class="n">"04"</span><p><b>"Review the complete answer."</b>" A separate AI reviewer examined complete answers that passed the calculation checks and could reject them. Replication by another research team is still needed."</p></div>
+                <div class="rule"><span class="n">"05"</span><p><b>"Keep failures in the record."</b>" Unsuccessful and invalid runs retain their original reports and decisions. Experiments used separate system copies, with checks for changes to the live database file."</p></div>
+                <div class="rule"><span class="n">"06"</span><p><b>"Provide data and methods."</b>" The "<a href="/record#paper-h">"paper, summary data and analysis code"</a>" can be downloaded. Reports describe the methods and statistical assumptions. Detailed experiment records are available on request."</p></div>
             </div>
         </section>
 
         <section class="wrap section" aria-labelledby="record-h">
             <div class="section-head">
-                <p class="eyebrow">"The record"</p>
+                <p class="eyebrow">"Research updates"</p>
                 <h2 id="record-h" class="display">"Latest research reports"</h2>
             </div>
             <div class="rulings">
@@ -142,7 +161,7 @@ pub fn Overview() -> impl IntoView {
                     </article>
                 }).collect_view()}
             </div>
-            <p class="more"><a href="/record">"All reports, with source files and hashes"</a></p>
+            <p class="more"><a href="/record">"Read all reports and supporting evidence"</a></p>
         </section>
 
         <section class="section section-feature" aria-labelledby="goals-h">

@@ -43,7 +43,7 @@ pub const OCEAN: &[OceanReading] = &[
         paired: Some(0.0717),
         shuffled: Some(0.0371),
         mutual_information: 0.0712,
-        note: "near the preceding value; the instrument's normalised scale has maximum 1.0",
+        note: "slightly below the preceding value; the scale’s maximum is 1.0",
     },
 ];
 pub const OCEAN_SOURCE: &str = "docs/ROADMAP.md, stage 6 (approved 2026-08-12)";
@@ -73,7 +73,7 @@ pub const SWEEP: &[BodyReading] = &[
         dream_seconds: 274.831,
     },
     BodyReading {
-        body: "30B, 3B active (MoE)",
+        body: "30B mixture of experts, 3B active",
         register_hold: 1.00,
         echo_rate: 0.05,
         stroke_accuracy: 0.45,
@@ -91,30 +91,30 @@ pub struct Figure {
 /// The memory laws' numbers, from bag 2 of the laws file.
 pub const MEMORY: &[Figure] = &[
     Figure {
-        claim: "A small test found better recall and worse judgement with the same record",
-        number: "recall 0/12 → 12/12; judgement 12/12 → 4/12 with the same record",
+        claim: "The same record improved recall and reduced correct judgements",
+        number: "With the record supplied, correct recall rose from 0 of 12 to 12 of 12; correct judgements fell from 12 of 12 to 4 of 12",
         evidence: "LAWS.md bag 2, rows 240–241",
     },
     Figure {
-        claim: "An interaction report associated an incorrect memory with more errors",
-        number: "reported 6× increase; adding a correction did not remove the pattern",
+        claim: "An incorrect stored record was associated with more errors",
+        number: "A sixfold increase was reported; full counts are not given in this summary",
         evidence: "LAWS.md bag 2, rows 236–237",
     },
     Figure {
-        claim: "Different test sets before and after one worked example",
-        number: "0/32 before; 48/48 later — not a matched comparison",
+        claim: "Performance differed before and after a worked example",
+        number: "0 of 32 before; 48 of 48 later, using different test questions",
         evidence: "LAWS.md bag 2, row 267",
     },
     Figure {
-        claim: "A stored lesson helped on a puzzle with the same structure",
-        number: "about a quarter of the time",
+        claim: "A stored lesson was used on a puzzle with the same structure",
+        number: "Success was reported in about one quarter of attempts; the total is not given here",
         evidence: "LAWS.md bag 2, rows 256–257",
     },
 ];
 
 /// First full-system comparison: no measured gain or loss.
 pub const BODY_RULING: &[Figure] = &[
-    Figure { claim: "Isolated requests completed with the live database unchanged", number: "396 of 396", evidence: "fish/album/2026-08-14T074428-EAT-body-evolution.md" },
-    Figure { claim: "Gains, losses and measured memory interaction", number: "0, 0, 0", evidence: "the same report" },
-    Figure { claim: "Records retrieved with memory enabled, including retention controls", number: "0", evidence: "no records passed the L2 distance threshold of 0.70; later calibration kept this threshold unchanged" },
+    Figure { claim: "Test replies collected", number: "396 of 396 planned", evidence: "fish/album/2026-08-14T074428-EAT-body-evolution.md; the live database file was unchanged" },
+    Figure { claim: "Changes detected by the comparison", number: "No measured gains, losses or interaction with memory", evidence: "the same report" },
+    Figure { claim: "Records retrieved when memory was enabled", number: "0", evidence: "no records passed the retrieval threshold, including on tests of earlier abilities" },
 ];

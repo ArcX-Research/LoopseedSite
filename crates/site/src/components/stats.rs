@@ -12,11 +12,11 @@ pub fn PairedTable(comparisons: &'static [Comparison]) -> impl IntoView {
                 <thead>
                     <tr>
                         <th>"Comparison"</th>
-                        <th class="num">"matched tasks"</th>
-                        <th class="num">"gains"</th>
-                        <th class="num">"losses"</th>
-                        <th class="num">"one-sided exact p"</th>
-                        <th class="num">"95 % lower bound on difference"</th>
+                        <th class="num">"Matched tasks"</th>
+                        <th class="num">"Gains"</th>
+                        <th class="num">"Losses"</th>
+                        <th class="num">"One-sided exact p-value"</th>
+                        <th class="num">"95% lower bound on success-rate difference"</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,11 +29,11 @@ pub fn PairedTable(comparisons: &'static [Comparison]) -> impl IntoView {
                                 <td class="num">{c.gains}</td>
                                 <td class="num">{c.losses}</td>
                                 <td class="num">
-                                    <span class="frozen">{scientific(c.frozen_p)}</span>
+                                    <span class="frozen">{format!("recorded {}", scientific(c.frozen_p))}</span>
                                     <span class="recomputed">{format!("recalculated {}", scientific(r.p_value))}</span>
                                 </td>
                                 <td class="num">
-                                    <span class="frozen">{signed(c.frozen_lower, 4)}</span>
+                                    <span class="frozen">{format!("recorded {}", signed(c.frozen_lower, 4))}</span>
                                     <span class="recomputed">{format!("recalculated {}", signed(r.lower_difference, 4))}</span>
                                 </td>
                             </tr>
@@ -42,6 +42,7 @@ pub fn PairedTable(comparisons: &'static [Comparison]) -> impl IntoView {
                 </tbody>
             </table>
         </ScrollTable>
+        <p class="caption">"Gains: only the response adapter passed. Losses: only the control passed. Each task is paired across the two model versions. The difference is a fraction: 0.10 means 10 percentage points. "<a href="#explorer-h">"Calculation methods and assumptions"</a>"."</p>
     }
 }
 
@@ -58,15 +59,15 @@ pub fn Explorer() -> impl IntoView {
     view! {
         <div class="explorer">
             <div class="explorer-inputs">
-                <label>"gains"<input type="number" min="0" prop:value=move || gains.get().to_string() on:input=move |ev| gains.set(parse_count(event_target_value(&ev)))/></label>
-                <label>"losses"<input type="number" min="0" prop:value=move || losses.get().to_string() on:input=move |ev| losses.set(parse_count(event_target_value(&ev)))/></label>
-                <label>"matched tasks"<input type="number" min="1" prop:value=move || n.get().to_string() on:input=move |ev| n.set(parse_count(event_target_value(&ev)))/></label>
+                <label>"Gains: only the update passed"<input type="number" min="0" prop:value=move || gains.get().to_string() on:input=move |ev| gains.set(parse_count(event_target_value(&ev)))/></label>
+                <label>"Losses: only the control passed"<input type="number" min="0" prop:value=move || losses.get().to_string() on:input=move |ev| losses.set(parse_count(event_target_value(&ev)))/></label>
+                <label>"Total matched tasks, including ties"<input type="number" min="1" prop:value=move || n.get().to_string() on:input=move |ev| n.set(parse_count(event_target_value(&ev)))/></label>
             </div>
             <dl class="explorer-out mono" aria-live="polite" aria-atomic="true">
-                <div><dt>"one-sided exact McNemar p"</dt><dd>{move || scientific(result().p_value)}</dd></div>
-                <div><dt>"95 % lower bound on the success-rate difference"</dt><dd>{move || signed(result().lower_difference, 4)}</dd></div>
-                <div><dt>"observed success-rate difference"</dt><dd>{move || signed(result().observed_difference, 4)}</dd></div>
-                <div><dt>"statistical criterion"</dt><dd><span class=move || if result().superior() { "status-badge status-pass" } else { "status-badge status-fail" }>{move || if result().superior() { "passes" } else { "fails" }}</span></dd></div>
+                <div><dt>"One-sided exact McNemar p-value"</dt><dd>{move || scientific(result().p_value)}</dd></div>
+                <div><dt>"95% lower bound on the success-rate difference"</dt><dd>{move || signed(result().lower_difference, 4)}</dd></div>
+                <div><dt>"Observed success-rate difference"</dt><dd>{move || signed(result().observed_difference, 4)}</dd></div>
+                <div><dt>"Statistical criterion only"</dt><dd><span class=move || if result().superior() { "status-badge status-pass" } else { "status-badge status-fail" }>{move || if result().superior() { "Met" } else { "Not met" }}</span></dd></div>
             </dl>
         </div>
     }

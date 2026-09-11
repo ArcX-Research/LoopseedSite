@@ -1,6 +1,9 @@
+pub mod livestreams;
 pub mod loop_diagram;
 pub mod mark;
 pub mod page_nav;
+pub mod research_figure;
+pub mod research_results;
 pub mod skin_chart;
 pub mod stats;
 pub mod tables;

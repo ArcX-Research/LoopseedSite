@@ -1,40 +1,42 @@
 //! Equations, implementation and evaluation methods.
 use crate::components::page_nav::PageNav;
+use crate::components::research_figure::ResearchFigure;
 use crate::components::tables::ScrollTable;
 use crate::util::set_title;
 use leptos::prelude::*;
 use loopseed_record::laws::LAWS;
 
 const SECTIONS: &[(&str, &str)] = &[
-    ("#eq-h", "Measurements"),
-    ("#night-h", "Training"),
+    ("#boundary-h", "System boundary"),
+    ("#eq-h", "State and prediction"),
+    ("#symbols", "Symbol guide"),
+    ("#night-h", "Training and memory"),
     ("#instruments-h", "Verification"),
     ("#context-h", "Scientific context"),
     ("#laws", "Observations"),
 ];
 
-const EXEGESIS: &str = "I[t] = α · E(r[t−1]) + E(you[t])
-δ_v1 = 1 − cos(E(Î), E(you))
-δ_v2 = ½ · (1 − exp(−L)) + ½ · δ_v1";
+const STATE_UPDATE: &str = "I[t] = α · E(r[t−1]) + E(you[t])";
+const PREDICTION_SCORES: &str = "δ₁ = 1 − cos(E(Î), E(you))
+δ₂ = ½ · (1 − exp(−L)) + ½ · δ₁";
 
-struct Organ {
+struct Symbol {
     symbol: &'static str,
     said: &'static str,
     what: &'static str,
 }
 
-const ORGANS: &[Organ] = &[
-    Organ { symbol: "I, E, r", said: "I, E, r", what: "I is the conversation vector used for retrieval. E embeds text in 384 dimensions; r is an actual generated reply. The prior reply's embedding is retained across room restarts. This vector is one component of Fish's state, alongside its context, database and model parameters." },
-    Organ { symbol: "W", said: "W", what: "The model's response-generating transformation in the design notation. Actual generation also depends on the prompt, retrieved context, adapter and sampling settings." },
-    Organ { symbol: "you", said: "you", what: "The incoming message from an external participant or source." },
-    Organ { symbol: "Ŵ, Î", said: "W-hat, I-hat", what: "The predictor and its estimate of the next incoming message. The estimate is recorded before the message arrives." },
-    Organ { symbol: "δ, L", said: "delta, L", what: "δ is a dimensionless prediction-discrepancy score. L is the mean negative log probability of the incoming message's tokens, measured from the predictor's prior context. The project calls 1 − exp(−L) normalised perplexity; it is a bounded transform of token loss, not a probability that the reply is incorrect." },
-    Organ { symbol: "σ, θ", said: "sigma, theta", what: "The surprise-based memory selection rule and its threshold. δ > θ selects an exchange for active memory, subject to admission and review rules. The reference θ is 0.35; regulation can adjust it within limits. Surprise does not certify truth." },
-    Organ { symbol: "M, λ", said: "M, lambda", what: "The active memory subset and its weight-decay factor. The default nightly multiplier is 0.995; regulation can slow decay and retrieval can reinforce a record. Eviction from active memory preserves the underlying exchange history." },
-    Organ { symbol: "π, V", said: "pi, V", what: "π names action selection in the design. V = −|δ| + β·H(you) is a recorded score balancing prediction discrepancy and input variety. The language model is not trained by reinforcement learning to maximise this score. Tools have separate operating rules." },
-    Organ { symbol: "H(you), β", said: "H of you, beta", what: "H(you) is the mean pairwise embedding distance among one speaker's last twelve messages, with at least four needed. It measures dispersion, not Shannon entropy. β varies between its configured floor and twice that floor in the recorded V score; this does not itself implement an exploration policy." },
-    Organ { symbol: "ε", said: "epsilon", what: "The configured rate of the additional external-input channel. Input provenance and admission rules determine which sources may enter memory or training." },
-    Organ { symbol: "α, k", said: "alpha, k", what: "α weights the previous reply embedding (reference value 0.70). k sets the retrieval count (reference value 6). Protocols record the settings used; a coefficient below one alone does not prove that the complete system is a contraction." },
+const SYMBOLS: &[Symbol] = &[
+    Symbol { symbol: "I, W", said: "I, W", what: "In the design shorthand, I denotes system activity and W its internal processing. In the implemented recurrence, I[t] has the narrower meaning of a text vector used for memory retrieval; the previous reply supplies the contribution from internal processing. It is only one part of the system state." },
+    Symbol { symbol: "you, u[t]", said: "you, u at t", what: "Input from outside the chosen system boundary. The general equations represent it as u[t]. It may come from an environment, a person or another system. In the text implementation, you[t] is the incoming message." },
+    Symbol { symbol: "s[t], a[t]", said: "s at t, a at t", what: "The complete state and the action at step t in the general formulation. The state includes whatever information the specified update needs, such as memory, internal variables and the current model configuration." },
+    Symbol { symbol: "F, π, θ[t]", said: "F, pi, theta at t", what: "F updates the state; π selects an action; θ[t] denotes the learned parameters used at step t. These functions and parameters must be specified for a particular implementation. The notation does not prescribe a learning algorithm." },
+    Symbol { symbol: "E, r, α", said: "E, r, alpha", what: "E converts text to an embedding, a numeric vector. r[t−1] is the actual previous reply. α weights that reply's embedding in the retrieval vector; its reference setting is 0.70." },
+    Symbol { symbol: "Ŵ → Î", said: "W-hat produces I-hat", what: "Ŵ is the predictor; Î is its predicted next incoming message. The arrow means ‘produces’. This prediction is recorded before the actual message arrives." },
+    Symbol { symbol: "δ, L", said: "delta, L", what: "δ is the prediction-error score, with the two versions defined above. L is the mean negative log probability of the observed message's tokens under the predictor's prior context. Lower L means those tokens were assigned higher probability." },
+    Symbol { symbol: "σ, θₘ", said: "sigma, theta subscript m", what: "σ is the memory selection rule. An error score above the threshold θₘ can select an exchange for active memory, subject to source and review rules. Records abbreviate this threshold as θ. Its reference value is 0.35, with bounded adjustment by the regulator." },
+    Symbol { symbol: "M, λ, k", said: "M, lambda, k", what: "M is the subset of stored exchanges available to active retrieval. λ multiplies their weights during maintenance; its default is 0.995. k sets how many memories retrieval requests; its reference value is 6. Individual experiments record their own settings." },
+    Symbol { symbol: "LoRA", said: "low-rank adaptation", what: "A method that trains small matrices added to a model while keeping its base weights fixed. These learned updates are called adapters here. Prediction and answer generation use separate adapters." },
 ];
 
 #[component]
@@ -44,96 +46,146 @@ pub fn Method() -> impl IntoView {
         <section class="page-intro page-intro-method">
             <div class="wrap">
                 <p class="eyebrow">"Method"</p>
-                <h1 class="display display-xl">"From a design idea to a testable learning system"</h1>
-                <p class="lede">"Dynamical Synthesis is Loopseed's name for organising a feedback loop between system activity and external input. Fish makes parts of that idea operational through a conversation state, prediction scores, selective memory, tools and offline adapter training. Each mechanism needs its own comparison and measure of success."</p>
-                <p class="prose-p">"The shorthand I = W(I) + you expresses the design idea. It does not by itself specify an algorithm, establish stability, or demonstrate intelligence. The equations below describe the implemented conversation vector and prediction instruments. Learning changes model parameters through gradient-based training, using separate objectives for prediction and replies."</p>
-                <p class="prose-p">"Project records use several short names: the base model is ‘water’, an adapter is a ‘coat’, offline training is a ‘dream’, and loading an adapter is ‘wearing’. The ‘body’ includes the stored system state; the ‘keeper’ is the human supervisor. We use their technical meanings throughout this site."</p>
+                <h1 class="display display-xl">"How learning is implemented and tested"</h1>
+                <p class="lede">"The controlled studies compare model configurations on the same tasks and measure changes in prediction, answer accuracy and retention of earlier abilities. Each comparison specifies what changes in the system, what stays fixed and which checks determine the outcome."</p>
+                <p class="prose-p">"The general formulation below describes a proposed framework. The state update, memory rules and training procedures describe the current implementation. "<a href="/results">"The Results page"</a>" gives the settings, findings and limitations of each study."</p>
             </div>
         </section>
 
         <PageNav items=SECTIONS/>
+        <section class="wrap section" aria-labelledby="boundary-h">
+            <div class="section-head">
+                <p class="eyebrow">"General formulation"</p>
+                <h2 id="boundary-h" class="display">"Define the system, its inputs and its actions"</h2>
+                <p class="lede-sm">"The shorthand I = W(I) + you expresses the organising idea of Dynamical Synthesis: system activity combines internal processing with external input. A computational model must specify what the system contains, how input is represented and how the state changes over time."</p>
+            </div>
+            <p class="prose-p">"The system boundary may enclose a single model, an agent with memory and tools, or several interacting systems. Input from outside that boundary may be a sensor measurement, a control signal or a message. One possible formulation is:"</p>
+            <pre class="exegesis mono" aria-label="General state and action equations">"s[t+1] = F(s[t], u[t]; θ[t])\na[t]   = π(s[t], u[t]; θ[t])"</pre>
+            <p class="prose-p">"At step t, s[t] is the system state, u[t] is the external input and a[t] is an action. F updates the state and π selects the action, using learned parameters θ[t]. A complete implementation must define these functions and any rule for changing the parameters. Input may depend on earlier actions, so an external source is not necessarily statistically independent of the system."</p>
+            <ResearchFigure name="framework"
+                alt="External input affects system state and action; action consequences return as input. A separate path records experience, trains a candidate and evaluates whether to adopt it. Returned messages may repeat the system's own claims."
+                caption="Proposed state, action and learning processes. Experience is recorded, a new parameter update is trained and tests inform whether to activate it. The reported studies evaluate individual components; this complete loop has not been experimentally validated."/>
+            <div class="cols-2">
+                <div class="card"><h3>"Trace feedback to its evidence"</h3><p>"A system may receive an answer that another system copied from its own earlier output. The new sender has added no measurement or calculation that could confirm the answer. Proposed feedback tests would record the original source, any transformations and any missing source information, then test whether new observations or checked calculations lead to correction."</p></div>
+                <div class="card"><h3>"Specify who can authorise a change"</h3><p>"Observations supply information; permission to change a goal or an operating limit requires a separately defined authority. Tests of human oversight would need to check whether authorised corrections and interventions change behaviour as intended. The general equations do not establish that ability."</p></div>
+            </div>
+            <p class="prose-p">"Reusing verified training examples may support retention without adding new evidence. The proposed feedback tests ask whether a system treats a repeated claim as new support. These tests, and tests of human oversight, remain "<a href="/goals#next-h">"research goals"</a>". The "<a href="/record#paper-h">"working paper"</a>" sets out the assumptions."</p>
+        </section>
         <section class="wrap section" aria-labelledby="eq-h">
             <div class="section-head">
-                <p class="eyebrow">"Equations and terms"</p>
-                <h2 id="eq-h" class="display">"What the implementation measures"</h2>
-                <p class="lede-sm">"At turn t, the conversation vector combines the embedded previous reply r with the new incoming message, you. Î is a predicted next message, recorded before the observation. The first error instrument compares embeddings; the second also includes token loss L. These quantities are defined for this implementation and are not interchangeable with task accuracy."</p>
+                <p class="eyebrow">"Implemented measurements"</p>
+                <h2 id="eq-h" class="display">"Represent input and measure prediction error"</h2>
+                <p class="lede-sm">"Fish represents text as numeric vectors called embeddings. At turn t, its retrieval vector I[t] combines the new message, you[t], with the actual previous reply, r[t−1]. E converts each text to a vector and α sets the weight of the previous reply."</p>
             </div>
-            <p class="source mono">"implementation: fish/daemon/src/fast/state.rs · fish/daemon/src/skin/mod.rs · fish/daemon/src/want/mod.rs · SOUL.md"</p>
-            <p class="prose-p">"The two δ versions are recorded separately, including fallback to v1 when token scoring is unavailable. Held-out token loss used to assess training is a different measurement from the δ time series. A reduction in either does not prove a contraction bound for the complete system. That would require a specified state space and a bound on how the update changes distances between states."</p>
-            <pre class="exegesis mono">{EXEGESIS}</pre>
+            <pre class="exegesis mono" aria-label="Implemented retrieval-state equation">{STATE_UPDATE}</pre>
+            <p class="prose-p">"The resulting vector is normalised before memory search. The previous reply's embedding is saved across session restarts; when none is available, its contribution is zero. The sum is recomputed for each input. This vector represents one part of the system state, alongside the stored history, prompt context and model parameters."</p>
+            <h3 class="figure-h">"Two versions of the prediction score"</h3>
+            <p class="prose-p">"The predictor records its expected next message, Î, before the actual message arrives. The first score, δ₁, measures the cosine distance between their embeddings. The second, δ₂, also uses L: the average negative log probability of the observed tokens under the context used for prediction."</p>
+            <pre class="exegesis mono" aria-label="Two versions of the prediction-error score">{PREDICTION_SCORES}</pre>
+            <p class="prose-p">"Lower values indicate closer predictions under the stated measure. The record identifies the version used, including fallback to δ₁ when token scoring is unavailable. The versions must be analysed separately. Neither score measures whether the system's answer is correct."</p>
+            <h3 id="symbols" class="figure-h">"Symbols and abbreviations"</h3>
+            <p class="prose-p">"The home-page learning cycle uses the symbols defined here. The memory threshold is written θₘ below to distinguish it from the learned parameters θ[t] in the general equations; implementation records abbreviate the threshold as θ."</p>
             <ScrollTable label="Symbols and measurement definitions">
                 <table class="table organs">
-                    <thead><tr><th>"Symbol"</th><th>"Pronunciation"</th><th>"Meaning"</th></tr></thead>
+                    <caption class="sr-only">"Notation for the general formulation and the implemented learning cycle"</caption>
+                    <thead><tr><th scope="col">"Symbol"</th><th scope="col">"Read as"</th><th scope="col">"Meaning"</th></tr></thead>
                     <tbody>
-                        {ORGANS.iter().map(|o| view! {
-                            <tr><td class="serif sym">{o.symbol}</td><td class="muted">{o.said}</td><td>{o.what}</td></tr>
+                        {SYMBOLS.iter().map(|s| view! {
+                            <tr><th scope="row" class="serif sym">{s.symbol}</th><td class="muted">{s.said}</td><td>{s.what}</td></tr>
                         }).collect_view()}
                     </tbody>
                 </table>
             </ScrollTable>
+            <details class="study-details">
+                <summary>"Additional recorded quantities and implementation notes"</summary>
+                <div class="study-details-content prose">
+                    <p>"H(you) measures the variety of one speaker's recent messages: the mean pairwise embedding distance among up to twelve messages, with at least four required. It is a measure of dispersion, rather than Shannon entropy. The weight β varies between a configured floor and twice that floor. V = −|δ| + β·H(you) combines prediction error and input variety in a recorded score; the model is not trained to maximise V."</p>
+                    <p>"ε denotes the configured fraction of messages supplied by the additional external-input channel. Source and review rules determine whether those messages may enter active memory or training. The term ‘normalised perplexity’ in source records refers to 1 − exp(−L), the bounded transform of token loss used in δ₂."</p>
+                    <p>"The text embedder is bge-small-en-v1.5, producing 384-dimensional vectors. The retrieval calculation adds a fixed search instruction before embedding each text; the prediction score embeds the messages without that prefix. A coefficient α below one in the retrieval equation does not establish stability of the complete system. A contraction claim would require a defined state space, a distance measure and a bound on how the full update changes distances between states."</p>
+                    <p class="source mono">"Source files: fish/daemon/src/fast/state.rs · fish/daemon/src/ledger/embed/mod.rs · fish/daemon/src/skin/mod.rs · fish/daemon/src/want/mod.rs · SOUL.md"</p>
+                </div>
+            </details>
         </section>
 
         <section class="wrap section" aria-labelledby="night-h">
             <div class="section-head">
-                <p class="eyebrow">"Offline training"</p>
+                <p class="eyebrow">"Training and memory"</p>
                 <h2 id="night-h" class="display">"Separate adapters for prediction and replies"</h2>
+                <p class="lede-sm">"Training uses low-rank adaptation (LoRA): small learned matrices modify the model while its base weights remain fixed. One adapter is trained to predict the next input and another to generate answers. They have different training targets and are evaluated separately."</p>
             </div>
             <div class="cols-3">
                 <div class="card">
-                    <span class="n">"lean"</span>
-                    <h3>"Prediction adapter"</h3>
-                    <p>"A low-rank adapter learns the next incoming message from admitted exchanges; the base model stays fixed. Only the target message contributes to training loss. The standard process holds out every fifth eligible pair within each attributed speaker, with a fallback for small groups. Continuation studies retain their earlier held-out sets and specify additional retention checks. This adapter serves the predictor."</p>
+                    <span class="n">"01"</span>
+                    <h3>"Predict the next input"</h3>
+                    <p>"Training examples pair an eligible exchange with the next incoming message in the same session. Only the target message contributes to the training loss. Evaluation measures token loss on examples reserved from training, including earlier examples when testing retention."</p>
                 </div>
                 <div class="card">
-                    <span class="n">"speak"</span>
-                    <h3>"Reply adapter"</h3>
-                    <p>"A separate adapter learns to produce answers. The September formal studies used checked model replies and prompts generated from task specifications. The later private study uses explicitly identified, teacher-derived worked solutions. Both require direct answer tests: lower validation loss alone does not establish useful transfer."</p>
+                    <span class="n">"02"</span>
+                    <h3>"Generate answers"</h3>
+                    <p>"The mathematical studies trained on checked model answers. Some initial prompts contained unrelated corrections, so later studies generated prompts directly from the problem specifications. The private continuation study used worked solutions supplied by a separate teaching procedure. Answer tests measure whether the trained adapter solves new questions and preserves earlier abilities."</p>
                 </div>
                 <div class="card">
-                    <span class="n">"memory maintenance"</span>
-                    <h3>"Decay and review"</h3>
-                    <p>"Memory weights decrease during nightly maintenance. Records below the weight floor leave the active retrieval index, while the original exchange rows remain in the archive. Retrieval can reinforce a record's weight. Memories admitted in the first hour after an adapter change are held for review."</p>
+                    <span class="n">"03"</span>
+                    <h3>"Maintain stored experience"</h3>
+                    <p>"Nightly maintenance reduces memory weights. Records below the configured minimum leave active retrieval, while their original exchange records remain in the archive. Retrieval can increase a record's weight. New memories selected during the first hour after an adapter change are withheld from retrieval and training until reviewed."</p>
                 </div>
             </div>
-            <p class="prose-p">"The continuing private study archives experience and trains the two channels separately. A candidate may be activated on that clone only after its preset checks pass; the previous selection remains recoverable. This is distinct from authorising a change to the main live system. "<a href="/results#current">"Current study and evaluation scope"</a>"."</p>
-            <p class="source mono">"implementation: fish/night/lean.py · fish/night/mercy.py · fish/lab/private_dream.py · fish/lab/private_dream_data.py"</p>
+            <p class="prose-p">"A trained adapter is a candidate update until it passes the required evaluation. The private continuation protocol permits activation only on its isolated experimental copy after the preset checks pass, with the previous configuration retained for recovery. "<a href="/results#current">"The recorded comparison"</a>" reports the training losses, answer tests and activation decisions."</p>
+            <details class="study-details">
+                <summary>"Data selection, validation and source files"</summary>
+                <div class="study-details-content prose">
+                    <p>"Prediction examples must satisfy the source, session and review rules in the data builder. Records awaiting review are excluded. For each identified speaker, the standard split reserves every fifth eligible pair for validation. A group with two to four pairs reserves its last pair; a speaker with no validation example is flagged by a separate coverage check."</p>
+                    <p>"The private continuation procedure reuses eligible earlier training examples alongside new ones. Earlier validation examples remain reserved, and additional examples assess prediction of new inputs. Answer training has its own data split. Lower validation loss therefore needs to be considered alongside direct tests of new questions and earlier abilities."</p>
+                    <p class="source mono">"Source files: fish/night/lean.py · fish/night/mercy.py · fish/lab/private_dream.py · fish/lab/private_dream_data.py · docs/KEEPING.md"</p>
+                    <p>"Original records call offline training a ‘dream’ and an adapter a ‘coat’; ‘wearing’ means activating that adapter. These names describe software operations."</p>
+                </div>
+            </details>
         </section>
 
         <section class="wrap section" aria-labelledby="instruments-h">
             <div class="section-head">
-                <p class="eyebrow">"Neurosymbolic reasoning"</p>
-                <h2 id="instruments-h" class="display">"Propose a formal answer and check it symbolically"</h2>
-                <p class="lede-sm">"The formal adapter studies combine a neural model that proposes solutions with symbolic software that checks them. This is a neurosymbolic approach. Their domain-specific language (DSL) represents calculations as typed JSON graphs: every operation and argument must follow explicit rules. Later plain-text studies use separately specified scorers."</p>
-                <p class="prose-p">"A deterministic compiler translates each accepted graph into Wolfram expressions. The Wolfram kernel computes the results, which are compared with an exact task generator. Independent AI review checks whether the complete answer follows the requested specification. These are bounded mathematical checks; the lab does not yet generate general formal proofs that an implementation satisfies its specification."</p>
+                <p class="eyebrow">"Experimental verification"</p>
+                <h2 id="instruments-h" class="display">"Check the calculation and the complete answer"</h2>
+                <p class="lede-sm">"The mathematical adapter studies combine model-generated solutions with exact symbolic calculation. The Wolfram kernel, called through WolframScript, evaluates the submitted calculations against reference answers. The main comparisons also use a separate AI reviewer to assess whether the complete solution answers the question."</p>
+                <p class="prose-p">"Controls include the base model without additional training and an adapter trained on shuffled question–answer pairings. Comparing the same questions across configurations helps distinguish the effect of correct training examples from effects of additional training or the output format."</p>
             </div>
             <div class="rules">
-                <div class="rule"><span class="n">"01"</span><p><b>"Structured answers."</b>" Fish returns a JSON graph: a sequence of operations using integers and references to earlier results. A grammar limits the allowed output. The strict version fixes result names and argument counts for each task; the loose version fixes only the general structure."</p></div>
-                <div class="rule"><span class="n">"02"</span><p><b>"Exact calculation."</b>" A checker validates the graph, then a computer algebra system evaluates it against the task generator's answer. Parentheses preserve the meaning of negative constants. The checker's file hash is fixed before the run."</p></div>
-                <div class="rule"><span class="n">"03"</span><p><b>"Isolated tests."</b>" Each request starts from a fresh copy of the same saved state and a new session. Memory retrieval, prediction and tools are disabled. The request record confirms the adapter settings actually used."</p></div>
-                <div class="rule"><span class="n">"04"</span><p><b>"Blinded conditions."</b>" Adapters receive randomly assigned labels before testing. Results and independent reviews are fixed and hashed before those labels are decoded."</p></div>
-                <div class="rule"><span class="n">"05"</span><p><b>"Separate AI review."</b>" A reviewer with condition labels withheld reads each complete reply that passed the checker. It can reject an answer whose steps do not match the task. The reviewer can also make mistakes; this assessment within the project does not replace external replication or a formal proof."</p></div>
-                <div class="rule"><span class="n">"06"</span><p><b>"Preset decision criteria."</b>" Each protocol sets statistical tests, limits on losses within task families, and checks for negative constants, information leaks and invalid requests. The statistical methods are the one-sided exact McNemar test and a Bonferroni-adjusted Clopper–Pearson bound on the difference in success rates. The Results page explains and recalculates them."</p></div>
+                <div class="rule"><span class="n">"01"</span><p><b>"Record the protocol before evaluation."</b>" The main comparisons specify the tasks, model configurations and pass criteria in local protocol files. Hashes identify the versions of software, data and adapters used. These are locally recorded plans, rather than public preregistrations."</p></div>
+                <div class="rule"><span class="n">"02"</span><p><b>"Control the test conditions."</b>" Each request starts from a fresh copy of the same saved state and a new session. Memory retrieval, prediction and model tool use are disabled for the adapter comparison. Request records confirm the adapter configuration used; the external checker runs separately."</p></div>
+                <div class="rule"><span class="n">"03"</span><p><b>"Validate the answer structure."</b>" Models return a JSON graph: a list of calculation steps containing operations, integers and references to earlier results. A grammar constrains this output. The strict version specifies result names and argument counts for each task; the less restrictive version specifies only the general structure."</p></div>
+                <div class="rule"><span class="n">"04"</span><p><b>"Recompute the mathematics."</b>" A compiler translates valid graphs into Wolfram expressions, preserving the signs of negative constants. The Wolfram kernel evaluates those expressions, and the checker compares them with exact answers computed by the task generator. Matching a value alone does not establish that every step follows the requested method."</p></div>
+                <div class="rule"><span class="n">"05"</span><p><b>"Review the full solution with model identities hidden."</b>" Adapters receive coded labels. A separate AI reviewer reads answers that passed the checker and can reject incorrect or irrelevant steps. Results and reviews are saved and hashed before the labels are revealed. This review is part of the project and remains fallible; independent replication is still needed."</p></div>
+                <div class="rule"><span class="n">"06"</span><p><b>"Apply the stated decision criteria."</b>" The main comparisons assess paired gains and losses: the same question succeeds with one configuration and fails with the other. They use a one-sided exact McNemar test and a conservative confidence bound, alongside protocol-specific checks for regressions and invalid requests. A higher total score alone may not satisfy those criteria. "<a href="/results#explorer-h">"Statistical calculations and assumptions"</a>"."</p></div>
             </div>
+            <p class="prose-p">"The 18-question place-value follow-up used exact checking without the separate AI review. Later studies of plain-text answers used their own scoring procedures. The "<a href="/results#coats">"study descriptions"</a>" identify which checks apply. These procedures assess specified mathematical tasks; they do not constitute a general proof that the software meets every requirement."</p>
+            <details class="study-details">
+                <summary>"Checker and analysis references"</summary>
+                <div class="study-details-content prose">
+                    <p>"The 4 September comparison records WolframScript version 1.13.0. Its confidence calculation combines one-sided Clopper–Pearson bounds for paired gains and losses using a Bonferroni adjustment. The Results page reproduces the calculation and discusses the assumption that task pairs are independent."</p>
+                    <p class="source mono">"Source files: fish/lab/claim_probe.py · fish/lab/typed_ast_probe.py · fish/lab/typed_ast_probe_v2.py"</p>
+                </div>
+            </details>
         </section>
 
         <section class="wrap section" aria-labelledby="context-h">
             <div class="section-head">
                 <p class="eyebrow">"Scientific context"</p>
-                <h2 id="context-h" class="display">"Established methods and the question we add"</h2>
-                <p class="lede-sm">"Loopseed combines existing techniques in a particular experimental system. Its research question is whether verified interaction can yield durable, transferable improvements under explicit tests for regressions. The architecture's name does not establish novelty or effectiveness."</p>
+                <h2 id="context-h" class="display">"Methods and related research"</h2>
+                <p class="lede-sm">"The training procedure draws on low-rank adaptation. Retention tests address a problem studied in continual learning, and the paired comparisons use established statistical methods. Research on generated training data also informs the proposed feedback tests."</p>
             </div>
             <div class="prose">
-                <p>"Adapters use low-rank parameter updates with frozen base weights, following the approach introduced by Hu and colleagues in "<a href="https://arxiv.org/abs/2106.09685">"LoRA (2021)"</a>". LoRA provides a training mechanism; it does not guarantee useful or lasting learning."</p>
-                <p>"Learning new tasks while preserving prior performance is a central continual-learning problem. "<a href="https://doi.org/10.1073/pnas.1611835114">"Kirkpatrick and colleagues (2017)"</a>" study this problem through constraints on parameter updates. Loopseed's current private study instead uses replay and explicit retention tests; it does not implement their elastic weight consolidation method."</p>
-                <p>"The formal studies use paired binary outcomes. The "<a href="https://www.itl.nist.gov/div898/software/dataplot/refman1/auxillar/mcnemar.htm">"NIST description of McNemar's test"</a>" explains the need for mutually independent pairs. Shared task templates can undermine that assumption. "<a href="/results#explorer-h">"Our statistical scope and limitations"</a>" accompany the original calculations."</p>
+                <p><b>"Parameter-efficient training. "</b><a href="https://arxiv.org/abs/2106.09685">"Hu and colleagues, LoRA (2021)"</a>" introduced the low-rank parameter updates used here. The contribution of an adapter in these experiments is assessed through its predictions and answers on the specified tests."</p>
+                <p><b>"Retention after further learning. "</b><a href="https://doi.org/10.1073/pnas.1611835114">"Kirkpatrick and colleagues (2017)"</a>" address loss of earlier abilities by limiting changes to parameters important for previous tasks, a method called elastic weight consolidation. The private continuation study uses replay of earlier examples and explicit retention tests; it does not implement elastic weight consolidation."</p>
+                <p><b>"Paired outcome comparisons. "</b><a href="https://www.itl.nist.gov/div898/software/dataplot/refman1/auxillar/mcnemar.htm">"NIST's description of McNemar's test"</a>" gives its assumptions, including independence between pairs. Questions generated from a shared template may be related, which limits interpretation of the reported significance tests."</p>
+                <p><b>"Repeated use of generated data. "</b><a href="https://www.nature.com/articles/s41586-024-07566-y">"Shumailov and colleagues (2024)"</a>" found degradation across generations of models trained on generated data. "<a href="https://arxiv.org/abs/2404.01413">"Gerstgrasser and colleagues (2024)"</a>" found that retaining original data while accumulating generated data avoided collapse in the settings they studied. These results depend on the training regime. They concern changes across successive training runs; treating a copied claim as fresh evidence during interaction is a separate question. Neither phenomenon has been directly tested in the studies reported here."</p>
             </div>
         </section>
 
         <section id="laws" class="wrap section" aria-labelledby="laws-h">
             <div class="section-head">
-                <p class="eyebrow">"Observed patterns"</p>
-                <h2 id="laws-h" class="display">"What the experiments suggest"</h2>
-                <p class="lede-sm">"The project records these observations in its ‘laws’ file. Several come from small, repeated interaction tests rather than independent samples. They motivate hypotheses and design changes; they are not universal laws. The source labels identify recorded batches, database rows and interaction cycles."</p>
+                <p class="eyebrow">"Method development"</p>
+                <h2 id="laws-h" class="display">"Observations behind the experimental controls"</h2>
+                <p class="lede-sm">"Interaction logs and diagnostic tests exposed problems that informed these procedures. The observations below explain why particular controls are needed. Several come from small, repeated tests and do not establish how common the failures are."</p>
             </div>
             <ol class="laws">
                 {LAWS.iter().map(|l| view! {
@@ -144,6 +196,7 @@ pub fn Method() -> impl IntoView {
                     </li>
                 }).collect_view()}
             </ol>
+            <p class="prose-p">"The identifiers refer to archive batches, database rows and interaction cycles recorded in docs/LAWS.md. "<a href="/record#where-h">"Source records and access"</a>" explains how to locate and request the detailed evidence."</p>
         </section>
     }
 }
