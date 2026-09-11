@@ -52,9 +52,9 @@ pub fn Overview() -> impl IntoView {
                 <p class="prose-p">"The paper presents the Dynamical Synthesis framework and experiments with Fish. It examines whether learning improves performance on new problems and preserves earlier abilities, reporting both improvements and failed tests. It also discusses how feedback can repeat a system’s own claims without providing new evidence, and identifies gaps for further research."</p>
                 <p class="prose-p">"A second paper will report follow-up studies aimed at closing gaps in the current findings. We plan to publish the research in phases, with each paper reporting new findings, unsuccessful tests and remaining gaps. The "<a href="/goals#next-h">"next research priorities"</a>" guide this work."</p>
                 <div class="paper-downloads">
-                    <a class="btn btn-primary" href="/papers/dynamical-synthesis.pdf" rel="external">"Read the paper"</a>
+                    <a class="btn btn-primary" href="/papers/dynamical-synthesis.html" rel="external">"Read the paper"</a>
                     <a class="btn" href="/results">"View experimental results"</a>
-                    <a class="text-link" href="/record#paper-h">"Data and LaTeX files ↗"</a>
+                    <a class="text-link" href="/papers/dynamical-synthesis.html#materials" rel="external">"Data and sources ↗"</a>
                 </div>
             </div>
         </section>
@@ -145,7 +145,7 @@ pub fn Overview() -> impl IntoView {
                 <div class="rule"><span class="n">"03"</span><p><b>"Check the calculations."</b>" Software checked each proposed solution’s structure. The Wolfram kernel, run locally through WolframScript, evaluated its calculations using exact arithmetic. The results were compared with the expected answers."</p></div>
                 <div class="rule"><span class="n">"04"</span><p><b>"Review the complete answer."</b>" A separate AI reviewer examined complete answers that passed the calculation checks and could reject them. Replication by another research team is still needed."</p></div>
                 <div class="rule"><span class="n">"05"</span><p><b>"Keep failures in the record."</b>" Unsuccessful and invalid runs retain their original reports and decisions. Experiments used separate system copies, with checks for changes to the live database file."</p></div>
-                <div class="rule"><span class="n">"06"</span><p><b>"Provide data and methods."</b>" The "<a href="/record#paper-h">"paper, summary data and analysis code"</a>" can be downloaded. Reports describe the methods and statistical assumptions. Detailed experiment records are available on request."</p></div>
+                <div class="rule"><span class="n">"06"</span><p><b>"Provide data and methods."</b>" The "<a href="/papers/dynamical-synthesis.html#materials" rel="external">"paper, mathematics records and analysis code"</a>" can be downloaded. The mathematics package includes full replies, review decisions and a standalone count check. Reports state the statistical assumptions and access limits for other studies."</p></div>
             </div>
         </section>
 

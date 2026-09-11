@@ -27,7 +27,16 @@ recalculates paired comparisons from the original counts.
 The scientific content was reviewed on 11 September 2026, using experiment records through
 7 September. The studies are dated snapshots, not a live status feed. The paper,
 eight scientific figures, LaTeX sources and aggregate data are available from `/record#paper-h`.
-Original run artifacts remain private and can be requested through the site's evidence contact.
+The mathematics evidence package contains the full 1,024-cell comparison, 155 AI
+reviews and selected training splits, with a standalone count check. Original
+records for the other studies remain private and can be requested for review.
+
+The paper has a plain HTML abstract and downloads at `/papers/dynamical-synthesis.html`.
+This page provides Google Scholar citation metadata without JavaScript; the homepage
+links to it in its HTML source. `/robots.txt` permits access and `/sitemap.xml` lists
+the page. The files must be deployed to loopseed.io before they can be discovered.
+Scholar indexing and manually adding a profile entry are separate steps; neither
+is evidence of peer review. Publication-page checks run with `make test`.
 
 ## Run it locally
 

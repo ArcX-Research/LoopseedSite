@@ -23,7 +23,7 @@ pub fn Goals() -> impl IntoView {
             <div class="wrap">
                 <p class="eyebrow">"Research goals"</p>
                 <h1 class="display display-xl">"Next studies and long-term research goals"</h1>
-                <p class="lede">"We intend to continue the research to close the gaps identified in "<a href="/papers/dynamical-synthesis.pdf">"Dynamical Synthesis: Learning through Interaction"</a>". The next phase focuses on learning beyond familiar tasks, preserving earlier abilities and identifying what interaction contributes."</p>
+                <p class="lede">"We intend to continue the research to close the gaps identified in "<a href="/papers/dynamical-synthesis.html" rel="external">"Dynamical Synthesis: Learning through Interaction"</a>". The next phase focuses on learning beyond familiar tasks, preserving earlier abilities and identifying what interaction contributes."</p>
                 <p class="prose-p">"Follow-up findings will form a second paper. Later papers will report subsequent research phases, including their results and remaining questions."</p>
             </div>
         </section>

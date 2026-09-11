@@ -48,6 +48,7 @@ button, input, summary, a { -webkit-tap-highlight-color: rgba(73,70,255,0.12); }
 .skip-link:focus { top: 12px; }
 .boot { display: flex; align-items: center; justify-content: center; min-height: 60vh; color: var(--ink-3); }
 .boot-noscript { color: var(--ink); }
+.boot-content { max-width: 620px; padding: 24px; text-align: center; }
 
 /* Layout and type */
 .wrap { width: min(var(--max), calc(100% - var(--gutter) - var(--gutter))); margin-inline: auto; }

@@ -31,11 +31,13 @@ pub fn Record() -> impl IntoView {
                 <h2 id="paper-h" class="display">"Dynamical Synthesis: Learning through Interaction"</h2>
                 <p class="prose-p">"The paper sets out the computational framework and reviews the learning experiments, including improvements, failed tests and incomplete comparisons. Eight figures include the exchange plots, with measurement versions and observational limitations stated separately. The paper has not been peer reviewed."</p>
                 <div class="paper-downloads">
-                    <a class="btn btn-primary" href="/papers/dynamical-synthesis.pdf" rel="external">"Read the paper"</a>
+                    <a class="btn btn-primary" href="/papers/dynamical-synthesis.html" rel="external">"Read the paper"</a>
                     <a class="btn" href="/papers/dynamical-synthesis-source.zip" download="dynamical-synthesis-source.zip">"Download LaTeX and analysis code"</a>
                     <a class="btn" href="/data/research-record.json" download="research-record.json">"Download summary data · JSON"</a>
+                    <a class="btn" href="/papers/dynamical-synthesis-mathematics-evidence.zip" download="dynamical-synthesis-mathematics-evidence.zip">"Download mathematics evidence"</a>
                 </div>
-                <p class="prose-p">"The source bundle contains the editable manuscript, references, figure-generation code, summary measurements and an audit of the supporting evidence. Detailed experiment records are available on request."</p>
+                <p class="prose-p">"The source bundle contains the editable manuscript, references, figure code and summary measurements. The mathematics evidence package adds all 1,024 recorded replies, 155 AI review decisions, task specifications, training splits and the recorded source code, with a standalone check of the reported counts. The underlying AI reviewer model version was not recorded."</p>
+                <p class="prose-p"><a href="/papers/dynamical-synthesis.html#citation" rel="external">"Citation downloads"</a>"."</p>
                 <details class="study-details">
                     <summary>"What the archive contains"</summary>
                     <div class="study-details-content prose">
@@ -82,9 +84,9 @@ pub fn Record() -> impl IntoView {
                     <h3 class="track-h">"Available material"</h3>
                     {match REPOSITORY_URL {
                         Some(url) => view! { <p class="prose-p">"The paper, figures and summary data are linked above. The research repository is also "<a href=url>"available online"</a>"."</p> }.into_any(),
-                        None => view! { <p class="prose-p">"The paper, figures, analysis code and summary data are downloadable above. The research repository and detailed experiment records remain private and can be requested for review."</p> }.into_any(),
+                        None => view! { <p class="prose-p">"The paper, figures, mathematics study records, analysis code and summary data are downloadable above. The complete repository and original records for the other studies remain private and can be requested for review."</p> }.into_any(),
                     }}
-                    <p class="prose-p">"To examine a study, request its protocol, model and adapter versions, questions, replies, scoring code, review decisions and final result. Give the report date, title and source path when you "
+                    <p class="prose-p">"For material outside the mathematics package, request the study protocol, model and adapter versions, questions, replies, scoring code, review decisions and final result. Give the report date, title and source path when you "
                         {match CONTACT_EMAIL {
                             Some(mail) => view! { <a href=format!("mailto:{mail}")>"contact the research team"</a> }.into_any(),
                             None => view! { <a href=CONTACT_URL>"contact the research team"</a> }.into_any(),
