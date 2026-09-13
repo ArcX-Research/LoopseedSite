@@ -143,9 +143,22 @@ The optional livestream players load third-party YouTube content when activated.
 
 ## Deploying
 
-Deploy `dist/` to a static host. Serve `index.html` for unknown paths so browser routing works.
-`dist/404.html` provides the same fallback. AWS Amplify settings are in `amplify.yml` and
-`customHttp.yml`.
+Deploy `dist/` to a static host. Builds include an `index.html` for each application
+route, so opening or refreshing a research page does not depend on a 404 fallback.
+`dist/404.html` provides the app's not-found page. AWS Amplify settings are in
+`amplify.yml` and `customHttp.yml`.
+
+The JavaScript and WebAssembly filenames contain content hashes. Each JavaScript
+bundle names its matching binary, preventing mixed versions in browser caches.
+HTML and mutable files must revalidate (`Cache-Control: no-cache`) on every URL,
+including `/` and research-page routes. Apply `customHttp.yml` when deploying;
+editing it locally does not change the live host's headers.
+
+Builds finish in a temporary directory before replacing served files. Assets are
+published before HTML and each file replacement is atomic. Earlier bundles remain
+in `dist/pkg/` for pages opened before a local rebuild. To clear accumulated local
+bundles, stop the preview server, remove `dist/`, then rebuild. A failed compilation
+or packaging step leaves the last successful site available.
 
 ## License
 

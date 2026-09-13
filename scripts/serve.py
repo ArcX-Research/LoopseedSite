@@ -11,12 +11,19 @@ import sys
 import threading
 import time
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
+
+from prepare_dist import client_routes
 
 ROOT = Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
 WATCH_DIRS = [ROOT / "crates", ROOT / "static"]
-WATCH_FILES = [ROOT / "Cargo.toml", ROOT / "Cargo.lock"]
+WATCH_FILES = [
+    ROOT / "Cargo.toml", ROOT / "Cargo.lock",
+    ROOT / "scripts/build.sh", ROOT / "scripts/prepare_dist.py",
+]
 WATCH_EXT = {".rs", ".toml", ".css", ".html", ".svg", ".js", ".md", ".lock"}
+CLIENT_ROUTES = set(client_routes())
 
 mimetypes.add_type("application/wasm", ".wasm")
 mimetypes.add_type("text/javascript", ".js")
@@ -140,22 +147,29 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         super().end_headers()
 
     def do_GET(self):
-        if self.path.startswith("/__dev/status"):
+        self.serve_request(head_only=False)
+
+    def do_HEAD(self):
+        self.serve_request(head_only=True)
+
+    def serve_request(self, head_only):
+        path = unquote(urlsplit(self.path).path)
+        if path == "/__dev/status":
             with LOCK:
                 body = json.dumps(STATE).encode()
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
-            self.wfile.write(body)
+            if not head_only:
+                self.wfile.write(body)
             return
-        path = self.path.split("?", 1)[0].split("#", 1)[0]
-        target = DIST / path.lstrip("/")
-        if path == "/" or not target.exists() or target.is_dir():
-            return self.serve_index()
-        return super().do_GET()
+        if (path.rstrip("/") or "/") in CLIENT_ROUTES:
+            return self.serve_index(head_only)
+        # Missing JS/Wasm/CSS must return 404, not a successful HTML response.
+        return super().do_HEAD() if head_only else super().do_GET()
 
-    def serve_index(self):
+    def serve_index(self, head_only=False):
         index = DIST / "index.html"
         if not index.exists():
             body = b"dist/index.html missing: run scripts/build.sh first"
@@ -163,7 +177,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "text/plain")
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
-            self.wfile.write(body)
+            if not head_only:
+                self.wfile.write(body)
             return
         html = index.read_text(encoding="utf-8")
         if self.server.live:
@@ -173,7 +188,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Content-Type", "text/html; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
-        self.wfile.write(body)
+        if not head_only:
+            self.wfile.write(body)
 
 
 class Server(http.server.ThreadingHTTPServer):

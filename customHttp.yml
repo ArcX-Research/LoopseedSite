@@ -1,16 +1,11 @@
-# AWS Amplify Hosting custom headers. Bundle assets carry a content hash in their URLs, so they
-# can be cached for a year; the HTML shell must always be revalidated.
+# Revalidate every entry URL (including / and client routes) and mutable files.
+# JS and Wasm also have matching content-hashed filenames, so an old binary
+# cached under the previous /pkg/loopseed_bg.wasm URL cannot be reused by new JS.
 customHeaders:
-  - pattern: '/pkg/*'
-    headers:
-      - key: 'Cache-Control'
-        value: 'public, max-age=31536000, immutable'
-  - pattern: '/index.html'
+  - pattern: '**/*'
     headers:
       - key: 'Cache-Control'
         value: 'no-cache'
-  - pattern: '**/*'
-    headers:
       - key: 'X-Content-Type-Options'
         value: 'nosniff'
       - key: 'Referrer-Policy'

@@ -17,21 +17,32 @@
 <body>
   <div id="boot" class="boot" aria-live="polite">
     <div class="boot-content">
-      <div class="boot-text mono">Loading Loopseed…</div>
+      <div class="boot-text">Loading Loopseed…</div>
+      <p id="boot-retry" hidden><button class="btn" type="button">Try again</button></p>
       <p><a href="/papers/dynamical-synthesis.html">Dynamical Synthesis: Learning through Interaction</a></p>
       <noscript><p class="boot-noscript">The paper and supporting evidence are available above. The interactive research site uses JavaScript and WebAssembly.</p></noscript>
     </div>
   </div>
   <script type="module">
-    import init from '/pkg/loopseed.js';
-    init().then(() => {
+    const retry = document.getElementById('boot-retry');
+    retry.querySelector('button').addEventListener('click', () => location.reload());
+    const slowLoad = setTimeout(() => {
+      document.querySelector('.boot-text').textContent = 'Loopseed is taking longer to load. You can retry or read the paper below.';
+      retry.hidden = false;
+    }, 20000);
+    try {
+      const { default: init } = await import('/pkg/loopseed.js');
+      await init();
       const b = document.getElementById('boot');
       if (b) b.remove();
-    }).catch((err) => {
+    } catch (err) {
       const t = document.querySelector('.boot-text');
-      if (t) t.textContent = 'Loopseed could not load: ' + err;
+      if (t) t.textContent = 'Loopseed could not load. Please try again, or read the paper below.';
+      retry.hidden = false;
       console.error(err);
-    });
+    } finally {
+      clearTimeout(slowLoad);
+    }
   </script>
 </body>
 </html>

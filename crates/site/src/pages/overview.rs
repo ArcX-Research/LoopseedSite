@@ -69,7 +69,7 @@ pub fn Overview() -> impl IntoView {
                 {latest.into_iter().map(|r| view! {
                     <article class="ruling">
                         <span class="mono meta">{r.date}</span>
-                        <div class="ruling-body"><h3>{r.title}</h3></div>
+                        <div class="ruling-body"><h3>{r.title}</h3><p>{r.result}</p></div>
                     </article>
                 }).collect_view()}
             </div>

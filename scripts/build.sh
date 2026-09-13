@@ -38,26 +38,18 @@ else
 fi
 
 WASM="$ROOT/target/wasm32-unknown-unknown/$OUT_DIR/loopseed-site.wasm"
-rm -rf "$ROOT/dist"
-mkdir -p "$ROOT/dist/pkg"
+# Keep serving the last successful build until every new artifact is ready.
+mkdir -p "$ROOT/.cache"
+STAGE="$(mktemp -d "$ROOT/.cache/site-build.XXXXXX")"
+trap 'rm -rf "$STAGE"' EXIT
+mkdir -p "$STAGE/pkg"
 echo "▸ wasm-bindgen"
-wasm-bindgen --target web --no-typescript --out-dir "$ROOT/dist/pkg" --out-name loopseed "$WASM"
+wasm-bindgen --target web --no-typescript --out-dir "$STAGE/pkg" --out-name loopseed "$WASM"
 if [ "$PROFILE" = release ] && command -v wasm-opt >/dev/null 2>&1; then
   echo "▸ wasm-opt -Os"
-  wasm-opt -Os -o "$ROOT/dist/pkg/loopseed_bg.wasm" "$ROOT/dist/pkg/loopseed_bg.wasm"
+  wasm-opt -Os -o "$STAGE/pkg/loopseed_bg.wasm" "$STAGE/pkg/loopseed_bg.wasm"
 fi
-cp -R "$ROOT/static/." "$ROOT/dist/"
-# Version assets by content hash.
-if command -v shasum >/dev/null 2>&1; then
-  HASH="$(shasum -a 256 "$ROOT/dist/pkg/loopseed_bg.wasm" | cut -c1-10)"
-  CSS_HASH="$(shasum -a 256 "$ROOT/dist/styles.css" | cut -c1-10)"
-else
-  HASH="$(sha256sum "$ROOT/dist/pkg/loopseed_bg.wasm" | cut -c1-10)"
-  CSS_HASH="$(sha256sum "$ROOT/dist/styles.css" | cut -c1-10)"
-fi
-sed -i.bak -e "s#/pkg/loopseed.js#/pkg/loopseed.js?v=$HASH#g" -e "s#/styles.css#/styles.css?v=$CSS_HASH#g" "$ROOT/dist/index.html"
-rm -f "$ROOT/dist/index.html.bak"
-# Static-host routing fallback.
-cp "$ROOT/dist/index.html" "$ROOT/dist/404.html"
+cp -R "$ROOT/static/." "$STAGE/"
+python3 "$ROOT/scripts/prepare_dist.py" "$STAGE" "$ROOT/dist"
 echo "▸ dist/ ready ($PROFILE)"
 ls -la "$ROOT/dist/pkg" | awk '$1 ~ /^-/ {printf "   %-22s %8.1f KB\n", $9, $5/1024}'
