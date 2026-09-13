@@ -47,7 +47,7 @@ pub struct Experiment {
 pub const EXPERIMENTS: &[Experiment] = &[
     Experiment {
         id: "primary",
-        title: "With calculation steps supplied, training improved answers",
+        title: "Answers with calculation steps supplied",
         date: "2026-09-02",
         run: "claim-evolution-2026-09-02T174832Z",
         instrument: "claim-coat-evolution-v1",
@@ -55,7 +55,6 @@ pub const EXPERIMENTS: &[Experiment] = &[
         design: &[
             "The dataset contained 60 structured examples that passed exact calculation checks and separate AI review: 48 for training, six for validation and six for testing. Every problem type in the dataset had examples in training. The update was trained on an isolated copy, with the live database file checked for changes.",
             "Each of 128 new problems from 16 types was tested with three model versions. Prompts supplied the calculation steps in English, and answers had to express them in a structured JSON format. Each request used a fresh system copy with memory retrieval, tools and additional autonomous input disabled. The test prompt remained available to the model.",
-            "The checker validated the proposed calculation structure, and the Wolfram kernel evaluated it. A separate AI reviewer read complete answers that passed, using coded model labels. The reviewer could reject an answer but could not change a failed calculation into a pass.",
         ],
         arms: &[
             Arm { name: "Response adapter", successes: 94, tasks: 128, negative_literal_cells: 1, note: "2 replies reached the length limit and counted as failures" },
@@ -75,11 +74,10 @@ pub const EXPERIMENTS: &[Experiment] = &[
             Gate { name: "no information leaks detected by the study’s checks", passed: true },
             Gate { name: "live database file unchanged", passed: true },
         ],
-        verdict: "The response adapter improved scores but failed the limit on negative numbers written directly in replies. The recorded decision did not permit the next test or adoption of this update.",
+        verdict: "Despite higher scores, the response adapter failed the limit on negative numbers written directly in replies. It did not qualify for adoption or the next planned test.",
         reading: &[
-            "The comparison supports improved translation of supplied steps into the required calculation format. The ability to find a solution method without those steps was not tested here.",
-            "All model versions failed all eight tasks in four problem types. Later inspection found ambiguous nested instructions in these 32 prompts. Removing them gives 94 of 96 accepted answers for the response adapter, but that subset was chosen after testing. The study’s reported result remains 94 of 128.",
-            "Later review linked the single negative number to irrelevant output on an ambiguous prompt. It still failed the criterion set before testing. The prompts were revised for a new study, with the original result preserved.",
+            "The improvement concerned translation of supplied steps into the required calculation format. Finding a solution method without those steps required a separate test.",
+            "All versions failed the eight tasks in each of four problem types. Later inspection found ambiguous nested instructions in these 32 prompts and linked the flagged negative number to irrelevant output on one of them. Excluding those prompts gives 94 of 96 accepted answers, but that subset was selected after testing; the reported result remains 94 of 128. The prompts were revised for the next study.",
         ],
         hashes: &[
             Hash { label: "evaluation software version", value: "ce4e60689a9c190204066cfe09fe40333cb28479" },
@@ -93,7 +91,7 @@ pub const EXPERIMENTS: &[Experiment] = &[
     },
     Experiment {
         id: "transfer-1",
-        title: "Without supplied steps, scores improved but one criterion failed",
+        title: "Answers without supplied calculation steps",
         date: "2026-09-03",
         run: "claim-transfer-2026-09-03T050535Z",
         instrument: "claim-method-transfer-v2",
@@ -119,9 +117,8 @@ pub const EXPERIMENTS: &[Experiment] = &[
         ],
         verdict: "The limit on negative numbers in failed answers was exceeded. The update did not qualify for adoption or the next planned test.",
         reading: &[
-            "Improvements occurred in eight of the 16 problem types, even though the prompts no longer supplied the calculation steps.",
-            "Three of the 39 failed answers included −2: 7.7%, exceeding the 2% limit set before testing. One training prompt had included a correction that quoted a rejected calculation. Only four training examples covered the affected place-value procedure.",
-            "The correction text was a possible source of the repeated error. A follow-up study changed how training prompts were constructed to investigate this explanation.",
+            "The adapter improved answers in eight of the 16 problem types without supplied steps. However, three of its 39 failed answers included −2, exceeding the preset limit of 2% with a rate of 7.7%.",
+            "Only four training examples covered the affected place-value procedure, and one prompt quoted a rejected calculation as part of a correction. That text may have contributed to the repeated error. The follow-up changed how training prompts were constructed to test this explanation.",
         ],
         hashes: &[
             Hash { label: "protocol", value: "9bd8df051ac6854f8f35859ff05acfc587e71a8c810acbcf13a3a21e252585d8" },
@@ -133,7 +130,7 @@ pub const EXPERIMENTS: &[Experiment] = &[
     },
     Experiment {
         id: "safety",
-        title: "Revised training prompts improved place-value answers",
+        title: "Place-value test with revised training prompts",
         date: "2026-09-03",
         run: "claim-clean-safety-2026-09-03T163231Z",
         instrument: "claim-clean-prompt-safety-v1",
@@ -157,8 +154,7 @@ pub const EXPERIMENTS: &[Experiment] = &[
         ],
         verdict: "The criteria were met, allowing a larger evaluation with coded model labels. Adoption of the update required further testing.",
         reading: &[
-            "The revised adapter’s correct answers and absence of unrelated constants support the explanation that correction text in the earlier training prompts contributed to the errors.",
-            "The test was limited to one problem type. Performance on other types required a separate evaluation.",
+            "The revised adapter answered every problem correctly without unrelated constants, supporting the explanation that correction text contributed to the earlier errors. This test covered only place value; the next study evaluated other problem types.",
         ],
         hashes: &[
             Hash { label: "protocol", value: "54d6ca6fc50490838fb7f8fa7686b8382c77fb12bba93183630798bf416a9972" },
@@ -170,7 +166,7 @@ pub const EXPERIMENTS: &[Experiment] = &[
     },
     Experiment {
         id: "transfer-clean",
-        title: "Revised training produced 43 accepted answers out of 64",
+        title: "Evaluation of the revised response adapter",
         date: "2026-09-04",
         run: "claim-transfer-clean-2026-09-03T170409Z",
         instrument: "claim-method-transfer-v2",
@@ -178,7 +174,7 @@ pub const EXPERIMENTS: &[Experiment] = &[
         design: &[
             "The dataset contained 60 accepted examples: 48 for training, six for validation and six for testing. The separate evaluation reported below used 64 new problems. All 16 problem types were represented in training, with one to ten examples per type across the full dataset.",
             "Training used mlx-community/Qwen3-8B-4bit with rank-8 LoRA on 16 layers: 200 Adam updates, batch size one, learning rate 0.00001, seed zero and a 1,024-token training window. Evaluation used the pinned Qwen3-8B Q4_K_M GGUF, an 8,192-token context and a 2,048-token reply limit. One candidate training run underlies this result; it was not averaged across independently trained replicas.",
-            "Each of the 16 problem types had four new sets of numerical values. Exact tasks from earlier tests and the source dataset were excluded. Related mathematics or templates may still have appeared in the base model’s original training.",
+            "Each problem type had four new sets of numerical values. Exact tasks from earlier tests and the source dataset were excluded. Related mathematics or templates may still have appeared in the base model’s original training.",
             "Every problem was tested with four combinations of prompts and output rules, using four model versions: the base model, earlier prediction adapter, shuffled-answer control and revised response adapter. The main comparison used prompts without calculation steps and general output rules. The control used the same questions and answers for training, with the pairings shuffled.",
             "All 1,024 requests completed as valid measurements. Across all settings, a separate AI reviewer accepted 137 of the 155 answers that passed the exact checker. Eighteen were rejected because their calculations did not address the requested problem. Model identities were withheld until review was complete.",
         ],
@@ -199,13 +195,11 @@ pub const EXPERIMENTS: &[Experiment] = &[
             Gate { name: "no negative numbers from the response adapter", passed: true },
             Gate { name: "information-leak checks passed; live database file unchanged", passed: true },
         ],
-        verdict: "The study met its criteria for improved performance on new numerical examples. The update still required a separate evaluation before adoption in the live system.",
+        verdict: "All study criteria were met. Adoption in the live system still required a separate evaluation.",
         reading: &[
-            "The response adapter passed all four problems in ten types and three in another. It passed none in the remaining five types. The result supports improved performance on new numbers within 11 of the 16 trained problem types. Performance on unfamiliar types remains unestablished.",
-            "The advantage over the shuffled-answer control supports the value of correct question–answer pairings in this setup. The test cannot determine whether the model learned a general procedure or became better at completing familiar templates. The control’s successes under stricter output rules also show that those rules can affect scores.",
-            "Both the base model and shuffled-answer control scored zero, so comparisons with them offered no successful answers on which to test retention. Against the earlier prediction adapter, the response adapter retained all five successes and added 38. This is a limited retention observation on these tasks.",
-            "Four response-adapter answers passed numerical checks but did not perform the requested calculation. The AI reviewer rejected them before model identities were revealed. Calculation checks and review of the complete answer therefore played distinct roles.",
-            "The dataset audit flags six of the 60 target answers for numerical constants outside its permitted-constant rules. The questions were regenerated, but these target answers were retained. Passing numerical checks does not establish that every example satisfies every dataset rule.",
+            "The response adapter passed all four problems in ten types, three in one type and none in the remaining five. Its advantage over the shuffled-answer control supports the value of correct training answers in this setup. The test does not distinguish learning a general procedure from better completion of familiar templates, or establish performance on unfamiliar problem types.",
+            "The base model and shuffled-answer control had no successful answers against which retention could be assessed. The response adapter preserved all five successes of the earlier prediction adapter and added 38, providing a limited retention observation on these tasks.",
+            "A dataset audit also flagged six of the 60 target answers for constants outside the permitted rules. Although the questions were regenerated, those target answers remained. Their numerical checks therefore did not establish compliance with every dataset rule.",
         ],
         hashes: &[
             Hash { label: "evaluation software version", value: "da445bb8de772f794766ca44a944e8ffff82c09a" },

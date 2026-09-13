@@ -13,6 +13,9 @@
   <link rel="canonical" href="https://loopseed.io/papers/dynamical-synthesis.html">
   <title>Dynamical Synthesis: Learning through Interaction | Brian Ashiundu</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Adamina&family=DM+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/papers/publication.css">
 </head>
@@ -21,48 +24,65 @@
   <header class="site-header">
     <div class="wrap header-row">
       <a class="brand" href="/" aria-label="Loopseed home"><img src="/favicon.svg" width="30" height="30" alt=""><span class="brand-name">Loopseed</span></a>
-      <nav class="nav" aria-label="Primary"><a href="/results">Results</a><a href="/method">Method</a><a href="/record">Reports</a><a href="/goals">Research goals</a></nav>
+      <nav class="nav" aria-label="Primary"><a href="/">Home</a><a href="/results">Results</a><a href="/method">Method</a><a href="/record">Reports</a><a href="/goals">Research goals</a></nav>
     </div>
   </header>
-  <main id="main" class="wrap publication" tabindex="-1">
-    <article>
-      <header class="publication-heading">
-        <p class="eyebrow">Research paper · <time datetime="2026-09-11">11 September 2026</time></p>
-        <h1>Dynamical Synthesis<span>Learning through Interaction</span></h1>
-        <p class="publication-author">Brian Ashiundu</p>
-        <p class="publication-roles">Research Fellow, Wolfram Institute<br>Head of Research, Dilate Technologies</p>
-        <p class="publication-origin">Research conducted under Dilate Technologies</p>
-      </header>
-      <section class="publication-abstract" aria-labelledby="abstract">
-        <h2 id="abstract">Abstract</h2>
-        <p>How can a computational system learn from continuing interaction, retain useful capabilities and revise its behaviour when new evidence challenges earlier conclusions? We introduce Dynamical Synthesis, a design framework for describing how internal computation and external input contribute to changes in a system and what it learns. External input includes observations from environments, people and other systems. We describe a computational model that separates changes during interaction from training changes to model parameters, and specifies how proposed updates should be checked. We test selected parts through controlled studies and examine records from a language-model implementation. In a controlled mathematics comparison, additional training produced 43 accepted answers out of 64 questions using new numerical values in problem types represented in training; the base model without additional training and a control trained on shuffled question-answer pairs each produced none. Acceptance required exact mathematical checks and a separate AI review. Follow-up studies found no advantage over the shuffled control on harder mathematics, and further response training produced more losses than gains in answer performance. These findings show improvement in a specific training comparison, with limits on applying learning to new problems and preserving earlier abilities. Whether the complete framework supports lasting learning beyond its individual parts remains to be tested.</p>
-      </section>
-      <div class="paper-downloads">
-        <a class="btn btn-primary" href="/papers/dynamical-synthesis.pdf">Read the paper · PDF</a>
-        <a class="btn" href="#materials">Supporting evidence</a>
-        <a class="publication-cite-link" href="#citation">Cite this paper</a>
-      </div>
-      <section class="publication-materials" aria-labelledby="materials">
-        <p class="eyebrow">Methods and data</p>
-        <h2 id="materials">Inspect the study</h2>
-        <div class="publication-resources">
-          <div>
-            <h3><a href="/papers/dynamical-synthesis-mathematics-evidence.zip" download>Mathematics evidence</a></h3>
-            <p>The 1,024 recorded replies, task specifications, checker scores, 155 AI review decisions, training splits and recorded source code. Includes a standalone Python check of the reported counts.</p>
-          </div>
-          <div>
-            <h3><a href="/papers/dynamical-synthesis-source.zip" download>Paper sources and figures</a></h3>
-            <p>Editable LaTeX and Markdown, references, figure code, study summaries and the numeric export used for the exchange plots.</p>
+  <main id="main" class="main" tabindex="-1">
+    <article class="publication research-page">
+      <header class="page-intro publication-heading">
+        <div class="wrap">
+          <p class="eyebrow">Research paper · <time datetime="2026-09-11">11 September 2026</time></p>
+          <h1 class="display display-xl">Dynamical Synthesis<span>Learning through Interaction</span></h1>
+          <p class="publication-author">Brian Ashiundu</p>
+          <p class="publication-roles">Research Fellow, Wolfram Institute<br>Head of Research, Dilate Technologies</p>
+          <p class="publication-origin">Research conducted under Dilate Technologies</p>
+          <div class="paper-downloads">
+            <a class="btn btn-primary" href="/papers/dynamical-synthesis.pdf">Read the paper · PDF</a>
+            <a class="btn" href="#materials">Supporting evidence</a>
+            <a class="publication-cite-link" href="#citation">Cite this paper</a>
           </div>
         </div>
-        <p class="publication-limits">The AI review archive does not record the underlying reviewer model version. Checking the saved counts does not repeat training or independently judge each answer. Other studies have separate source and access limits, described in the paper and <a href="/record#where-h">evidence-access record</a>.</p>
-        <p><a href="/results">Explore the results and figures ↗</a></p>
-      </section>
-      <section class="publication-citation" aria-labelledby="citation">
-        <h2 id="citation">Citation</h2>
-        <p>Ashiundu, B. (2026). Dynamical Synthesis: Learning through Interaction. Dilate Technologies. https://loopseed.io/papers/dynamical-synthesis.html</p>
-        <p><a href="/papers/dynamical-synthesis.bib" download>BibTeX</a><span aria-hidden="true"> · </span><a href="/papers/dynamical-synthesis.ris" download>RIS</a></p>
-      </section>
+      </header>
+      <div class="research-layout">
+        <nav class="page-nav page-nav-sidebar" aria-label="On this page">
+          <div class="wrap page-nav-inner">
+            <div class="page-nav-links">
+              <a href="#abstract">Abstract</a>
+              <a href="#materials">Supporting material</a>
+              <a href="#citation">Citation</a>
+            </div>
+          </div>
+        </nav>
+        <div class="research-sections">
+          <section class="wrap section publication-abstract" aria-labelledby="abstract">
+            <h2 id="abstract" class="display">Abstract</h2>
+            <p>How can a computational system learn from continuing interaction, retain useful capabilities and revise its behaviour when new evidence challenges earlier conclusions? We introduce Dynamical Synthesis, a design framework for describing how internal computation and external input contribute to changes in a system and what it learns. External input includes observations from environments, people and other systems. We describe a computational model that separates changes during interaction from training changes to model parameters, and specifies how proposed updates should be checked. We test selected parts through controlled studies and examine records from a language-model implementation. In a controlled mathematics comparison, additional training produced 43 accepted answers out of 64 questions using new numerical values in problem types represented in training; the base model without additional training and a control trained on shuffled question-answer pairs each produced none. Acceptance required exact mathematical checks and a separate AI review. Follow-up studies found no advantage over the shuffled control on harder mathematics, and further response training produced more losses than gains in answer performance. These findings show improvement in a specific training comparison, with limits on applying learning to new problems and preserving earlier abilities. Whether the complete framework supports lasting learning beyond its individual parts remains to be tested.</p>
+          </section>
+          <section class="wrap section publication-materials" aria-labelledby="materials">
+            <p class="eyebrow">Methods and data</p>
+            <h2 id="materials" class="display">Supporting material</h2>
+            <div class="publication-resources">
+              <div>
+                <h3><a href="/papers/dynamical-synthesis-mathematics-evidence.zip" download>Mathematics evidence</a></h3>
+                <p>This package contains 1,024 recorded replies, task specifications, checker scores, 155 AI review decisions, training splits and source code. A Python script checks the reported counts.</p>
+              </div>
+              <div>
+                <h3><a href="/papers/dynamical-synthesis-source.zip" download>Paper sources and figures</a></h3>
+                <p>The editable LaTeX and Markdown manuscript is accompanied by references, figure code, study summaries and the numerical data used in the exchange plots.</p>
+              </div>
+            </div>
+            <p class="publication-limits">The reviewer model version was not recorded. Recalculating saved counts does not repeat training or independently assess the answers. The paper and <a href="/record#where-h">evidence-access record</a> describe the sources and access limits for the other studies.</p>
+            <p><a href="/results">Results and figures ↗</a></p>
+          </section>
+          <section class="wrap section" aria-labelledby="citation">
+            <div class="publication-citation">
+              <h2 id="citation" class="display">Citation</h2>
+              <p>Ashiundu, B. (2026). Dynamical Synthesis: Learning through Interaction. Dilate Technologies. https://loopseed.io/papers/dynamical-synthesis.html</p>
+              <p><a href="/papers/dynamical-synthesis.bib" download>BibTeX</a><span aria-hidden="true"> · </span><a href="/papers/dynamical-synthesis.ris" download>RIS</a></p>
+            </div>
+          </section>
+        </div>
+      </div>
     </article>
   </main>
   <footer class="site-footer"><div class="wrap"><p>Loopseed · Research by <a href="https://dilate.co.ke/">Dilate Technologies</a></p></div></footer>

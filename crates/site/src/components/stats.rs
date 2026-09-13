@@ -28,21 +28,15 @@ pub fn PairedTable(comparisons: &'static [Comparison]) -> impl IntoView {
                                 <td class="num">{c.n}</td>
                                 <td class="num">{c.gains}</td>
                                 <td class="num">{c.losses}</td>
-                                <td class="num">
-                                    <span class="frozen">{format!("recorded {}", scientific(c.frozen_p))}</span>
-                                    <span class="recomputed">{format!("recalculated {}", scientific(r.p_value))}</span>
-                                </td>
-                                <td class="num">
-                                    <span class="frozen">{format!("recorded {}", signed(c.frozen_lower, 4))}</span>
-                                    <span class="recomputed">{format!("recalculated {}", signed(r.lower_difference, 4))}</span>
-                                </td>
+                                <td class="num">{scientific(r.p_value)}</td>
+                                <td class="num">{signed(r.lower_difference, 4)}</td>
                             </tr>
                         }
                     }).collect_view()}
                 </tbody>
             </table>
         </ScrollTable>
-        <p class="caption">"Gains: only the response adapter passed. Losses: only the control passed. Each task is paired across the two model versions. The difference is a fraction: 0.10 means 10 percentage points. "<a href="#explorer-h">"Calculation methods and assumptions"</a>"."</p>
+        <p class="caption">"Calculated from the recorded paired outcomes. "<a href="#explorer-h">"Definitions, methods and assumptions"</a>"."</p>
     }
 }
 

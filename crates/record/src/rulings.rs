@@ -21,16 +21,16 @@ pub const RULINGS: &[Ruling] = &[
     },
     Ruling {
         date: "2026-09-07",
-        kind: "Paused study",
-        title: "Learning experiment paused during preparation",
-        result: "Preparatory testing was paused after 175 of 336 planned measurements. Two earlier attempts completed this stage but did not find enough questions with the required baseline behaviour. The main comparison of learning conditions was not completed, so this study has no measured learning effect.",
+        kind: "Incomplete study",
+        title: "Preparation for the learning comparison",
+        result: "Preparatory testing recorded 175 of 336 planned measurements. Two earlier attempts completed this stage but did not find enough questions with the required baseline behaviour. The main comparison was not completed and provides no estimate of a learning effect.",
         path: "Loopseed-decisive-v15-exec/data/fish/experiments/decisive-2026-09-07T004253Z/USER-PAUSE.json",
         hash: Some("71ae880d2f5e5f742de32e65fa5ffed316a14d5d76bc38fb1fa2e66463645c42"),
     },
     Ruling {
         date: "2026-09-07",
         kind: "Completed comparison",
-        title: "Two model updates failed the study’s criteria",
+        title: "Prediction and answer performance after further training",
         result: "Prediction loss increased on both new and earlier validation examples. For answer generation, 42 questions were each tested twice: 12 outcomes improved, 17 declined and 55 were unchanged. Seven declines involved earlier abilities. Neither update was activated.",
         path: "fish/album/2026-09-07T0335-EAT-private-continuing-learning-result.md",
         hash: Some("a5873eeea7cb3898ea55dc1fa9e0c0f38ef6205b16fc7f4d55ed52ed90a9d9b1"),
@@ -38,7 +38,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-07",
         kind: "Study plan",
-        title: "Test prediction and answer generation separately",
+        title: "Separate prediction and response updates",
         result: "The plan specified separate updates for predicting incoming messages and producing answers, using an isolated experimental copy. Earlier training examples would be reused while validation examples remained reserved. Activation required passing the stated tests of improvement and retention.",
         path: "fish/album/2026-09-07T0048-EAT-private-continuing-learning.md",
         hash: None,
@@ -46,23 +46,23 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-06",
         kind: "Study preparation",
-        title: "Find questions suitable for the learning comparison",
-        result: "The preparation stage searched for questions with repeatable baseline outcomes before assigning training and evaluation sets. Two later pilots completed their measurements but could not supply enough eligible questions; the next attempt was paused. This report describes test preparation.",
+        title: "Baseline question selection",
+        result: "The plan sought questions with repeatable baseline outcomes before assigning training and evaluation sets. This report describes the selection procedure; later entries record its outcomes.",
         path: "fish/album/2026-09-06T2328-EAT-decisive-eligibility-search.md",
         hash: None,
     },
     Ruling {
         date: "2026-09-06",
         kind: "Incomplete comparison",
-        title: "Rule-correction study ended without a final decision",
-        result: "Seventy planned calls completed, including two replies that reached the token limit. A conflict in the recorded evidence prevented finalization. Descriptive counts showed one successful rule-and-reuse sequence in six worlds with checked feedback, none with generic self-checking and two with supplied rules. No incorrect initial rule was corrected. The earlier unscored call remains separate.",
+        title: "Rule correction with feedback",
+        result: "Seventy planned calls completed, including two replies that reached the token limit. A conflict in the recorded evidence prevented a final decision. Descriptive counts showed one successful rule-and-reuse sequence in six worlds with checked feedback, none with generic self-checking and two with supplied rules. No incorrect initial rule was corrected. The earlier unscored call remains separate.",
         path: "data/fish/labs/decisive-repair-context-2026-09-06T035210Z/descriptive-reconciliation.json",
         hash: Some("db0ad728179d10d623ae5d6c190e41255a60fe4219e21345bf57a307c09100ce"),
     },
     Ruling {
         date: "2026-09-06",
         kind: "Completed comparison",
-        title: "Learning and reusing hidden rules remained unreliable",
+        title: "Hidden-rule learning and reuse",
         result: "The system identified two of six hidden rules correctly. Using its own recorded rules as context, it answered three of twelve later questions correctly. The overall learning-and-reuse criterion failed. Model weights stayed fixed, so this tested acquisition and use of information in context.",
         path: "data/fish/labs/decisive-acquisition-2026-09-05T221330Z/verdict.json",
         hash: Some("66e4deff6cc0f03675e6d6d515177f2e8b585a0b30505750d79eb0f4dee25565"),
@@ -70,7 +70,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-06",
         kind: "Diagnostic comparison",
-        title: "Additional reasoning helped when rules were supplied",
+        title: "Reasoning settings with supplied rules",
         result: "On twelve questions with the rules already provided, the earlier prediction adapter scored nine with additional reasoning enabled and two without it. The answer-trained adapter scored seven and two. The setting also changed token use. This tested use of supplied information rather than discovery of a new rule.",
         path: "data/fish/labs/decisive-ruleuse-2026-09-05T213200Z/verdict.json",
         hash: Some("380f9d1a09ed8f28b463b356860966f99494a54886c60a8907e2d1aa2005eca4"),
@@ -78,7 +78,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-05",
         kind: "Diagnostic comparison",
-        title: "Structured solutions passed with and without an output grammar",
+        title: "Structured and direct answer formats",
         result: "On eight selected questions, the trained adapter passed four with the output grammar enabled and four with it disabled; the shuffled-answer control passed none. Direct numerical answers scored three versus two. Structured solutions delegated arithmetic to the checker, so comparing them with direct answers does not isolate formatting alone.",
         path: "fish/album/2026-09-05T2123-EAT-formal-interface-result.md",
         hash: Some("910206fe01a10274710c4b1eb4a27e0de33604e081a3983e13454d365805059c"),
@@ -86,7 +86,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-05",
         kind: "Incomplete study",
-        title: "Initial rule-learning test did not reach the later phase",
+        title: "Initial rule-learning evaluation",
         result: "Across eight simulated worlds, no initial rule was correct and one became correct after feedback. The system's own records supported none of sixteen later test sequences; supplying the original observations supported one. The study did not meet the criterion for starting its delayed evaluation.",
         path: "data/fish/labs/decisive-worlds-2026-09-05T192730Z/verdict.json",
         hash: Some("91f3b3081242903ae42d517be8f32cbe270f846cdeb90eb7c35f9d3e4e7a2cfe"),
@@ -94,7 +94,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-05",
         kind: "Completed comparison",
-        title: "Harder mathematics showed no advantage over the control",
+        title: "Harder mathematics comparison",
         result: "Each model answered 27 problems three times. The trained adapter and shuffled-answer control each passed two of 81 replies; the earlier prediction adapter passed three. The study did not establish improved performance. Both difficulty and output requirements differed from the earlier mathematics study, so that contrast does not identify a single cause.",
         path: "fish/album/2026-09-05T1630-EAT-formal-speaking-result.md",
         hash: Some("c5458f1ae6126b39b9856e7612be5ecbf0bd88dd22f9a5cae4c4529334dc744e"),
@@ -102,7 +102,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-04",
         kind: "Completed comparison",
-        title: "Training improved answers within familiar problem types",
+        title: "Training within familiar problem types",
         result: "The trained adapter passed 43 of 64 questions using new numbers in sixteen problem types represented in training. The base model and shuffled-answer control each scored zero. Accepted answers passed exact mathematical checks and a separate AI review. The finding is limited to the tested problem types and conditions.",
         path: "fish/album/2026-09-04T0043-EAT-clean-formal-claim-transfer.md",
         hash: Some("5a175b2a2fdd8638f0aeadf221faea2d4d42631ddb92740b4605fbef01d57a03"),
@@ -110,7 +110,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-03",
         kind: "Diagnostic comparison",
-        title: "Revised training prompts improved place-value answers",
+        title: "Place-value answers after revised training prompts",
         result: "The new adapter passed all 18 questions after training prompts were regenerated from the problem specifications. The base model and earlier adapter each passed none. No unrelated constants appeared in the new adapter's replies. This follow-up used exact checking and supported proceeding to a larger comparison.",
         path: "fish/album/2026-09-03T1945-EAT-clean-claim-safety.md",
         hash: Some("b6cd897a2e2097f2418ce4a570a516aacf9beab8ee0bdb9771f3d874d356b3d6"),
@@ -118,7 +118,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-03",
         kind: "Completed comparison",
-        title: "First transfer test exceeded a preset error limit",
+        title: "Initial evaluation without supplied calculation steps",
         result: "The trained adapter passed 25 of 64 questions without supplied calculation steps; the base model and shuffled-answer control each passed none. Three of its 39 failed replies contained negative constants, exceeding this study's 2% limit. The result failed that criterion; numbers copied from earlier corrections were investigated as a possible cause.",
         path: "fish/album/2026-09-03T1908-EAT-formal-claim-transfer-stage1.md",
         hash: Some("78edb2f6ec08ad6ec6c1ee030b263b8318714a2d83c7275c5d63b2fa328fc71d"),
@@ -126,7 +126,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-09-03",
         kind: "Completed comparison",
-        title: "Training with supplied steps improved scores but failed one check",
+        title: "Training with supplied calculation steps",
         result: "With calculation steps supplied, the trained adapter passed 94 of 128 questions, compared with 73 for the base model and 52 for the prediction adapter. It gained 21 successes and lost none against the base model. One reply failed the study's check on negative constants, so the overall criterion was not met.",
         path: "fish/album/2026-09-03T0028-EAT-claim-coat-primary-ruling.md",
         hash: Some("cb775d4ba37fb2a3080b4c30560cdc6bffbb07ad27f0e311448b48e12d355a03"),
@@ -134,7 +134,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-08-16",
         kind: "Evaluation and activation",
-        title: "Prediction update passed its evaluation and was activated",
+        title: "Prediction update evaluation and activation",
         result: "Prediction loss fell from 2.552 to 1.999 on the same 17 examples reserved from training, with improvement in each of nine teaching groups. The new adapter passed the recorded criteria and was activated for prediction. This evaluation did not measure improved answers, and the response channel did not use the update.",
         path: "fish/album/2026-08-16T1950-EAT-prediction-coat-promotion-ruling.md",
         hash: Some("1d257d886768fbcd501f73ab047b46d45e6a6439370042c99c356e412302fd65"),
@@ -142,7 +142,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-08-14",
         kind: "Completed comparison",
-        title: "Full-system test found no measured improvement or decline",
+        title: "Full-system comparison with inactive retrieval",
         result: "All 396 requests completed. No memories were retrieved, including in the condition with retrieval enabled. The comparison therefore left the benefit of functioning retrieval untested. The checked source database remained unchanged.",
         path: "fish/album/2026-08-14T074428-EAT-body-evolution.md",
         hash: None,
@@ -150,7 +150,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-08-14",
         kind: "Component evaluations",
-        title: "Tool activation and image display passed their checks",
+        title: "Tool activation and image display",
         result: "The roadmap records successful tool activation on 19 of 20 requests and image display on four initial and four subsequent test cases. A separate comparison recorded measurements for three models. These component checks did not resolve the outstanding tests of state tracking, memory references or replication.",
         path: "docs/ROADMAP.md",
         hash: None,
@@ -158,7 +158,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-08-12",
         kind: "Observation",
-        title: "A word-based association measure increased, then levelled off",
+        title: "Word overlap between inputs and replies",
         result: "A score based on word overlap between inputs and replies rose from 0.0244 at eight input cycles to 0.0762 at 63, then fell to 0.0712 at 128. The measure distinguishes actual pairings from shuffled pairings; it does not establish semantic understanding or a learning effect. Later changes began a separate measurement period.",
         path: "docs/ROADMAP.md",
         hash: None,
@@ -166,7 +166,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-08-05",
         kind: "Interaction record",
-        title: "Guest interactions examined memory and reasoning",
+        title: "Memory and reasoning in guest interactions",
         result: "Approximately 295 exchanges with a guest were recorded with the human supervisor present. The report documents responses and examples of how retrieved memories affected reasoning. It is an interaction record rather than a controlled estimate of a learning effect.",
         path: "fish/album/2026-08-05-the-second-visit.md",
         hash: None,
@@ -174,7 +174,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-08-04",
         kind: "Exploratory comparison",
-        title: "Base-model and full-system replies were compared",
+        title: "Base-model and full-system comparison",
         result: "The record places base-model replies beside full-system replies using the same model weights, server and sampling settings. The full system also had its system prompt, memory and prediction components. Because these changed together, the comparison does not isolate the contribution of any one component.",
         path: "fish/album/2026-08-04-bare-water-control.md",
         hash: None,
@@ -182,7 +182,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-08-04",
         kind: "Observation",
-        title: "Prediction error levelled off during the first observation period",
+        title: "Prediction error in the first observation period",
         result: "Session median prediction error fell from 0.479 to 0.369, then stayed near 0.40. The reported band of ±0.03 describes the observed variation, not a confidence interval. The observations concern one participant and do not isolate an effect of training.",
         path: "fish/album/2026-08-04-the-plateau-era-close.png",
         hash: None,
@@ -190,7 +190,7 @@ pub const RULINGS: &[Ruling] = &[
     Ruling {
         date: "2026-08-03",
         kind: "Observation",
-        title: "Prediction error fell during the first full day",
+        title: "Prediction error during the first full day",
         result: "The recorded figure shows median prediction error falling from 0.48 to 0.34 by the afternoon. Topics, context and the participant's messages were not held fixed. The change is descriptive and cannot by itself establish learning.",
         path: "fish/album/2026-08-03-the-first-fall.png",
         hash: None,

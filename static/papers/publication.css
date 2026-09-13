@@ -1,24 +1,19 @@
-.publication { max-width: 920px; padding-block: 48px 64px; }
-.publication-heading h1 { font-size: clamp(32px, 4vw, 48px); line-height: 1.12; letter-spacing: -.04em; margin: 0 0 22px; }
+.publication-heading h1 { margin-bottom: 24px; }
 .publication-heading h1 span { display: block; font-size: .68em; margin-top: 10px; letter-spacing: -.025em; }
 .publication-author { font-size: 19px; font-weight: 600; margin: 0 0 5px; }
 .publication-roles { color: var(--ink-2); font-size: 14px; line-height: 1.5; margin: 0 0 4px; }
 .publication-origin { color: var(--ink-3); font-size: 13px; margin: 0; }
-.publication h2 { font-size: 22px; line-height: 1.3; margin: 0 0 14px; }
-.publication-abstract { margin-top: 28px; }
 .publication-abstract p { font-size: 16px; line-height: 1.75; margin: 0; color: var(--ink-2); }
-.publication .paper-downloads { margin-block: 24px 40px; }
+.publication .paper-downloads { margin: 28px 0 0; }
 .publication-cite-link { padding: 12px 6px; }
-.publication-materials { border-top: 1px solid var(--hair); padding-top: 32px; }
-.publication-resources { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.publication-resources { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
 .publication-resources h3 { font-size: 18px; margin: 12px 0 8px; }
-.publication-resources p { color: var(--ink-2); font-size: 15px; margin: 0; }
-.publication-limits { margin-top: 24px; color: var(--ink-3); font-size: 14px; }
-.publication-citation { margin-top: 32px; padding: 24px; border-radius: 14px; background: var(--indigo-soft); }
+.publication-resources p { color: var(--ink-2); font-size: 16px; margin: 0; }
+.publication-limits { margin-top: 24px; color: var(--ink-2); font-size: 15px; }
+.publication-citation { padding: 24px; border-radius: 14px; background: var(--indigo-soft); }
+.publication-citation h2 { font-size: 24px; margin-bottom: 16px; }
 .publication-citation p { margin: 0 0 12px; overflow-wrap: anywhere; }
 .publication-citation p:last-child { margin: 0; }
 @media (max-width: 640px) {
-  .publication { padding-top: 30px; }
-  .publication-resources { grid-template-columns: 1fr; gap: 12px; }
   .publication-citation { padding: 20px; }
 }

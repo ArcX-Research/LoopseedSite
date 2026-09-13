@@ -29,32 +29,33 @@ const SECTIONS: &[(&str, &str)] = &[
 pub fn Results() -> impl IntoView {
     set_title("Results");
     view! {
+        <div class="results-page research-page">
         <section class="page-intro page-intro-results">
             <div class="wrap">
                 <p class="eyebrow">"Results"</p>
-                <h1 class="display display-xl">"Results from learning experiments"</h1>
-                <p class="lede">"One controlled mathematics study found 43 accepted answers out of 64 after training, compared with zero from each of two control models. The problems used new numbers in problem types included in training. Follow-up studies found limited success on harder problems and losses in some earlier abilities."</p>
-                <p class="prose-p">"This page brings together the findings available on 11 September 2026. The studies used different tasks and scoring rules, so their scores cannot be combined into one overall success rate. The "<a href="/record#paper-h">"paper, summary data and analysis code"</a>" are available for review; detailed experiment records are available on request. Independent replication is still needed."</p>
+                <h1 class="display display-xl">"Learning, transfer and retention"</h1>
+                <p class="lede">"These studies examine how further training and stored experience affect answers and prediction. Mathematics tests found improvements within trained problem types, while subsequent experiments showed limited transfer and losses on earlier tasks."</p>
+                <p class="prose-p">"The findings cover experiments reported by 11 September 2026. Each study has its own tasks and scoring rules, so the results cannot be combined into one overall success rate. The "<a href="/record#paper-h">"paper and supporting data"</a>" provide the records behind these comparisons. Independent replication is still needed."</p>
             </div>
         </section>
-        <PageNav items=SECTIONS/>
-
+        <div class="research-layout">
+        <PageNav items=SECTIONS show_label=false sidebar=true/>
+        <div class="research-sections">
         <section id="coats" class="wrap section" aria-labelledby="coats-h">
             <div class="section-head">
-                <p class="eyebrow">"Mathematics studies · September 2026"</p>
-                <h2 id="coats-h" class="display">"Training improved answers within familiar problem types"</h2>
-                <p class="lede-sm">"The response adapters improved mathematical answers in four related studies, although two failed additional criteria set before testing. The gains concerned new numerical examples within problem types represented in training. The studies below show how the training material and answer requirements affected those results."</p>
-                <p class="prose-p">"The training updates are called adapters: small sets of additional weights trained while the base model’s original weights remain fixed. Response adapters were trained to answer questions; prediction adapters were trained to predict incoming messages."</p>
-                <p class="prose-p">"In the main comparisons, accepted answers passed both calculation checks and AI review. The smaller place-value follow-up reports exact-check results, as noted in its methods. A problem type, called a ‘family’ in the reports, groups tasks that use the same mathematical procedure with different numbers. These studies test new examples from types already included in training."</p>
+                <p class="eyebrow">"2–4 September 2026"</p>
+                <h2 id="coats-h" class="display">"Mathematics training studies"</h2>
+                <p class="lede-sm">"Four related studies tested how training examples and answer requirements affected mathematical performance. The sequence began with calculation steps supplied in the prompt, then tested answers without those steps and revised training prompts that contained correction text. Each evaluation used new numerical values within problem types represented in training."</p>
+                <p class="prose-p">"Accepted answers passed calculation checks and a separate AI review, except in the focused place-value study, which used calculation checks alone. Two studies met all their criteria; the other two improved scores but failed additional checks set before testing."</p>
             </div>
             <details class="study-details">
                 <summary>"Model versions, answer formats and review procedure"</summary>
                 <div class="study-details-content">
-                    <p class="prose-p">"The model returned a structured description of calculation steps. Our software checked that structure, and the Wolfram kernel, run locally through WolframScript, evaluated the calculations. In the main comparisons, a separate AI reviewer assessed complete answers that passed, without knowing which model version produced them."</p>
-                    <p class="prose-p">"The candidate is the response adapter being tested. The base-model control uses no adapter. The shuffled-answer control uses an adapter trained with answers reassigned to different questions. An earlier prediction adapter provides another comparison; it was used here to generate answers."</p>
+                    <p class="prose-p">"Training changed additional model weights, called adapters, while keeping the base model’s original weights fixed. Response adapters were trained to answer questions; prediction adapters were trained to predict incoming messages. The candidate is the response adapter under evaluation. The comparisons used the base model without an adapter, an earlier prediction adapter and a shuffled-answer control trained on the same questions with answers taken from other questions."</p>
+                    <p class="prose-p">"The model returned a structured description of calculation steps. Our software checked that structure, and the Wolfram kernel, run locally through WolframScript, evaluated the calculations. In the main comparisons, an AI reviewer then read complete answers that passed, with model identities hidden. Review could reject an answer but could not reverse a failed calculation check."</p>
                     <p class="prose-p">"Prompts either supplied the calculation steps or asked the model to produce them. The reports call these ‘node-specified’ and ‘names-only’. Both required structured JSON output. Task-specific output rules restricted names and the number of inputs to each operation; general output rules restricted the overall structure. These are called strict and loose grammars in the reports."</p>
                     <p class="prose-p">"The studies also counted negative numbers written directly in replies. Their limits were chosen to detect particular errors associated with the training material. Negative numbers are valid mathematics; this check was specific to these tasks."</p>
-                    <p class="prose-p">"The project team recorded the tasks, settings and decision criteria locally before evaluation. These plans were not publicly preregistered, and the four studies are successive experiments by the same team. Experiments used isolated copies and checked for changes to the live database file. The AI review is an additional check within the project; it is fallible and does not constitute independent replication."</p>
+                    <p class="prose-p">"The team recorded tasks, settings and decision criteria locally before evaluation, without public preregistration. Experiments used isolated system copies and checked for changes to the live database. AI review was an internal check and could itself make errors. The reports use ‘family’ for problems that share a mathematical procedure."</p>
                 </div>
             </details>
             <ResearchFigure name="adapter-transfer"
@@ -75,9 +76,9 @@ pub fn Results() -> impl IntoView {
         <section class="wrap section" aria-labelledby="factorial-h">
             <div class="section-head">
                 <p class="eyebrow">"4 September study · additional comparisons"</p>
-                <h2 id="factorial-h" class="display">"How prompts and output rules affected scores"</h2>
-                <p class="lede-sm">"The same 64 problems were tested with four combinations of prompts and output rules. The response adapter scored 43 when it had to produce the calculation steps and 4 when the steps were supplied. The shuffled-answer control had accepted answers only under the task-specific output rules."</p>
-                <p class="prose-p">"The main comparison was selected before testing: no supplied steps, with general output rules. Each cell counts accepted answers out of 64. Differences from the training format and more replies reaching the length limit are possible explanations for the lower scores with supplied steps; the study did not isolate their separate effects."</p>
+                <h2 id="factorial-h" class="display">"Effects of prompts and output rules"</h2>
+                <p class="lede-sm">"The 4 September study also tested the same problems under four combinations of prompts and output rules. Supplying calculation steps reduced the response adapter’s score, while the shuffled-answer control succeeded only with task-specific output rules. The main comparison, selected before testing, used no supplied steps and general output rules."</p>
+                <p class="prose-p">"Each cell counts accepted answers out of 64. Differences from the training format and more replies reaching the length limit may explain the lower scores with supplied steps, but their separate effects were not tested."</p>
             </div>
             <ScrollTable label="Prompt and grammar comparisons">
                 <table class="table">
@@ -94,12 +95,12 @@ pub fn Results() -> impl IntoView {
         <section id="harder" class="wrap section" aria-labelledby="harder-h">
             <div class="section-head">
                 <p class="eyebrow">"Harder mathematics problems · 5 September 2026"</p>
-                <h2 id="harder-h" class="display">"The harder test found no advantage over the control"</h2>
+                <h2 id="harder-h" class="display">"Performance on harder problems"</h2>
                 <p class="lede-sm">"The response adapter and shuffled-answer control each produced 2 accepted answers out of 81 on harder problems. The earlier prediction adapter produced 3. This study did not meet its criterion for improved performance."</p>
             </div>
-            <p class="prose-p">"Each model version answered 27 mathematics problems three times, using different random seeds to control generation randomness. Five memory questions and four questions whose answers were unavailable were tested in the same way, giving 324 replies overall. All three versions failed all 15 memory-test replies, so those questions could not establish whether earlier abilities were preserved."</p>
-            <p class="prose-p">"Across the 27 problems, the response adapter outscored the shuffled-answer control on two, scored lower on two and tied on 23. The one-sided sign test gave p = 0.6875. Equal overall scores do not establish that the models perform equivalently. Plain-text requirements and reply-length limits contributed to failures, and both the problems and answer requirements differed from the preceding study."</p>
-            <h3 class="figure-h">"A separate test of answer format"</h3>
+            <p class="prose-p">"Each model version answered 27 mathematics problems at three random seeds. Five memory questions and four questions with unavailable answers were tested in the same way, giving 324 replies overall. Each version failed all 15 memory-test attempts, leaving no successful baseline for assessing retention."</p>
+            <p class="prose-p">"Across the 27 problems, the response adapter scored higher than the shuffled-answer control on two, lower on two and tied on 23 (one-sided sign test, p = 0.6875). This result does not establish equivalent performance. Plain-text requirements and reply-length limits also contributed to failures."</p>
+            <h3 class="figure-h">"Answer-format comparison"</h3>
             <p class="prose-p">"Eight selected problems were tested with two adapters and three answer formats, producing 48 replies. Structured answers described calculations for the evaluator to execute; direct answers required the model to provide the numerical results."</p>
             <ScrollTable label="Accepted answers in the answer-format study">
                 <table class="table">
@@ -111,17 +112,17 @@ pub fn Results() -> impl IntoView {
                     </tbody>
                 </table>
             </ScrollTable>
-            <p class="prose-p">"The problems were selected using earlier results, and one direct-answer task required less than its structured counterpart. These differences limit what the comparison can tell us about the effect of answer format. An earlier attempt at the harder study was invalid because the requested adapter was not active; its results remain excluded."</p>
+            <p class="prose-p">"The problems were selected using earlier results, and one direct-answer task required less than its structured counterpart. The comparison therefore cannot isolate the effect of answer format. An earlier attempt at the harder study was excluded because the requested adapter was not active."</p>
             <p class="source">"Study identifiers: decisive-formal-2026-09-05T101400Z and formal-interface-2026-09-05T150825Z. "<a href="/record#paper-h">"Methods and supporting records"</a>"."</p>
         </section>
 
         <section class="wrap section" aria-labelledby="explorer-h">
             <div class="section-head">
                 <p class="eyebrow">"Statistical methods"</p>
-                <h2 id="explorer-h" class="display">"Compare gains and losses on the same tasks"</h2>
-                <p class="lede-sm">"A gain is a task the response adapter passed and the control failed. A loss is a task the control passed and the response adapter failed. A tie means both passed or both failed. The calculator below reproduces the statistical rule used in the mathematics studies."</p>
-                <p class="prose-p">"The rule requires a one-sided exact McNemar p-value below 0.05 and a positive lower confidence bound on the difference in success rates. With 128 matched tasks and no losses, at least nine gains meet both requirements. Passing this statistical rule is only one of the study’s success criteria."</p>
-                <p class="prose-p">"The calculation assumes independent task pairs. In the 4 September study, four tasks shared each problem type, so their errors may be related. The reported statistics do not account for this grouping or variation across separately trained models. They describe this evaluation under the stated assumptions; stronger conclusions require new problem types and independent repetitions."</p>
+                <h2 id="explorer-h" class="display">"Paired performance comparisons"</h2>
+                <p class="lede-sm">"Comparing the same tasks across two model versions shows where performance improved or declined. A gain means only the response adapter passed, a loss means only the control passed, and a tie means both passed or both failed. The calculator applies the statistical rule used in the mathematics studies."</p>
+                <p class="prose-p">"That rule requires a one-sided exact McNemar p-value below 0.05 and a positive lower confidence bound on the difference in success rates. With 128 matched tasks and no losses, at least nine gains meet both requirements. Other study criteria still apply."</p>
+                <p class="prose-p">"The calculation assumes independent task pairs. In the 4 September study, four tasks shared each problem type, so their errors may be related. The statistics do not account for that grouping or for variation between independently trained models."</p>
             </div>
             <details class="study-details">
                 <summary>"How the p-value and confidence bound are calculated"</summary>
@@ -137,27 +138,13 @@ pub fn Results() -> impl IntoView {
         <section id="current" class="wrap section" aria-labelledby="current-h">
             <div class="section-head">
                 <p class="eyebrow">"Further training · 7 September 2026"</p>
-                <h2 id="current-h" class="display">"Two training updates failed the study’s criteria"</h2>
-                <p class="lede-sm">"An isolated copy of the system was used to train separate updates for prediction and answering questions. Prediction became less accurate on test examples. The response update improved some answers but caused more previously successful answers to fail. Neither update was adopted."</p>
-            </div>
-            <div class="cols-3">
-                <div class="card">
-                    <h3>"Predicting incoming messages"</h3>
-                    <p>"Training used 85 previously selected examples and 11 additional examples. On three new test examples, prediction loss rose from 1.967 to 2.201; on 16 older test examples, it rose from 1.977 to 2.676. Lower loss means more accurate prediction. These test examples were excluded from training."</p>
-                </div>
-                <div class="card">
-                    <h3>"Answering questions"</h3>
-                    <p>"The study used 84 solutions supplied by an AI teacher and checked by exact calculation: 63 for training and 21 for validation, split by shared computation. Validation loss, an error measure on the reserved examples, fell from 1.919 to 0.035. A separate evaluation of generated answers found 12 improvements, 17 declines and 55 unchanged outcomes."</p>
-                </div>
-                <div class="card">
-                    <h3>"Why the updates were not adopted"</h3>
-                    <p>"The prediction update had to reduce loss by at least 0.01 on the new test set without increasing it on the older set. The response update had to improve at least four new cases without losing any previously successful answers. Both failed their criteria. The isolated copy kept its previous configuration."</p>
-                </div>
+                <h2 id="current-h" class="display">"Performance after further training"</h2>
+                <p class="lede-sm">"Separate updates for prediction and answering questions were tested on an isolated system copy. Prediction error increased on new and older test examples. The response update lowered validation loss from 1.919 to 0.035, but direct tests of its answers found more losses than gains. Neither update met the criteria for adoption."</p>
             </div>
             <ResearchFigure name="continuation"
                 alt="Prediction loss increased from 1.967 to 2.201 on new test examples and 1.977 to 2.676 on older test examples. The response update produced 12 improvements, 17 declines and 55 unchanged outcomes."
-                caption="Panel A compares prediction loss before and after training. ‘Witness’ denotes examples excluded from training. Panel B compares answers from the response update with the previous version. A gain means only the update passed; a loss means only the previous version passed. Lower validation loss during training did not ensure better performance on these tasks."/>
-            <h3 class="figure-h">"Answer comparisons, including earlier abilities"</h3>
+                caption="Panel A compares prediction loss before and after training; lower values indicate more accurate prediction. ‘Witness’ denotes examples excluded from training. Panel B compares answers from the response update with the previous version: gains are newly passed tasks, and losses are previously passed tasks that now fail."/>
+            <h3 class="figure-h">"Answer accuracy and retention"</h3>
             <p class="prose-p">"Each of 42 tasks was answered twice by each model version, using matching random seeds. The 168 replies therefore form 84 comparisons. ‘Unchanged’ includes cases where both versions passed and cases where both failed."</p>
             <ScrollTable label="Answer outcomes for the updated and previous model versions">
                 <table class="table">
@@ -170,7 +157,14 @@ pub fn Results() -> impl IntoView {
                     <tfoot><tr><th>"Total"</th><td class="num">"84"</td><td class="num">"12"</td><td class="num">"17"</td><td class="num">"55"</td></tr></tfoot>
                 </table>
             </ScrollTable>
-            <p class="prose-p">"Seven declines involved earlier abilities. Both versions correctly acknowledged unavailable information in all six of those checks. Repeated questions and related problem types mean these 84 comparisons are not independent replications. They show why generated answers and earlier abilities need direct testing even when validation loss falls."</p>
+            <p class="prose-p">"The losses included seven comparisons involving earlier abilities. Both versions correctly acknowledged unavailable information in all six checks of that behaviour. Repeated questions and related problem types limit the independence of these observations."</p>
+            <details class="study-details">
+                <summary>"Training examples and adoption criteria"</summary>
+                <div class="study-details-content">
+                    <p class="prose-p">"Prediction training used 85 previously selected examples and 11 additional examples. Evaluation reserved three new examples and 16 older ones. Adoption required a loss reduction of at least 0.01 on the new set without an increase on the older set."</p>
+                    <p class="prose-p">"Response training used 84 solutions supplied by an AI teacher and checked by exact calculation: 63 for training and 21 for validation, split by shared computation. Adoption required at least four gains on new cases without losing any previously successful answers. The isolated copy retained its previous configuration."</p>
+                </div>
+            </details>
             <details class="study-details">
                 <summary>"Study records and result file"</summary>
                 <div class="study-details-content">
@@ -188,32 +182,20 @@ pub fn Results() -> impl IntoView {
         <section id="skin" class="wrap section" aria-labelledby="skin-h">
             <div class="section-head">
                 <p class="eyebrow">"Prediction during interaction · August 2026"</p>
-                <h2 id="skin-h" class="display">"How prediction error changed across sessions"</h2>
-                <p class="lede-sm">"Prediction error decreased between early sessions and varied across later ones. Topics, context and system settings changed during the observation period, so these records do not isolate an effect of training."</p>
-                <p class="prose-p">"Before each incoming message, the system recorded a prediction. The score δ measures the difference between the prediction and observation. Two versions were used and are shown in separate panels; lower values mean a closer match under that version’s measure. The dashed line marked θₘ is the reference threshold for selecting memories. These are the same figures shown in the paper. See the "<a href="/method#symbols">"symbol guide"</a>" for the notation."</p>
-                <p id="prediction-settings" class="prose-p">"The recorded text encoder for these interaction measurements is "<code>"bge-small-en-v1.5"</code>", with d = 384. The same setting is reported in Section 5.8 of the paper."</p>
+                <h2 id="skin-h" class="display">"Prediction error during interaction"</h2>
+                <p class="lede-sm">"Before each incoming message, the system recorded a prediction. The score δ measures how much that prediction differed from the observed message, with lower values indicating a closer match. Topics, context and system settings changed during collection, so the records do not isolate an effect of training."</p>
+                <p class="prose-p">"Two versions of the score were used. They are plotted separately because a change in the measure can change the score even without a change in performance. The "<a href="/method#symbols">"symbol guide"</a>" introduces the notation used in the figures."</p>
             </div>
 
             <h3 id="participant" class="figure-h">"Interactions with one regular participant"</h3>
-            <p class="lede-sm figure-lede">"All scores in this chart come from the same human participant. Dots show individual exchanges; outlined markers show session medians. Medians are calculated separately for each measurement version."</p>
+            <p class="prose-p">"The export contains 717 scored exchanges with one participant: 652 under version 1 and 65 under version 2, grouped into 15 and seven sessions respectively. The version-1 session median fell from 0.4795 on 2 August to 0.3694 on 3 August; subsequent medians ranged from 0.3912 to 0.5497. Dates are in UTC."</p>
             <SkinChart/>
-            <div class="prose cols-2">
-                <div>
-                    <h3>"What changed"</h3>
-                    <p>"The first session median was 0.4795 on 2 August and a later median was 0.3694 on 3 August, using UTC dates. Subsequent version-1 session medians ranged from 0.3912 to 0.5497. All sessions are included in the plot, including those with few exchanges."</p>
-                    <p>"The export contains 717 scored exchanges: 652 under version 1 and 65 under version 2, grouped into 15 and seven sessions respectively. A gap of at least 30 minutes starts a new session within each measurement version. These are repeated observations from one participant, not independent participants or a controlled training comparison."</p>
-                </div>
-                <div>
-                    <h3>"Why the two score versions differ"</h3>
-                    <p>"Version 1 compares numerical representations of the predicted and observed text using cosine distance. Version 2, introduced on 7 August, combines that distance with a measure of how unlikely the observed text was under the prediction model. Each contributes half of the combined score."</p>
-                    <p>"The original measure was also used later when the additional scoring was unavailable. A change between versions can therefore reflect a change in measurement. Neither score is a percentage of wrong answers: a value of 0.40 does not mean 40% incorrect."</p>
-                </div>
-            </div>
 
-            <details class="study-details">
-                <summary>"Prediction-error formulas and definitions"</summary>
+            <details id="prediction-settings" class="study-details">
+                <summary>"Score definitions and encoder settings"</summary>
                 <div class="study-details-content">
-                    <p class="prose-p">"In these formulas, E converts text to a vector of dimension d, Î is the recorded prediction and ‘you’ is the observed message. Cosine distance compares the directions of the two vectors."</p>
+                    <p class="prose-p">"Version 1 compares representations of predicted and observed text using cosine distance. Version 2, introduced on 7 August, gives equal weight to that distance and a measure of how unlikely the observed text was under the prediction model. Version 1 was also used later when the additional scoring was unavailable. Neither score is an answer-error rate."</p>
+                    <p class="prose-p">"The recorded encoder was "<code>"bge-small-en-v1.5"</code>", with d = 384. In the formulas, E converts text to a vector of dimension d, Î is the recorded prediction and ‘you’ is the observed message."</p>
                     <p class="prose-p"><code>{DELTA_V1}</code></p>
                     <p class="prose-p"><code>{DELTA_V2}</code></p>
                     <p class="prose-p">"In version 2, ppl_norm = 1 − exp(−L). L is the mean negative log probability of the observed tokens, evaluated using the context available before the message arrived. Both scores are dimensionless."</p>
@@ -221,27 +203,16 @@ pub fn Results() -> impl IntoView {
             </details>
 
             <h3 id="guests" class="figure-h">"Interactions with other input sources"</h3>
-            <p class="lede-sm figure-lede">"These scores come from AI teachers, nine automated teaching programmes and a separate stream of external text. The figures below separate the source groups and measurement versions; each teaching programme has its own panel. These records are separate from the regular participant’s results."</p>
+            <p class="prose-p">"AI teachers, nine automated teaching programmes and a stream of external text supplied additional inputs. Prediction error was higher for the external-text group and varied across teachers and sessions. Because the sources supplied different topics and formats at different times, these scores cannot rank their learning effectiveness."</p>
             <GuestChart/>
-            <div class="prose cols-2">
-                <div>
-                    <h3>"What the differences mean"</h3>
-                    <p>"Prediction error was higher for the external-text group, with substantial variation across teachers and sessions. The sources supplied different topics and formats at different times. These observations cannot establish why a source was harder to predict, and they do not rank the sources’ intelligence."</p>
-                </div>
-                <div>
-                    <h3>"Compare like measurements"</h3>
-                    <p>"Every panel identifies its score version. Daily medians and quartiles are calculated separately for each version, and no line crosses a version boundary or a missing observation date. Differences between groups or score versions do not establish a learning effect."</p>
-                </div>
-            </div>
         </section>
 
         <section id="ocean" class="wrap section" aria-labelledby="ocean-h">
             <div class="section-head">
                 <p class="eyebrow">"External input · 12 August 2026"</p>
-                <h2 id="ocean-h" class="display">"Word-based association increased, then levelled off"</h2>
-                <p class="lede-sm">"The word-based association estimate rose from 0.0244 bits after eight input cycles to 0.0762 after 63, then fell slightly to 0.0712 after 128. It compared overlap between external text and the model’s replies with overlap after the replies were shuffled."</p>
-                <p class="prose-p">"This pattern met the project’s criterion that the estimate should rise and then level off below its maximum of one bit. The statistic describes how word overlap distinguishes actual from shuffled pairings. It does not measure how much the system learned, or establish understanding or causal influence. Later changes to input processing began a separate measurement period."</p>
-                <p class="prose-p">"The overlap columns report mean scores for actual and shuffled input–reply pairs. A dash means no value is reported for that entry."</p>
+                <h2 id="ocean-h" class="display">"Word overlap between input and replies"</h2>
+                <p class="lede-sm">"This study compared shared words in actual input–reply pairs with pairs formed by reassigning replies to other inputs. The resulting association estimate increased and then levelled off, meeting the study’s criterion. It describes a pattern in word overlap; it does not measure learning, understanding or causal influence."</p>
+                <p class="prose-p">"The table reports mean word overlap and the association estimate in bits. A dash indicates an unreported value. Later changes to input processing began a separate measurement period."</p>
             </div>
             <ScrollTable label="External-input measurements">
                 <table class="table">
@@ -272,11 +243,9 @@ pub fn Results() -> impl IntoView {
         <section id="bodies" class="wrap section" aria-labelledby="bodies-h">
             <div class="section-head">
                 <p class="eyebrow">"Model comparison · 14 August 2026"</p>
-                <h2 id="bodies-h" class="display">"Baseline answers and training time for three models"</h2>
-                <p class="lede-sm">"The three models answered between 45% and 70% of the 20 test questions correctly. Testing preceded training, so these scores describe baseline performance. Training time was measured separately."</p>
-                <p class="prose-p">"Each model received the same 30 teaching messages, 20 fixed test questions and 200 training iterations. The questions were answered in fresh sessions with memory retrieval disabled."</p>
-                <p class="prose-p">"The first three columns are proportions: 1.00 means all replies, and 0.05 means one of 20. Format compliance records whether replies passed the study’s output checks. Repetition counts replies identical to an earlier test reply after whitespace is normalised. Task accuracy follows the study’s answer checker. Training time is one recorded run per model on the tested setup."</p>
-                <p class="prose-p">"B denotes billions of model parameters. The mixture-of-experts model has 30 billion parameters in total, with about 3 billion active for each token. This small comparison cannot establish a general ranking of models."</p>
+                <h2 id="bodies-h" class="display">"Baseline performance and training time"</h2>
+                <p class="lede-sm">"Three models answered the same 20 test questions before training, with accuracy ranging from 45% to 70%. Each received 30 teaching messages, and testing used fresh sessions with memory retrieval disabled. Training time was recorded separately for 200 iterations per model."</p>
+                <p class="prose-p">"The accuracy and format scores describe this small set of questions. Runtime comes from one training run per model, so neither result establishes a broader model ranking."</p>
             </div>
             <ScrollTable label="Model baseline comparisons">
                 <table class="table">
@@ -288,15 +257,22 @@ pub fn Results() -> impl IntoView {
                     </tbody>
                 </table>
             </ScrollTable>
+            <details class="study-details">
+                <summary>"Measures and model sizes"</summary>
+                <div class="study-details-content">
+                    <p class="prose-p">"The first three numeric columns are proportions of the 20 replies. Format compliance records whether a reply passed the output checks; repetition counts replies identical to an earlier test reply after whitespace is normalised; accuracy follows the study’s answer checker."</p>
+                    <p class="prose-p">"B denotes billions of parameters. The mixture-of-experts model has 30 billion parameters in total, with about 3 billion active for each token."</p>
+                </div>
+            </details>
             <p class="source mono">{format!("source: {SWEEP_SOURCE}")}</p>
         </section>
 
         <section id="memory" class="wrap section" aria-labelledby="memory-h">
             <div class="section-head">
                 <p class="eyebrow">"Memory studies"</p>
-                <h2 id="memory-h" class="display">"How stored records affect answers"</h2>
-                <p class="lede-sm">"Small exploratory tests found that stored records could improve recall while worsening some judgements. These observations concern the use of supplied or retrieved information. They do not by themselves show that model training produced lasting learning."</p>
-                <p class="prose-p">"The counts describe answer attempts. Some tests repeated prompts or used different questions before and after an intervention. Those designs limit comparisons, and the original reports do not always provide complete denominators."</p>
+                <h2 id="memory-h" class="display">"Use of stored experience"</h2>
+                <p class="lede-sm">"Exploratory tests examined whether supplied or retrieved records helped the system answer questions. Their outcomes concern access to information during a task, rather than learning retained through model training."</p>
+                <p class="prose-p">"Some tests repeated prompts or changed the questions between evaluations, and several reports lack complete counts. The observations below retain those limits."</p>
             </div>
             <div class="cols-2">
                 <div>
@@ -306,11 +282,11 @@ pub fn Results() -> impl IntoView {
                     </dl>
                 </div>
                 <div>
-                    <h3>"A comparison with memory enabled and disabled"</h3>
+                    <h3>"Memory enabled and disabled"</h3>
                     <dl class="figures">
                         {BODY_RULING.iter().map(|f| view! { <div><dt>{f.claim}</dt><dd>{f.number}<span class="mono meta">{f.evidence}</span></dd></div> }).collect_view()}
                     </dl>
-                    <p class="muted">"No records were retrieved in this test, including when memory was enabled. The run therefore left the effect of successful retrieval untested. The retrieval procedure was later revised for a separate experiment; the original outcome remains in the record."</p>
+                    <p class="prose-p">"Because retrieval returned no records, this comparison left the effect of successful retrieval untested. The procedure was revised for a later experiment."</p>
                 </div>
             </div>
         </section>
@@ -318,12 +294,14 @@ pub fn Results() -> impl IntoView {
         <section class="wrap section" aria-labelledby="remainders-h">
             <div class="section-head">
                 <p class="eyebrow">"Unresolved questions"</p>
-                <h2 id="remainders-h" class="display">"What the next studies need to establish"</h2>
-                <p class="lede-sm">"The central questions are whether improvements persist, extend to unfamiliar problem types and preserve earlier abilities. The programme also needs independent replication. The experiments on this page do not establish general intelligence or reliable alignment with human goals."</p>
-                <p class="prose-p">"Other open tests concern installation on another machine, reliable use of an intermediate working area, answers that cite the correct memory sources, and repeated studies with different models and human participants. The research goals page records their criteria and progress."</p>
+                <h2 id="remainders-h" class="display">"Questions for further study"</h2>
+                <p class="lede-sm">"The next phase will test whether repeated training adds a lasting benefit beyond access to stored examples, and whether that benefit can coexist with retention of earlier abilities. Further work will examine unfamiliar problem types and repeat the comparisons with other models and participants."</p>
+                <p class="prose-p">"Reliable use of working memory, accurate citation of stored sources and reproduction on another machine also remain open. The "<a href="/goals#tracks">"research goals"</a>" describe these tests and the separate questions of human control and oversight, which the results here do not resolve."</p>
             </div>
-            <p class="more"><a class="btn" href="/goals#tracks">"Research goals and progress"</a></p>
         </section>
+        </div>
+        </div>
+        </div>
     }
 }
 
@@ -340,21 +318,21 @@ fn ExperimentBlock(experiment: &'static Experiment) -> impl IntoView {
                 </div>
                 <h3 class="display display-sm">{e.title}</h3>
             </div>
-            <div class="exp-grid">
-                <div class="exp-main">
+            <div class="exp-main">
+                <ArmTable arms=e.arms/>
+                <p class="verdict">{e.verdict}</p>
+                <h4>"Interpretation and limitations"</h4>
+                {e.reading.iter().map(|p| view! { <p class="prose-p">{*p}</p> }).collect_view()}
+                {(!e.comparisons.is_empty()).then(|| view! {
                     <details class="study-details">
-                        <summary>"Study design and training setup"</summary>
-                        <div class="study-details-content">
-                            {e.design.iter().map(|p| view! { <p class="prose-p">{*p}</p> }).collect_view()}
-                        </div>
+                        <summary>"Paired counts and statistics"</summary>
+                        <div class="study-details-content"><PairedTable comparisons=e.comparisons/></div>
                     </details>
-                    <ArmTable arms=e.arms/>
-                    {(!e.comparisons.is_empty()).then(|| view! { <PairedTable comparisons=e.comparisons/> })}
-                    <p class="verdict"><b>"Study decision. "</b>{e.verdict}</p>
-                    <h4>"What this result supports"</h4>
-                    {e.reading.iter().map(|p| view! { <p class="prose-p">{*p}</p> }).collect_view()}
-                </div>
-                <aside class="exp-side">
+                })}
+                <details class="study-details">
+                    <summary>"Study design, criteria and source records"</summary>
+                    <div class="study-details-content">
+                    {e.design.iter().map(|p| view! { <p class="prose-p">{*p}</p> }).collect_view()}
                     <h4>"Criteria set before testing"</h4>
                     <GateList gates=e.gates/>
                     <h4>"Study identifiers"</h4>
@@ -362,7 +340,8 @@ fn ExperimentBlock(experiment: &'static Experiment) -> impl IntoView {
                     <p class="mono small">{e.run}</p>
                     <HashList hashes=e.hashes/>
                     <p class="mono small muted">{format!("source: {}", e.source)}</p>
-                </aside>
+                    </div>
+                </details>
             </div>
         </article>
     }

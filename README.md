@@ -17,8 +17,9 @@ and does not provide a general formal proof of correctness.
 
 The strongest completed adapter result is 43 accepted answers out of 64 new parameter
 instances, with gains within eleven learned task families. Both principal controls scored zero.
-The result does not establish transfer beyond those families or long-term retention. The
-Becoming track proposes broader applications and formal verification; AGI remains an ambition.
+The result does not establish transfer beyond those families or long-term retention.
+The programme's longer-term goals include learning across varied tasks and
+environments, broader applications and formal verification.
 
 This repository contains the research website, built in Rust and compiled to WebAssembly.
 `crates/record` stores the reported measurements and their source references. The browser

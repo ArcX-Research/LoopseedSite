@@ -12,7 +12,7 @@ use leptos_router::{path, NavigateOptions};
 use loopseed_record::{ORGANISATION, ORGANISATION_URL, REPOSITORY_URL};
 
 pub const NAV: &[(&str, &str)] = &[
-    ("/", "Mission"),
+    ("/", "Home"),
     ("/results", "Results"),
     ("/method", "Method"),
     ("/record", "Reports"),
@@ -103,15 +103,13 @@ fn Footer() -> impl IntoView {
                     <div>
                         <div class="footer-h">"This site"</div>
                         <div class="footer-meta mono">
-                            <div>"Research summary · reviewed 7 September 2026"</div>
-                            <div>"Recorded paired statistics recalculated in your browser"</div>
+                            <div>"Research record · 11 September 2026"</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="wrap footer-line mono">
                 <span>{format!("© {ORGANISATION} · Loopseed")}</span>
-                <span>"No tracking · light theme only"</span>
             </div>
         </footer>
     }

@@ -8,33 +8,33 @@ pub struct Law {
 
 pub const LAWS: &[Law] = &[
     Law {
-        title: "Review the content selected for memory",
-        statement: "Some successful explanations were omitted from active memory because the next message produced a low prediction-error score. Incorrect exchanges could pass the same selection rule. In one recorded incident, an invented address was retrieved and repeated; removing the memory stopped its repetition on the next turn. These observations motivate reviewing correctness separately from prediction error.",
+        title: "Memory selection and correctness",
+        statement: "Low prediction error excluded some helpful explanations from active memory, while incorrect exchanges could pass the selection rule. In one incident, an invented address was retrieved and repeated until the memory was removed; repetition stopped on the next turn. These observations support checking correctness separately from prediction error.",
         evidence: "Archive batch 2, rows 231, 236–237, 255, 269–274, 294; batch 3, cycles 70–71; batch 4, cycle 1026",
     },
     Law {
-        title: "Test recall and reasoning separately",
-        statement: "A stored record improved factual recall in one small comparison while reducing accuracy on judgement questions. Repeated questions may also have influenced the responses. Counting successful retrievals would therefore miss an important part of the outcome: whether the retrieved material helps the system solve the current task.",
+        title: "Recall and task performance",
+        statement: "A stored record improved recall but reduced accuracy on judgement questions in a small comparison. Repeated questions may also have influenced the answers. This distinction supports separate tests of retrieving information and using it to solve a task.",
         evidence: "Archive batch 2, rows 240–242",
     },
     Law {
-        title: "Account for model changes during interaction",
-        statement: "Changing an adapter used only for prediction altered the score governing memory selection, even though it was not used to generate replies. A study spanning that change could not attribute subsequent behaviour to the teaching material alone. Observations after adapter changes also motivated the period of memory review described above.",
+        title: "Adapter changes during interaction",
+        statement: "Changing the prediction adapter altered the score used to select memories, despite leaving the response adapter unchanged. Later behaviour could therefore reflect both the teaching material and the adapter change. These observations also informed the review period for new memories after an update.",
         evidence: "Cycle 3039, 15 August 2026; adapter change of 7 August 2026; docs/KEEPING.md",
     },
     Law {
-        title: "Check the method as well as the final value",
-        statement: "Some answers in the 4 September comparison passed exact numerical checks despite changing the requested calculation. A separate AI review rejected them. This motivated retaining both the numerical check and a review of the complete solution, with the limitations of each stated explicitly.",
+        title: "Numerical accuracy and solution validity",
+        statement: "Some answers in the 4 September comparison passed numerical checks after changing the requested calculation. AI review rejected them, showing why the complete solution needed assessment as well as its final values.",
         evidence: "Transfer-study review and decision, 4 September 2026",
     },
     Law {
-        title: "Compare prompts and output constraints explicitly",
-        statement: "Adding calculation steps to the prompt reduced the trained adapter's score in one comparison. A more restrictive output grammar also helped the adapter trained on shuffled answers. Both observations show that prompts and format constraints can affect the measured outcome and need to be included in the comparison design.",
+        title: "Prompts and output requirements",
+        statement: "Supplied calculation steps reduced the response adapter’s score in one comparison, while stricter output rules helped the adapter trained on mismatched answers. Both effects supported including prompt and output conditions in the study design.",
         evidence: "Prompt and output-format comparison, 4 September 2026",
     },
     Law {
-        title: "Keep unrelated corrections out of training prompts",
-        statement: "An adapter trained on prompts containing raw corrections repeated a number unrelated to the new questions. A follow-up regenerated prompts from the problem specifications and obtained correct answers on the tested problem type without that number appearing. This supports checking the origin and content of training prompts as well as their target answers.",
+        title: "Corrections in training prompts",
+        statement: "Training prompts containing corrections were linked to repetition of a number unrelated to new questions. A follow-up using prompts generated from problem specifications produced correct answers on the tested problem type without that number. The result supported reviewing the prompts as well as the target answers.",
         evidence: "Training-prompt diagnosis and 18-question follow-up, 3 September 2026",
     },
 ];

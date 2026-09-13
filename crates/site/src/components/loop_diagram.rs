@@ -88,7 +88,7 @@ pub fn loop_svg() -> String {
     );
     let _ = write!(
         s,
-        r##"<text x="{c}" y="{:.1}" text-anchor="middle" font-family="Adamina, Georgia, serif" font-size="14" fill="#000020" fill-opacity="0.7">I = W(I) + you</text>"##,
+        r##"<text x="{c}" y="{:.1}" text-anchor="middle" font-family="Adamina, Georgia, serif" font-size="14" font-weight="700" fill="#000020">I = W(I) + you</text>"##,
         c + 44.0
     );
     // The five stages.

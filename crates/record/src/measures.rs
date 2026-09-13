@@ -91,22 +91,22 @@ pub struct Figure {
 /// The memory laws' numbers, from bag 2 of the laws file.
 pub const MEMORY: &[Figure] = &[
     Figure {
-        claim: "The same record improved recall and reduced correct judgements",
+        claim: "Recall and judgement with a supplied record",
         number: "With the record supplied, correct recall rose from 0 of 12 to 12 of 12; correct judgements fell from 12 of 12 to 4 of 12",
         evidence: "LAWS.md bag 2, rows 240–241",
     },
     Figure {
-        claim: "An incorrect stored record was associated with more errors",
+        claim: "Errors with an incorrect stored record",
         number: "A sixfold increase was reported; full counts are not given in this summary",
         evidence: "LAWS.md bag 2, rows 236–237",
     },
     Figure {
-        claim: "Performance differed before and after a worked example",
+        claim: "Answers before and after a worked example",
         number: "0 of 32 before; 48 of 48 later, using different test questions",
         evidence: "LAWS.md bag 2, row 267",
     },
     Figure {
-        claim: "A stored lesson was used on a puzzle with the same structure",
+        claim: "Reuse of a lesson on a similar puzzle",
         number: "Success was reported in about one quarter of attempts; the total is not given here",
         evidence: "LAWS.md bag 2, rows 256–257",
     },

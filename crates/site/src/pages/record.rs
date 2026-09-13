@@ -15,45 +15,48 @@ const SECTIONS: &[(&str, &str)] = &[
 pub fn Record() -> impl IntoView {
     set_title("Reports");
     view! {
+        <div class="record-page research-page">
         <section class="page-intro page-intro-record">
             <div class="wrap">
                 <p class="eyebrow">"Reports"</p>
                 <h1 class="display display-xl">"Study reports and supporting evidence"</h1>
-                <p class="lede">"Read the paper, follow the findings from individual studies and locate the records behind them. The report list includes completed comparisons, unsuccessful tests, study plans and observations."</p>
-                <p class="prose-p">"Reports were reviewed on 11 September 2026 and cover experiments recorded through 7 September. Each entry identifies the type of record and its source. The "<a href="/results">"Results page"</a>" brings the measurements together with their methods and limitations."</p>
+                <p class="lede">"The reports document individual experiments, from study preparation to measured outcomes. Each entry includes a summary and source record, with the paper and supporting data available below."</p>
+                <p class="prose-p">"Reviewed on 11 September 2026, this collection covers experiments recorded through 7 September. The "<a href="/results">"Results page"</a>" compares their findings and explains the limits of each study."</p>
             </div>
         </section>
 
-        <PageNav items=SECTIONS/>
+        <div class="research-layout">
+        <PageNav items=SECTIONS show_label=false sidebar=true/>
+        <div class="research-sections">
         <section class="wrap section" aria-labelledby="paper-h">
-            <div class="paper-callout">
+            <div class="section-head">
                 <p class="eyebrow">"Research paper · 11 September 2026"</p>
                 <h2 id="paper-h" class="display">"Dynamical Synthesis: Learning through Interaction"</h2>
-                <p class="prose-p">"The paper sets out the computational framework and reviews the learning experiments, including improvements, failed tests and incomplete comparisons. Eight figures include the exchange plots, with measurement versions and observational limitations stated separately. The paper has not been peer reviewed."</p>
+                <p class="lede-sm">"The paper presents the computational framework and reviews the learning experiments. Its eight figures include the exchange plots, keeping different scoring versions separate. It has not been peer reviewed."</p>
+            </div>
                 <div class="paper-downloads">
                     <a class="btn btn-primary" href="/papers/dynamical-synthesis.html" rel="external">"Read the paper"</a>
-                    <a class="btn" href="/papers/dynamical-synthesis-source.zip" download="dynamical-synthesis-source.zip">"Download LaTeX and analysis code"</a>
+                    <a class="btn" href="/papers/dynamical-synthesis-source.zip" download="dynamical-synthesis-source.zip">"Paper sources and figure code"</a>
                     <a class="btn" href="/data/research-record.json" download="research-record.json">"Download summary data · JSON"</a>
                     <a class="btn" href="/papers/dynamical-synthesis-mathematics-evidence.zip" download="dynamical-synthesis-mathematics-evidence.zip">"Download mathematics evidence"</a>
                 </div>
-                <p class="prose-p">"The source bundle contains the editable manuscript, references, figure code and summary measurements. The mathematics evidence package adds all 1,024 recorded replies, 155 AI review decisions, task specifications, training splits and the recorded source code, with a standalone check of the reported counts. The underlying AI reviewer model version was not recorded."</p>
-                <p class="prose-p"><a href="/papers/dynamical-synthesis.html#citation" rel="external">"Citation downloads"</a>"."</p>
+                <p class="prose-p">"The source bundle includes the editable manuscript, references, figure code and summary measurements. The mathematics package contains 1,024 recorded replies, 155 AI review decisions, task specifications, training splits and source code, with a script to check the reported counts. The reviewer model version was not recorded."</p>
+                <p class="prose-p"><a href="/papers/dynamical-synthesis.html#citation">"Citation and reference downloads"</a></p>
                 <details class="study-details">
                     <summary>"What the archive contains"</summary>
                     <div class="study-details-content prose">
-                        <p>"The archive inventory covers 23,099 files from available experiment directories, reports, laboratory code and seven separate experiment checkouts. Copies and repeated artifacts are included, so this is a file count rather than a count of observations."</p>
-                        <p>"The catalogue includes failed, invalid and incomplete attempts. It records gaps and exclusions and identifies linked dependencies. It describes the files available when the archive was assembled; it cannot recover missing historical records."</p>
+                        <p>"The inventory lists 23,099 files from experiment directories, reports, laboratory code and seven separate experiment checkouts. This includes repeated files and copies, so the total is not a sample size. Some listed records are available only on request."</p>
+                        <p>"Failed, invalid and incomplete attempts are included, with gaps, exclusions and linked dependencies identified. The inventory describes the files available when it was assembled."</p>
                         <p><a href="/data/data-inventory.json" download="data-inventory.json">"Download the archive inventory and its limits"</a>"."</p>
                     </div>
                 </details>
-            </div>
         </section>
 
         <section class="wrap section" aria-labelledby="reports-h">
             <div class="section-head">
                 <p class="eyebrow">"Study history"</p>
-                <h2 id="reports-h" class="display">"Selected reports, newest first"</h2>
-                <p class="lede-sm">"Comparison reports give measured outcomes. Plans describe intended tests, and observations document what happened without necessarily isolating a cause. An incomplete study has no final result for its planned comparison."</p>
+                <h2 id="reports-h" class="display">"Study reports"</h2>
+                <p class="lede-sm">"Entries are listed newest first and labelled by record type. Completed comparisons report measured outcomes; plans and observations provide context. Incomplete studies have no final result for their planned comparison."</p>
             </div>
             <div class="rulings rulings-full">
                 {RULINGS.iter().map(|r| view! {
@@ -77,28 +80,25 @@ pub fn Record() -> impl IntoView {
         <section class="wrap section" aria-labelledby="where-h">
             <div class="section-head">
                 <p class="eyebrow">"Evidence access"</p>
-                <h2 id="where-h" class="display">"Inspect the records behind a result"</h2>
+                <h2 id="where-h" class="display">"Source records and access"</h2>
             </div>
-            <div class="cols-2">
-                <div>
-                    <h3 class="track-h">"Available material"</h3>
+                    <h3 class="figure-h">"Additional study records"</h3>
                     {match REPOSITORY_URL {
-                        Some(url) => view! { <p class="prose-p">"The paper, figures and summary data are linked above. The research repository is also "<a href=url>"available online"</a>"."</p> }.into_any(),
-                        None => view! { <p class="prose-p">"The paper, figures, mathematics study records, analysis code and summary data are downloadable above. The complete repository and original records for the other studies remain private and can be requested for review."</p> }.into_any(),
+                        Some(url) => view! { <p class="prose-p">"Additional source records are in the "<a href=url>"research repository"</a>"."</p> }.into_any(),
+                        None => view! { <p class="prose-p">"The complete repository and original records for studies outside the mathematics package remain private and can be requested for review."</p> }.into_any(),
                     }}
-                    <p class="prose-p">"For material outside the mathematics package, request the study protocol, model and adapter versions, questions, replies, scoring code, review decisions and final result. Give the report date, title and source path when you "
+                    <p class="prose-p">"A review may require the protocol, model and adapter versions, questions, replies, scoring code, review decisions and final result. Include the report date, title and source path when you "
                         {match CONTACT_EMAIL {
                             Some(mail) => view! { <a href=format!("mailto:{mail}")>"contact the research team"</a> }.into_any(),
                             None => view! { <a href=CONTACT_URL>"contact the research team"</a> }.into_any(),
                         }}
                     "."</p>
-                </div>
-                <div>
-                    <h3 class="track-h">"Paths and file checks"</h3>
-                    <p class="prose-p">"Source paths identify files in the associated research checkout. Reports are stored in "<code>{ALBUM_PATH}</code>" and observations are indexed in "<code>{LAWS_PATH}</code>". A path beginning with a separate experiment directory identifies that study's isolated checkout."</p>
-                    <p class="prose-p">"Where a SHA-256 checksum is shown, it applies to the named source file. A matching checksum confirms that a supplied copy has the same bytes. Assessing the result also requires inspecting the methods and observations; recalculating summary statistics does not replace an independent repetition of the experiment."</p>
-                </div>
-            </div>
+                    <h3 class="figure-h">"Source paths and file checks"</h3>
+                    <p class="prose-p">"Reports are stored in "<code>{ALBUM_PATH}</code>" and observations are indexed in "<code>{LAWS_PATH}</code>". Paths beginning with a separate experiment directory refer to that study’s isolated copy of the code and records."</p>
+                    <p class="prose-p">"A matching SHA-256 checksum confirms that a supplied file is identical to the named source. It does not verify the study’s conclusions. That requires assessment of the methods and observations, with independent replication beyond recalculation of saved counts."</p>
         </section>
+        </div>
+        </div>
+        </div>
     }
 }
