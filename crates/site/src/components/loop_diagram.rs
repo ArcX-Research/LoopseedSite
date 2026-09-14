@@ -14,8 +14,8 @@ pub const STEPS: &[Step] = &[
     Step { ordinal: "01", label: "Predict", organ: "Ŵ → Î", gloss: "Predict what the system will observe next. Record the prediction before the observation arrives." },
     Step { ordinal: "02", label: "Compare", organ: "δ", gloss: "Measure how much the observation differs from the prediction. Assess task performance separately." },
     Step { ordinal: "03", label: "Remember", organ: "σ, M", gloss: "Use prediction error to select experiences for active memory. Keep source records and check accuracy before training." },
-    Step { ordinal: "04", label: "Act", organ: "π", gloss: "Produce a response or use an available tool, then observe the outcome." },
-    Step { ordinal: "05", label: "Update", organ: "LoRA", gloss: "Train separate updates for prediction and response generation using reviewed examples. Check for improvements and losses on examples excluded from training before applying an update." },
+    Step { ordinal: "04", label: "Act", organ: "π", gloss: "Produce a response or use an available computational tool, such as a symbolic DSL, then observe the outcome." },
+    Step { ordinal: "05", label: "Update", organ: "LoRA", gloss: "Train separate prediction and response updates on reviewed examples. Check gains and losses before applying them." },
 ];
 
 pub fn loop_svg() -> String {

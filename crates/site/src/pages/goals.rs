@@ -64,7 +64,7 @@ pub fn Goals() -> impl IntoView {
             <details class="study-details">
                 <summary>"Related work on human control and beneficial AI"</summary>
                 <div class="study-details-content prose">
-                    <p>"This direction shares concerns with the "<a href="https://futureoflife.org/about-us/">"Future of Life Institute’s mission"</a>" and the "<a href="https://futureoflife.org/open-letter/ai-principles/">"Asilomar AI Principles"</a>". Our proposed contribution is to test how repeated learning updates affect usefulness, correction and intervention."</p>
+                    <p>"This direction shares concerns with the "<a href="https://futureoflife.org/our-mission/">"Future of Life Institute’s mission"</a>" and the "<a href="https://futureoflife.org/open-letter/ai-principles/">"Asilomar AI Principles"</a>". Our proposed contribution is to test how repeated learning updates affect usefulness, correction and intervention."</p>
                     <p>"Verification and control are also discussed in "<a href="https://futureoflife.org/data/documents/research_priorities.pdf" rel="external">"Research Priorities for Robust and Beneficial Artificial Intelligence"</a>" by Russell, Dewey and Tegmark (2015)."</p>
                 </div>
             </details>

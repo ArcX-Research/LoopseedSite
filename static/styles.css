@@ -107,6 +107,7 @@ button, input, summary, a { -webkit-tap-highlight-color: rgba(73,70,255,0.12); }
 .mission-banner { padding-block: clamp(36px, 5vw, 64px); border-top: 1px solid var(--hair); }
 .mission-banner .eyebrow { color: var(--blue-ink); font-weight: 500; }
 .mission-banner p { margin: 0; max-width: 70ch; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.5; letter-spacing: -0.025em; text-wrap: pretty; }
+.mission-banner .mission-detail { margin-top: 20px; max-width: 75ch; font-size: clamp(16px, 1.4vw, 18px); line-height: 1.7; letter-spacing: normal; color: var(--ink-2); }
 
 /* Reading rhythm */
 .page-intro, .section-feature, .mission-banner { position: relative; isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--hair); background: radial-gradient(ellipse at 100% 0, #e6e7fc 0, transparent 60%), linear-gradient(115deg, #f9faff, #f0f3fc); }

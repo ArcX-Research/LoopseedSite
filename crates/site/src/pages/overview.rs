@@ -16,7 +16,7 @@ pub fn Overview() -> impl IntoView {
                     <p class="eyebrow">"Dilate Technologies · research program"</p>
                     <h1 class="display display-xl">"Toward Intelligence that keeps Learning"</h1>
                     <p class="lede">
-                        "Loopseed is a research programme at Dilate Technologies investigating how computational systems can learn through interaction with their environments. Our current experiments use Fish, a platform built around a language model, to examine how memory and further training affect performance on new and previously learned tasks."
+                        "Loopseed is a research programme at Dilate Technologies investigating how computational systems can learn through interaction with their environments. Our current experiments use Fish, an adaptive AI system that drives a language model, to examine how memory and further training affect performance on new and previously learned tasks."
                     </p>
                     <div class="hero-actions">
                         <a class="btn btn-primary" href="/results">"Read the results"</a>
@@ -36,7 +36,8 @@ pub fn Overview() -> impl IntoView {
         <section class="mission-banner" aria-labelledby="mission-h">
             <div class="wrap">
                 <h2 id="mission-h" class="eyebrow">"Our mission"</h2>
-                <p>"To develop intelligence that learns from verified experience, adapts to unfamiliar situations and preserves useful knowledge and abilities over time."</p>
+                <p>"To develop AI that helps people solve scientific and technical problems by learning from verified experience while remaining under human control."</p>
+                <p class="mission-detail">"Our research examines how systems can adapt to unfamiliar or chaotic environments while retaining useful knowledge and abilities. We test learning through controlled experiments and publish methods, results and supporting data so others can assess the findings."</p>
             </div>
         </section>
 
